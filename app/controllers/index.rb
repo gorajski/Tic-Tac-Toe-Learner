@@ -1,4 +1,4 @@
 get '/' do
-  erb :index
+  redirect 'http://www.google.com'
 end
 
