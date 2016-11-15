@@ -1,22 +1,28 @@
+#board *, #board *:after, #board *:before {
+/*  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;*/
+}
+
 #board {
-  margin: auto;
-  width: 900px;
-  height: 900px;
-  /*border: 1px solid black;*/
-  padding-top: 50px;
+  margin: 50px auto;
+  width: 600px;
+  height: 600px;
 }
 
-#1 {
-  position: relative;
-  width: 300px;
-  height: 300px;
-  background: blue;
+#c1, #c2, #c4, #c5 {
+  border-right: 3px solid black;
+  border-bottom: 3px solid black;
 }
 
-*, *:after, *:before {
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
+#c6 {
+  border-top: 3px solid black;
+  border-bottom: 3px solid black;
+}
+
+#c8 {
+  border-right: 3px solid black;
+  border-left: 3px solid black;
 }
 
 body {
@@ -24,87 +30,23 @@ body {
   padding-bottom: 4em;
 }
 
-button {
-  color: white;
-  background-color: #19abb5;
-  border: none;
-  font-size: 1em;
-  border-radius: 1em;
-  outline: none;
-  display: block;
-  width: 100%;
-  margin: 0 auto;
-  padding: 2em;
- }
-
- button:active {
-  background-color: #828c91;
- }
-
- header {
-  color: #2d425c;
- }
-
- header h1 {
-  font-size: 3em;
- }
-
- main section {
-  padding: 2em 0;
- }
-
-  main section:first-of-type {
-    padding-top: 0;
-  }
-
-  main section:last-of-type {
-    padding-bottom: 0;
-  }
-
  .center-text {
   text-align: center;
  }
 
 .cell{
-  display: block;
-  width: 33.33%;
-  float: left;
-  height: 0;
+  width: 200px;
+  height: 200px;
+
   text-align: center;
-  font-size: 250px;
-  padding-bottom: 33.33%;
-  background-color: #c8c8c8;
-  margin: 0;
-  border: solid white 3px;
+  font-size: 175px;
 }
 
 .cells {
+  display: -webkit-flex;
+  display: flex;
   margin: 0 auto;
   padding: 0;
   overflow: auto;
   width: 100%;
  }
-
-.container {
-    margin: 0 auto;
-    overflow: auto;
-    width: 100%;
-    max-width: 400px;
-    padding: 0 1em;
-}
-
-.round-top-left {
-  /*border-top-left-radius: 1em;*/
-}
-
-.round-top-right {
-  /*border-top-right-radius: 1em;*/
-}
-
-.round-bottom-left {
-  /*border-bottom-left-radius: 1em;*/
-}
-
-.round-bottom-right {
-  /*border-bottom-right-radius: 1em;*/
-}
