@@ -74,6 +74,17 @@ $(document).ready(function() {
 			}
 		}
 
+		var checkForFullBoard = function() {
+			var isFull = true;
+			for (var i = 0; i < board.length; i++) {
+				isFull = isFull && (board[i] != 0)
+			}
+			if (isFull) {
+				console.log("No winner!")
+				resetGame();
+			}
+		}
+
 		$(".cell").on("click", function() {
 			cell_index = parseInt($(this).attr("id")[1]);
 			if (cellIsFree(cell_index)) {
@@ -81,6 +92,7 @@ $(document).ready(function() {
 				updateBoard();
 				switchPlayer();
 				checkForWinner();
+				checkForFullBoard();
 			}
 
 		})

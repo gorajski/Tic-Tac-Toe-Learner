@@ -3,15 +3,17 @@ def remove_blatantly_impossible_board_states
   # INPUT: every number from 0 to 19682
   # OUTPUT: Array containing decimal numbers representing (not strictly) playable board states.
 
-  # Player1 has more than 5 marks on the board or Player2 has more than 4 marks on the board
+  # Discard any board where Player1 has more than 5 marks on the board or Player2 has more than 4 marks on the board
   arr = (0...19682).to_a.reject do |number|
     (number.to_s(3).count('1') > 5 || number.to_s(3).count('2') > 4) 
   end
 
+  # Discard any board where Player1 has more than just 1 mark more than Player2 
   arr = arr.to_a.reject do |number|
     (number.to_s(3).count('1') - number.to_s(3).count('2')) > 1
   end
 
+  # Discard any board where Player2 has more marks than Player1
   arr = arr.to_a.reject do |number|
     (number.to_s(3).count('1') - number.to_s(3).count('2')) < 0 
   end
@@ -86,41 +88,41 @@ end
 
 # Tests that these board combinations were removed from the array -> FALSE
 # - More than five 1's or more than four 2's
-p remove_blatantly_impossible_board_states.include?("110011011".to_i(3))
-p remove_blatantly_impossible_board_states.include?("220022020".to_i(3))
-p remove_blatantly_impossible_board_states.include?("111110100".to_i(3))
-p remove_blatantly_impossible_board_states.include?("222220000".to_i(3))
-p remove_blatantly_impossible_board_states.include?("102202202".to_i(3))
-p remove_blatantly_impossible_board_states.include?("201101111".to_i(3))
-p remove_blatantly_impossible_board_states.include?("211121110".to_i(3))
-p remove_blatantly_impossible_board_states.include?("122211220".to_i(3))
+# p remove_blatantly_impossible_board_states.include?("110011011".to_i(3))
+# p remove_blatantly_impossible_board_states.include?("220022020".to_i(3))
+# p remove_blatantly_impossible_board_states.include?("111110100".to_i(3))
+# p remove_blatantly_impossible_board_states.include?("222220000".to_i(3))
+# p remove_blatantly_impossible_board_states.include?("102202202".to_i(3))
+# p remove_blatantly_impossible_board_states.include?("201101111".to_i(3))
+# p remove_blatantly_impossible_board_states.include?("211121110".to_i(3))
+# p remove_blatantly_impossible_board_states.include?("122211220".to_i(3))
 # - More player2 plays outstrips player1 plays
-p remove_blatantly_impossible_board_states.include?("222211220".to_i(3))
-p remove_blatantly_impossible_board_states.include?("201201220".to_i(3))
-p remove_blatantly_impossible_board_states.include?("000022100".to_i(3))
-p remove_blatantly_impossible_board_states.include?("022200001".to_i(3))
-p remove_blatantly_impossible_board_states.include?("112121222".to_i(3))
-p remove_blatantly_impossible_board_states.include?("100121222".to_i(3))
-p remove_blatantly_impossible_board_states.include?("112100222".to_i(3))
-p remove_blatantly_impossible_board_states.include?("122101202".to_i(3))
-p remove_blatantly_impossible_board_states.include?("222111122".to_i(3))
-p remove_blatantly_impossible_board_states.include?("212121221".to_i(3))
-p remove_blatantly_impossible_board_states.include?("111000000".to_i(3))
+# p remove_blatantly_impossible_board_states.include?("222211220".to_i(3))
+# p remove_blatantly_impossible_board_states.include?("201201220".to_i(3))
+# p remove_blatantly_impossible_board_states.include?("000022100".to_i(3))
+# p remove_blatantly_impossible_board_states.include?("022200001".to_i(3))
+# p remove_blatantly_impossible_board_states.include?("112121222".to_i(3))
+# p remove_blatantly_impossible_board_states.include?("100121222".to_i(3))
+# p remove_blatantly_impossible_board_states.include?("112100222".to_i(3))
+# p remove_blatantly_impossible_board_states.include?("122101202".to_i(3))
+# p remove_blatantly_impossible_board_states.include?("222111122".to_i(3))
+# p remove_blatantly_impossible_board_states.include?("212121221".to_i(3))
+# p remove_blatantly_impossible_board_states.include?("111000000".to_i(3))
 
 # Tests that these board combinations remain in the array -> TRUE
 puts '*' * 8
-p remove_blatantly_impossible_board_states.include?("222000111".to_i(3))
-p remove_blatantly_impossible_board_states.include?("102001002".to_i(3))
-p remove_blatantly_impossible_board_states.include?("201002101".to_i(3))
-p remove_blatantly_impossible_board_states.include?("211022100".to_i(3))
-p remove_blatantly_impossible_board_states.include?("122011200".to_i(3))
-p remove_blatantly_impossible_board_states.include?("122010000".to_i(3))
-p remove_blatantly_impossible_board_states.include?("121021020".to_i(3))
-p remove_blatantly_impossible_board_states.include?("022111002".to_i(3))
-p remove_blatantly_impossible_board_states.include?("222011001".to_i(3))
+# p remove_blatantly_impossible_board_states.include?("222000111".to_i(3))
+# p remove_blatantly_impossible_board_states.include?("102001002".to_i(3))
+# p remove_blatantly_impossible_board_states.include?("201002101".to_i(3))
+# p remove_blatantly_impossible_board_states.include?("211022100".to_i(3))
+# p remove_blatantly_impossible_board_states.include?("122011200".to_i(3))
+# p remove_blatantly_impossible_board_states.include?("122010000".to_i(3))
+# p remove_blatantly_impossible_board_states.include?("121021020".to_i(3))
+# p remove_blatantly_impossible_board_states.include?("022111002".to_i(3))
+# p remove_blatantly_impossible_board_states.include?("222011001".to_i(3))
 # Total reasonable states
-p remove_blatantly_impossible_board_states.count
+p remove_blatantly_impossible_board_states
 
 # winning board
-puts board_state_winners
+# puts board_state_winners
 # p REASONABLE_BOARD_STATES
