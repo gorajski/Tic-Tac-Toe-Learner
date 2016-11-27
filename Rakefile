@@ -149,3 +149,5 @@ rescue LoadError
 end
 
 task :default  => :spec
+require 'jasmine'
+load 'jasmine/tasks/jasmine.rake'

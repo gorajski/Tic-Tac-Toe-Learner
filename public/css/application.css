@@ -37,9 +37,10 @@ body {
 .cell{
   width: 200px;
   height: 200px;
+  /*padding: 0;*/
 
   text-align: center;
-  font-size: 175px;
+  font-size: 150px;
 }
 
 .cells {
