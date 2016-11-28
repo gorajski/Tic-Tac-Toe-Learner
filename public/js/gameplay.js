@@ -17,7 +17,7 @@ Game.prototype.play = function() {
 			g.updateBoard();
 			g.switchPlayer();
 			g.checkForWinner();
-			g.checkForFullBoard();
+			g.isBoardFull();
 		}
 
 	})
@@ -85,10 +85,12 @@ Game.prototype.checkForWinner = function() {
 	if (winner != "NO match") {
 		console.log(winner);
 		this.resetGame();
+		return winner;
 	}
+	return null;
 }
 
-Game.prototype.checkForFullBoard = function() {
+Game.prototype.isBoardFull = function() {
 	var isFull = true;
 	for (var i = 0; i < this.board.length; i++) {
 		isFull = isFull && (this.board[i] != 0)
@@ -96,5 +98,7 @@ Game.prototype.checkForFullBoard = function() {
 	if (isFull) {
 		console.log("No winner!")
 		this.resetGame();
+		return true;
 	}
+	return false;
 }
