@@ -1,8 +1,10 @@
 describe("game play", function() {
-	var game;
+	var game, player1, player2;
 
 	beforeEach(function() {
-		game = new Game('mouse','mouse');
+		player1 = new Player(1, "keyboard");
+		player2 = new Player(2, "mouse");
+		game = new Game(player1, player2);
 	});
 
 	it("has game board representation", function() {
@@ -10,6 +12,7 @@ describe("game play", function() {
 	});
 
 	it('has a current player', function() {
+		console.log(game.current_player)
 		expect(game.current_player.number).toEqual(1);
 	});
 
@@ -144,7 +147,7 @@ describe("game play", function() {
 										2,1,1,
 										1,2,2];
 			game.current_player = game.player2;
-			expect(game.isBoardFull()).toEqual(true);
+			expect(game.checkForFullBoard()).toEqual(true);
 			expect(game.board).toEqual([0,0,0,0,0,0,0,0,0]);
 			expect(game.current_player).toEqual(game.player1);
 		});
@@ -154,7 +157,7 @@ describe("game play", function() {
 										2,1,0,
 										1,2,2];
 			game.current_player = game.player2;
-			expect(game.isBoardFull()).toEqual(false);
+			expect(game.checkForFullBoard()).toEqual(false);
 			expect(game.board).toEqual([1,1,2,2,1,0,1,2,2]);
 			expect(game.current_player).toEqual(game.player2);
 		});
