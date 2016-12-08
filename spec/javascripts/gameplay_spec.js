@@ -1,8 +1,10 @@
 describe("game play", function() {
-	var game;
+	var game, player1, player2;
 
 	beforeEach(function() {
-		game = new Game();
+		player1 = new Player(1, "keyboard");
+		player2 = new Player(2, "mouse");
+		game = new Game(player1, player2);
 	});
 
 	it("has game board representation", function() {
@@ -10,7 +12,8 @@ describe("game play", function() {
 	});
 
 	it('has a current player', function() {
-		expect(game.current_player).toEqual(1);
+		console.log(game.current_player)
+		expect(game.current_player.number).toEqual(1);
 	});
 
 	describe('winChecker', function() {
@@ -94,25 +97,25 @@ describe("game play", function() {
 
 	describe('switchPlayer', function() {
 		it("toggles the current_player from player1 to player2", function() {
-			expect(game.current_player).toEqual(1);
+			expect(game.current_player.number).toEqual(1);
 			game.switchPlayer();
-			expect(game.current_player).toEqual(2);
+			expect(game.current_player.number).toEqual(2);
 		});
 
 		it("toggles the current_player from player2 to player1", function() {
 			game.current_player = 2;
 			game.switchPlayer();
-			expect(game.current_player).toEqual(1);
+			expect(game.current_player.number).toEqual(1);
 		});
 	});
 
 	describe('resetGame', function() {
 		it("clears the board and sets current_player as player1", function() {
 			game.board = [1,2,0,1,0,1,0,2,2];
-			game.current_player = 2;
+			game.current_player = this.player2;
 			game.resetGame();
 			expect(game.board).toEqual([0,0,0,0,0,0,0,0,0]);
-			expect(game.current_player).toEqual(1);
+			expect(game.current_player.number).toEqual(1);
 		});
 	});
 
@@ -124,17 +127,17 @@ describe("game play", function() {
 			game.current_player = 2;
 			expect(game.checkForWinner()).toEqual(2);
 			expect(game.board).toEqual([0,0,0,0,0,0,0,0,0]);
-			expect(game.current_player).toEqual(1);
+			expect(game.current_player).toEqual(game.player1);
 		});
 
 		it("returns null results when no winner", function() {
 			game.board = [2,1,2,
 										1,0,0,
 										1,1,2];
-			game.current_player = 2;
+			game.current_player = game.player2;
 			expect(game.checkForWinner()).toEqual(null);
 			expect(game.board).toEqual([2,1,2,1,0,0,1,1,2]);
-			expect(game.current_player).toEqual(2);
+			expect(game.current_player).toEqual(game.player2);
 		});
 	});
 
@@ -143,20 +146,20 @@ describe("game play", function() {
 			game.board = [1,1,2,
 										2,1,1,
 										1,2,2];
-			game.current_player = 2;
-			expect(game.isBoardFull()).toEqual(true);
+			game.current_player = game.player2;
+			expect(game.checkForFullBoard()).toEqual(true);
 			expect(game.board).toEqual([0,0,0,0,0,0,0,0,0]);
-			expect(game.current_player).toEqual(1);
+			expect(game.current_player).toEqual(game.player1);
 		});
 
 		it("detects board is not full and returns null result", function() {
 			game.board = [1,1,2,
 										2,1,0,
 										1,2,2];
-			game.current_player = 2;
-			expect(game.isBoardFull()).toEqual(false);
+			game.current_player = game.player2;
+			expect(game.checkForFullBoard()).toEqual(false);
 			expect(game.board).toEqual([1,1,2,2,1,0,1,2,2]);
-			expect(game.current_player).toEqual(2);
+			expect(game.current_player).toEqual(game.player2);
 		});
 	});
 

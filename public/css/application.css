@@ -1,3 +1,5 @@
+* {background-color: #111e1e;}
+
 #board *, #board *:after, #board *:before {
 /*  -webkit-box-sizing: border-box;
      -moz-box-sizing: border-box;
@@ -8,21 +10,24 @@
   margin: 50px auto;
   width: 600px;
   height: 600px;
+  /*-ms-transform: rotate(20deg);
+  -webkit-transform: rotate(20deg);
+  transform: rotate(20deg);*/
 }
 
 #c0, #c1, #c3, #c4 {
-  border-right: 3px solid black;
-  border-bottom: 3px solid black;
+  border-right: 5px solid #ff8007;
+  border-bottom: 5px solid #ff8007;
 }
 
 #c5 {
-  border-top: 3px solid black;
-  border-bottom: 3px solid black;
+  border-top: 5px solid #ff8007;
+  border-bottom: 5px solid #ff8007;
 }
 
 #c7 {
-  border-right: 3px solid black;
-  border-left: 3px solid black;
+  border-right: 5px solid #ff8007;
+  border-left: 5px solid #ff8007;
 }
 
 body {
@@ -41,6 +46,7 @@ body {
 
   text-align: center;
   font-size: 150px;
+  color: #ff8007;
 }
 
 .cells {
