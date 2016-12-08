@@ -1,4 +1,4 @@
-var Game = function(player1, player2) {
+var Board = function(player1, player2) {
 	this.board = [
 							  0,0,0,
 								0,0,0,
@@ -10,28 +10,16 @@ var Game = function(player1, player2) {
 	this.current_player = player1;
 
 	this.current_move = null;
-	// this.i = 150;
 };
 
-Game.prototype.play = function() {
-	var g = this;
+Board.prototype.play = function() {
 
-	var gameLoop = setInterval( () => {
-	// this.i = this.i + 1;
-	// console.log('rotate(' + this.i + 'deg)')
-
-	// $('#board').css('-ms-transform', 'rotate(' + this.i + 'deg)');
-	// $('#board').css('-webkit-transform', 'rotate(' + this.i + 'deg)');
-	// $('#board').css('transform', 'rotate(' + this.i + 'deg)');
-	// $('#board').css('width', 2*this.i);
-	// $('#board').css('height', 2*this.i);
+	let gameLoop = setInterval( () => {
 
 		if (this.current_player === this.player2) {
-			var state = this.board.join('');
-			console.log('hi')
-			var p2 = { '000000001': 0, '200000011': 1, '220001011': 3, '220201011': 4, '220221011': 6 };
-			console.log(p2[state])
-			this.takeTurn(p2[state]);
+			const state = this.board.join('');
+			var p2 = this.current_player.genome;
+			this.takeTurn(this.current_player.genome[state]);
 		}
 
 		if (this.current_player === this.player1) {
@@ -44,59 +32,37 @@ Game.prototype.play = function() {
 			}
 		}
 	}, 100);
-	// var myCount = setInterval(function() {
-	// 	// console.log(g.current_player)
-	// 	if (g.current_move != null) {
-	// 		console.log('success!')
-	// 		// g.current_move = null;
-	// 		clearInterval(myCount)
-	// 	}
-	// }
-	// , 300);
 
 };
 
-// Game.prototype.playing = 
 
-	// $(document).on('keyup', function() {
-	// 	// g.switchPlayer();
-	// 	g.current_player = g.player1;
-	// 	console.log(g.current_player);		
-	// });
-
-
-Game.prototype.fetchPlayerMove = function(event) {
-	var cell = event.target;
-	var cell_index = parseInt($(cell).attr("id")[1]);
+Board.prototype.fetchPlayerMove = function(event) {
+	const cell = event.target;
+	const cell_index = parseInt($(cell).attr("id")[1]);
 	this.current_move = cell_index;
-	// console.log(this.current_move)
-
-	// 	this.markAsPlayer(cell_index);
-	// 	this.switchPlayer();
-	// 	this.updateBoard();
-	// 	this.checkForWinner();
-	// 	this.checkForFullBoard();
-		// this.takeTurn(cell_index);
-		// console.log(cell_index)
 
 }
 
-Game.prototype.takeTurn = function(cell_index) {
-	if (this.cellIsFree(cell_index) ) {  // && this.current_player == this.player1     SAVE FOR LATER
+
+Board.prototype.takeTurn = function(cell_index) {
+	isFree = this.cellIsFree(cell_index)
+	if (isFree) {
 		this.markAsPlayer(cell_index);
 		this.switchPlayer();
-		this.updateBoard();
+		this.updateBoardView();
 		this.checkForWinner();
 		this.checkForFullBoard();
 	}
+	return isFree;
 }
 
-Game.prototype.winChecker = function() {
+// Jasmine Tested
+Board.prototype.winChecker = function() {		
 	if ((this.board[0] === 1 || this.board[0] === 2) && this.board[0] === this.board[4] && this.board[0] === this.board[8]) {
 			return this.board[0]; }  // downward diagonal
 	if ((this.board[2] === 1 || this.board[2] === 2) && this.board[2] === this.board[4] && this.board[2] === this.board[6]) {
 			return this.board[2]; }  // upward diagonal
-	for (var i = 0; i < 3; i++) {
+	for (let i = 0; i < 3; i++) {
 		if ((this.board[3*i] === 1 || this.board[3*i] === 2) && this.board[3*i] === this.board[3*i+1] && this.board[3*i] === this.board[3*i+2]) {
 			return this.board[3*i]; }  // matching row
 		if ((this.board[i] === 1 || this.board[i] === 2) && this.board[i] === this.board[i+3] && this.board[i] === this.board[i+6]) {
@@ -107,15 +73,18 @@ Game.prototype.winChecker = function() {
 	
 };
 
-Game.prototype.cellIsFree = function(cell) {
+// Jasmine Tested
+Board.prototype.cellIsFree = function(cell) {
 	return this.board[cell] === 0;
 };
 
-Game.prototype.markAsPlayer = function(cell) {
+// Jasmine Tested
+Board.prototype.markAsPlayer = function(cell) {
 	this.board[cell] = this.current_player.number;
 }
 
-Game.prototype.switchPlayer = function() {
+// Jasmine Tested
+Board.prototype.switchPlayer = function() {
 	if (this.current_player.number === 1) {
 		this.current_player = this.player2;
 	} else {
@@ -123,10 +92,11 @@ Game.prototype.switchPlayer = function() {
 	}
 }
 
-Game.prototype.updateBoard = function() {
-	var $cells = $(".cell");
-	for (var i = 0; i < $cells.length; i++) {
-		var mark = "";
+
+Board.prototype.updateBoardView = function() {
+	const $cells = $(".cell");
+	for (let i = 0; i < $cells.length; i++) {
+		let mark = "";
 		if (this.board[i] === 1) {
 			mark = "X";
 		}
@@ -137,14 +107,16 @@ Game.prototype.updateBoard = function() {
 	}
 }
 
-Game.prototype.resetGame = function() {
+// Jasmine Tested
+Board.prototype.resetGame = function() {
 	this.board = [0,0,0,0,0,0,0,0,0];
 	this.current_player = this.player1;
-	this.updateBoard();
+	this.updateBoardView();
 }
 
-Game.prototype.checkForWinner = function() {
-	var winner = this.winChecker();
+// Jasmine Tested
+Board.prototype.checkForWinner = function() {
+	const winner = this.winChecker();
 	if (winner != "NO match") {
 		console.log(winner);
 		this.resetGame();
@@ -153,7 +125,8 @@ Game.prototype.checkForWinner = function() {
 	return null;
 }
 
-Game.prototype.checkForFullBoard = function() {
+// Jasmine Tested
+Board.prototype.checkForFullBoard = function() {
 	var isFull = true;
 	for (var i = 0; i < this.board.length; i++) {
 		isFull = isFull && (this.board[i] != 0);

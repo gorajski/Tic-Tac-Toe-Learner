@@ -4,7 +4,7 @@ describe("game play", function() {
 	beforeEach(function() {
 		player1 = new Player(1, "keyboard");
 		player2 = new Player(2, "mouse");
-		game = new Game(player1, player2);
+		game = new Board(player1, player2);
 	});
 
 	it("has game board representation", function() {
@@ -141,7 +141,7 @@ describe("game play", function() {
 		});
 	});
 
-	describe('isBoardFull', function() {
+	describe('checkForFullBoard', function() {
 		it("detects board is full and resets the game", function() {
 			game.board = [1,1,2,
 										2,1,1,
