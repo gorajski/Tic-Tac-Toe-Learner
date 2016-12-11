@@ -3,7 +3,6 @@ var Player = function(number, type) {
 	this.type = type;
 
 	this.genome = this.new_genome();
-	console.log(this.genome)
 }
 
 Player.prototype.new_genome = function() {
