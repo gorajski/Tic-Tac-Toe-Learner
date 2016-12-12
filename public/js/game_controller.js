@@ -1,39 +1,36 @@
 var GameController = function() {
 
-	var player1 = new Player(1, "keyboard");
-	var player2 = new Player(2, "mouse");
- 	this.board = new Board(player1, player2);
+	this.player1 = new Player(1, "keyboard");
+	this.player2 = new Player(2, "mouse");
+ 	this.board = new Board();
+
+ 	this.current_move = null;
+ 	this.current_player = this.player1;
+
  	setInterval(this.gameLoop.bind(this), 100)
 }
 
-GameController.prototype.fetchPlayerMove = function(event) {
-	const cell = event.target;
-	const cell_index = parseInt($(cell).attr("id")[1]);
-	this.board.current_move = cell_index;		// CHANGE CURRENT MOVE TO CONTROLLER VARIABLE
-
-}
-
 GameController.prototype.switchPlayer = function() {
-	if (this.board.current_player.number === 1) {
-		this.board.current_player = this.board.player2;
+	if (this.current_player.number === 1) {
+		this.current_player = this.player2;
 	} else {
-		this.board.current_player = this.board.player1;
+		this.current_player = this.player1;
 	}
-	console.log(this.board.current_player)
+	console.log(this.current_player)
 }
 
 GameController.prototype.resetGame = function() {
 	this.board.state = [0,0,0,0,0,0,0,0,0];
-	this.board.current_player = this.board.player1;
+	this.current_player = this.player1;
 	this.board.updateBoardView();
 }
 
 GameController.prototype.takeTurn = function(player, cell_index) {
 	isFree = this.board.cellIsFree(cell_index)
 	if (isFree) {
-		this.board.markAsPlayer(this.board.current_player, cell_index);
-		this.switchPlayer();
+		this.board.markAsPlayer(this.current_player, cell_index);
 		this.board.updateBoardView();
+		this.switchPlayer();
 		winner = this.board.checkForWinner();
 		if (winner || this.board.checkForFullBoard()) {
 			this.resetGame();
@@ -42,22 +39,27 @@ GameController.prototype.takeTurn = function(player, cell_index) {
 	return isFree;
 }
 
+GameController.prototype.fetchPlayerMove = function(event) {
+	const cell = event.target;
+	const cell_index = parseInt($(cell).attr("id")[1]);
+	this.current_move = cell_index;
+}
+
 GameController.prototype.gameLoop = function() {
 
-	if (this.board.current_player === this.board.player2) {
- 	console.log(this.board.current_player.genome[this.board.state])
+	if (this.current_player === this.player2) {
 		const state = this.board.state.join('');
-		var p2 = this.board.current_player.genome;
-		this.takeTurn(this.board.current_player, this.board.current_player.genome[state]);
+		let cell_index = this.current_player.genome[state];
+		this.takeTurn(this.current_player, cell_index);
 	}
 
-	if (this.board.current_player === this.board.player1) {
+	if (this.current_player === this.player1) {
 		$(".cell").on("click", this.fetchPlayerMove.bind(this));
-		if (this.board.current_move != null) {
-			cell_index = this.board.current_move;
-			this.board.current_move = null;
-			this.takeTurn(this.board.current_player, cell_index);
+		if (this.current_move != null) {
+			let cell_index = this.current_move;
+			this.current_move = null;
 			$(".cell").off("click");
+			this.takeTurn(this.current_player, cell_index);
 		}
 	}
 };

@@ -4,94 +4,94 @@ describe("game play", function() {
 	beforeEach(function() {
 		player1 = new Player(1, "keyboard");
 		player2 = new Player(2, "mouse");
-		game = new Board(player1, player2);
+		board = new Board(player1, player2);
 	});
 
-	it("has game board representation", function() {
-		expect(game.state).toEqual([0,0,0,0,0,0,0,0,0]);
+	it("has board representation", function() {
+		expect(board.state).toEqual([0,0,0,0,0,0,0,0,0]);
 	});
 
-	it('has a current player', function() {
-		console.log(game.current_player)
-		expect(game.current_player.number).toEqual(1);
-	});
+	// it('has a current player', function() {
+	// 	console.log(board.current_player)
+	// 	expect(board.current_player.number).toEqual(1);
+	// });
 
 	describe('winChecker', function() {
 		it('detects no winner condition', function() {
-			expect(game.winChecker()).toEqual("NO match");
+			expect(board.checkForWinner()).toEqual(null);
 		});
 
 		it('detects player1 win on row 1', function() {
-			game.state = [1,1,1,2,2,0,0,0,0];
-			expect(game.winChecker()).toEqual(1);
+			board.state = [1,1,1,2,2,0,0,0,0];
+			expect(board.checkForWinner()).toEqual(1);
 		});
 
 		it('detects player2 win on row 2', function() {
-			game.state = [1,0,1,2,2,2,0,1,1];
-			expect(game.winChecker()).toEqual(2);
+			board.state = [1,0,1,2,2,2,0,1,1];
+			expect(board.checkForWinner()).toEqual(2);
 		});
 
 		it('detects player1 win on row 3', function() {
-			game.state = [2,0,0,
+			board.state = [2,0,0,
 										0,2,2,
 										1,1,1];
-			expect(game.winChecker()).toEqual(1);
+			expect(board.checkForWinner()).toEqual(1);
 		});
 
 		it('detects player2 win on column 1', function() {
-			game.state = [2,0,1,
+			board.state = [2,0,1,
 										2,0,0,
 										2,1,1];
-			expect(game.winChecker()).toEqual(2);
+			expect(board.checkForWinner()).toEqual(2);
 		});
 
 		it('detects player1 win on column 2', function() {
-			game.state = [2,1,0,
+			board.state = [2,1,0,
 										0,1,2,
 										2,1,1];
-			expect(game.winChecker()).toEqual(1);
+			expect(board.checkForWinner()).toEqual(1);
 		});
 
 		it('detects player2 win on column 3', function() {
-			game.state = [2,1,2,
+			board.state = [2,1,2,
 										1,0,2,
 										1,1,2];
-			expect(game.winChecker()).toEqual(2);
+			expect(board.checkForWinner()).toEqual(2);
 		});
 
 		it('detects player1 win on downward diagonal', function() {
-			game.state = [1,2,0,
+			board.state = [1,2,0,
 										0,1,2,
 										2,1,1];
-			expect(game.winChecker()).toEqual(1);
+			expect(board.checkForWinner()).toEqual(1);
 		});
 
 		it('detects player2 win on upward diagonal', function() {
-			game.state = [1,0,2,
+			board.state = [1,0,2,
 										1,2,0,
 										2,1,1];
-			expect(game.winChecker()).toEqual(2);
+			expect(board.checkForWinner()).toEqual(2);
 		});
 
 	});
 
 	describe('cellIsFree', function() {
 		it('indicates when cell is unmarked', function() {
-			game.state = [0,0,0,0,0,0,0,0,0];
-			expect(game.cellIsFree(2)).toEqual(true);
+			board.state = [0,0,0,0,0,0,0,0,0];
+			expect(board.cellIsFree(2)).toEqual(true);
 		});
 
 		it('indicates when cell is marked', function() {
-			game.state = [1,1,0,2,0,2,0,1,2];
-			expect(game.cellIsFree(1)).toEqual(false);
+			board.state = [1,1,0,2,0,2,0,1,2];
+			expect(board.cellIsFree(1)).toEqual(false);
 		});
 	});
 
 	describe('markAsPlayer', function() {
 		it("marks the selected cell as the current_player's", function() {
-			expect(game.state).toEqual([0,0,0,0,0,0,0,0,0]);
-			game.markAsPlayer(player1, 2);
-			expect(game.state).toEqual([0,0,1,0,0,0,0,0,0]);
+			expect(board.state).toEqual([0,0,0,0,0,0,0,0,0]);
+			board.markAsPlayer(player1, 2);
+			expect(board.state).toEqual([0,0,1,0,0,0,0,0,0]);
 		});
 	});
 
@@ -143,37 +143,37 @@ describe("game play", function() {
 
 		describe('checkForWinner', function() {
 		it("returns the winner", function() {
-			game.state = [2,1,2,
+			board.state = [2,1,2,
 										1,0,2,
 										1,1,2];
-			game.current_player = game.player2;
-			expect(game.checkForWinner()).toEqual(2);
+			board.current_player = board.player2;
+			expect(board.checkForWinner()).toEqual(2);
 		});
 
 		it("returns null results when no winner", function() {
-			game.state = [2,1,2,
+			board.state = [2,1,2,
 										1,0,0,
 										1,1,2];
-			game.current_player = game.player2;
-			expect(game.checkForWinner()).toEqual(null);
+			board.current_player = board.player2;
+			expect(board.checkForWinner()).toEqual(null);
 		});
 	});
 
 	describe('checkForFullBoard', function() {
 		it("detects board is full and returns true", function() {
-			game.state = [1,1,2,
+			board.state = [1,1,2,
 										2,1,1,
 										1,2,2];
-			game.current_player != game.player2;
-			expect(game.checkForFullBoard()).toEqual(true);
+			board.current_player != board.player2;
+			expect(board.checkForFullBoard()).toEqual(true);
 		});
 
 		it("detects board is not full and returns false", function() {
-			game.state = [1,1,2,
+			board.state = [1,1,2,
 										2,1,0,
 										1,2,2];
-			game.current_player = game.player2;
-			expect(game.checkForFullBoard()).toEqual(false);
+			board.current_player = board.player2;
+			expect(board.checkForFullBoard()).toEqual(false);
 		});
 	});
 

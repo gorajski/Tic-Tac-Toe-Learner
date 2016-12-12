@@ -12,3 +12,4 @@ Player.prototype.new_genome = function() {
 	for (key in template) { template[key] = Math.floor(Math.random() * (maxIndex - minIndex) + minIndex) }		
 	return template;
 }
+
