@@ -1,21 +1,26 @@
+require 'csv'
+
+def number_of_moves_by_player(player_num, board)
+  board.to_s(3).count(player_num)
+end
 
 def remove_blatantly_impossible_board_states
   # INPUT: every number from 0 to 19682
   # OUTPUT: Array containing decimal numbers representing (not strictly) playable board states.
 
   # Discard any board where Player1 has more than 5 marks on the board or Player2 has more than 4 marks on the board
-  arr = (0...19682).to_a.reject do |number|
-    (number.to_s(3).count('1') > 5 || number.to_s(3).count('2') > 4) 
+  arr = (0...19682).to_a.reject do |board|
+    (number_of_moves_by_player('1', board) > 5 || board.to_s(3).count('2') > 4) 
   end
 
   # Discard any board where Player1 has more than just 1 mark more than Player2 
-  arr = arr.to_a.reject do |number|
-    (number.to_s(3).count('1') - number.to_s(3).count('2')) > 1
+  arr = arr.to_a.reject do |board|
+    (board.to_s(3).count('1') - board.to_s(3).count('2')) > 1
   end
 
   # Discard any board where Player2 has more marks than Player1
-  arr = arr.to_a.reject do |number|
-    (number.to_s(3).count('1') - number.to_s(3).count('2')) < 0 
+  arr = arr.to_a.reject do |board|
+    (board.to_s(3).count('1') - board.to_s(3).count('2')) < 0 
   end
 
   # arr = arr.to_a.reject do |number|
@@ -121,7 +126,23 @@ puts '*' * 8
 # p remove_blatantly_impossible_board_states.include?("022111002".to_i(3))
 # p remove_blatantly_impossible_board_states.include?("222011001".to_i(3))
 # Total reasonable states
-p remove_blatantly_impossible_board_states
+remove_blatantly_impossible_board_states
+
+template_str = "{ "
+remove_blatantly_impossible_board_states.each do |state|
+  state_str = state.to_s(3)
+  state_str = "0" * (9 - state_str.length) + state_str
+
+  template_str << "'#{state_str}' : null, "
+end
+template_str = template_str.chop.chop
+template_str += " }"
+p template_str
+
+CSV.open('template.csv', 'wb') do |csv|
+  csv << [template_str]
+end
+
 
 # winning board
 # puts board_state_winners
