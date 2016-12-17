@@ -1,24 +1,26 @@
-var GameController = function() {
+var GameController = function(board, player1, player2) {
 
-	this.player1 = new Player(1, "keyboard");
-	this.player2 = new Player(2, "mouse");
- 	this.board = new Board();
+ 	this.board = board;
+	this.player1 = player1;
+	this.player2 = player2;
 
  	this.current_move = null;
  	this.current_player = this.player1;
 
- 	setInterval(this.gameLoop.bind(this), 100)
+ 	setInterval(this.gameClock.bind(this), 100)
 }
 
+// Jasmine Tested
 GameController.prototype.switchPlayer = function() {
 	if (this.current_player.number === 1) {
 		this.current_player = this.player2;
 	} else {
 		this.current_player = this.player1;
 	}
-	console.log(this.current_player)
+	// console.log(this.current_player)
 }
 
+// Jasmine Tested
 GameController.prototype.resetGame = function() {
 	this.board.state = [0,0,0,0,0,0,0,0,0];
 	this.current_player = this.player1;
@@ -41,26 +43,30 @@ GameController.prototype.takeTurn = function(player, cell_index) {
 
 GameController.prototype.fetchPlayerMove = function(event) {
 	const cell = event.target;
-	const cell_index = parseInt($(cell).attr("id")[1]);
+	const cell_index = parseInt($(cell).attr("class")[1]);
 	this.current_move = cell_index;
 }
 
-GameController.prototype.gameLoop = function() {
+GameController.prototype.gameClock = function() {
 
-	if (this.current_player === this.player2) {
+	if (this.current_player.type === 'human') {
+		// console.log(this.board.html_element)
+		// console.log($("#board"))
+		this.board.html_element.on("click", this.fetchPlayerMove.bind(this));
+		if (this.current_move != null) {
+			let cell_index = this.current_move;
+			this.current_move = null;
+			this.board.html_element.off("click");
+			this.takeTurn(this.current_player, cell_index);
+		}
+	}
+
+
+	if (this.current_player.type === 'computer') {
 		const state = this.board.state.join('');
 		let cell_index = this.current_player.genome[state];
 		this.takeTurn(this.current_player, cell_index);
 	}
 
-	if (this.current_player === this.player1) {
-		$(".cell").on("click", this.fetchPlayerMove.bind(this));
-		if (this.current_move != null) {
-			let cell_index = this.current_move;
-			this.current_move = null;
-			$(".cell").off("click");
-			this.takeTurn(this.current_player, cell_index);
-		}
-	}
 };
 
