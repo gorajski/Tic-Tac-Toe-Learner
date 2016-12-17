@@ -1,7 +1,20 @@
 describe("game play", function() {
 	
-	beforeEach(function() {
-		game = new GameController();
+	beforeEach(function() {		
+		player1 = new Player("computer");
+		player2 = new Player("computer");
+		board = new Board($("#dummy_entry"));
+		game = new GameController(board, player1, player2);
+	});
+
+	it('has a current player', function() {
+		console.log(game.current_player)
+		expect(game.current_player.number).toEqual(1);
+	});
+
+	it('has a current move', function() {
+		console.log(game.current_player)
+		expect(game.current_move).toEqual(null);
 	});
 
 	describe('switchPlayer', function() {
