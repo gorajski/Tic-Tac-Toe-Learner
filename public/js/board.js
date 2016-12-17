@@ -9,10 +9,8 @@ var Board = function(html_element) {
 };
 
 Board.prototype.updateBoardView = function() {
-	// const $cells = $(".cell");
 	const $cells = $(this.html_element.find(".cell"))
-	// console.log($cells);
-	// console.log(this.html_element.find(".cell"))
+
 	for (let i = 0; i < $cells.length; i++) {
 		let mark = "";
 		if (this.state[i] === 1) {

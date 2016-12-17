@@ -1,18 +1,20 @@
-var GameController = function(board, player1, player2) {
+let GameController = function(board, player1, player2) {
 
  	this.board = board;
-	this.player1 = player1;
-	this.player2 = player2;
+	this.player1 = Object.assign({}, player1);
+	this.player1.number = 1;
+	this.player2 = Object.assign({}, player2);
+	this.player2.number = 2;
 
  	this.current_move = null;
  	this.current_player = this.player1;
 
- 	setInterval(this.gameClock.bind(this), 100)
+ 	// setInterval(this.gameClock.bind(this), 100)
 }
 
 // Jasmine Tested
 GameController.prototype.switchPlayer = function() {
-	if (this.current_player.number === 1) {
+	if (this.current_player === this.player1) {
 		this.current_player = this.player2;
 	} else {
 		this.current_player = this.player1;
@@ -43,6 +45,7 @@ GameController.prototype.takeTurn = function(player, cell_index) {
 
 GameController.prototype.fetchPlayerMove = function(event) {
 	const cell = event.target;
+	console.log
 	const cell_index = parseInt($(cell).attr("class")[1]);
 	this.current_move = cell_index;
 }

@@ -1,21 +1,17 @@
-describe("game board", function() {
-	var game, player1, player2;
+describe("board object", function() {
+	var board, player1, player2;
 
 	beforeEach(function() {
-		player1 = new Player(1, "keyboard");
-		player2 = new Player(2, "mouse");
-		board = new Board(player1, player2);
+		player1 = new Player("computer");
+		player1.number = 1;
+		player2 = new Player("computer");
+		player2.number = 2;
+		board = new Board("#dummy_entry");
 	});
 
 	it("has board representation", function() {
 		expect(board.state).toEqual([0,0,0,0,0,0,0,0,0]);
 	});
-
-	// it('has a current player', function() {
-	// 	console.log(board.current_player)
-	// 	expect(board.current_player.number).toEqual(1);
-	// });
-
 
 	describe('cellIsFree', function() {
 		it('indicates when cell is unmarked', function() {
