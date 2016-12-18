@@ -45,7 +45,6 @@ GameController.prototype.takeTurn = function(player, cell_index) {
 
 GameController.prototype.fetchPlayerMove = function(event) {
 	const cell = event.target;
-	console.log
 	const cell_index = parseInt($(cell).attr("class")[1]);
 	this.current_move = cell_index;
 }
@@ -53,8 +52,6 @@ GameController.prototype.fetchPlayerMove = function(event) {
 GameController.prototype.gameClock = function() {
 
 	if (this.current_player.type === 'human') {
-		// console.log(this.board.html_element)
-		// console.log($("#board"))
 		this.board.html_element.on("click", this.fetchPlayerMove.bind(this));
 		if (this.current_move != null) {
 			let cell_index = this.current_move;
@@ -63,7 +60,6 @@ GameController.prototype.gameClock = function() {
 			this.takeTurn(this.current_player, cell_index);
 		}
 	}
-
 
 	if (this.current_player.type === 'computer') {
 		const state = this.board.state.join('');

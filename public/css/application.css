@@ -1,6 +1,6 @@
 * {background-color: #111e1e;}
 
-#board, #board2, #board3, #board4 {
+.board, .miniboard {
   margin: 50px auto;
   width: 600px;
   height: 600px;
@@ -9,17 +9,21 @@
   transform: rotate(20deg);*/
 }
 
+.board_element > td {
+  padding: 15px;
+}
+
 .c0, .c1, .c3, .c4 {
   border-right: 5px solid #ff8007;
   border-bottom: 5px solid #ff8007;
 }
 
-.c5, .d5 {
+.c5 {
   border-top: 5px solid #ff8007;
   border-bottom: 5px solid #ff8007;
 }
 
-.c7, .d7 {
+.c7 {
   border-right: 5px solid #ff8007;
   border-left: 5px solid #ff8007;
 }
