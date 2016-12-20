@@ -1,6 +1,6 @@
 * {background-color: #111e1e;}
 
-.board, .miniboard {
+.board {
   margin: 50px auto;
   width: 600px;
   height: 600px;
@@ -9,27 +9,51 @@
   transform: rotate(20deg);*/
 }
 
-.board_element > td {
-  padding: 15px;
+.miniboard {
+  /*margin: 10px auto;*/
+  width: 60px;
+  height: 60px;
+
+  font-size: 14px;
 }
 
-.c0, .c1, .c3, .c4 {
+.board_element > td {
+  padding: 0px 15px 5px 15px;
+}
+
+.board .c0, .board .c1, .board .c3, .board .c4 {
   border-right: 5px solid #ff8007;
   border-bottom: 5px solid #ff8007;
 }
 
-.c5 {
+.board .c5 {
   border-top: 5px solid #ff8007;
   border-bottom: 5px solid #ff8007;
 }
 
-.c7 {
+.board .c7 {
   border-right: 5px solid #ff8007;
   border-left: 5px solid #ff8007;
 }
 
+
+.miniboard .c0, .miniboard .c1, .miniboard .c3, .miniboard .c4 {
+  border-right: 2px solid #ff8007;
+  border-bottom: 2px solid #ff8007;
+}
+
+.miniboard .c5 {
+  border-top: 2px solid #ff8007;
+  border-bottom: 2px solid #ff8007;
+}
+
+.miniboard .c7 {
+  border-right: 2px solid #ff8007;
+  border-left: 2px solid #ff8007;
+}
+
 body {
-  font-size: 14px;
+  /*font-size: 14px;*/
   padding-bottom: 4em;
 }
 
@@ -38,11 +62,13 @@ body {
 }
 
 .cell{
-  width: 195px;
-  height: 195px;
+  /*width: 195px;*/
+  /*height: 195px;*/
+  width: 18px;
+  height: 18px;
 
   text-align: center;
-  font-size: 150px;
+  /*font-size: 150px;*/
   color: #ff8007;
 }
 
