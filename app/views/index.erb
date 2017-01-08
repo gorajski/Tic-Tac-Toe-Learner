@@ -1,4 +1,11 @@
 <div><a href="/player_mode">Player Mode</a><a href="/training_mode">Training Mode</a></div>
+<div id="splash">
+	<div id="button-container">
+		<button id="close" class="splash-button">x</button>
+	  <button id="back" class="splash-button">   < back   </button>
+	  <button id="next" class="splash-button">   next >   </button>
+  </div>
+</div>
 <div id="content">
 	<table>
 
@@ -80,7 +87,7 @@
 		</tr>
 
 		<tr class="board_element">
-			<td id="board57" class="miniboard">hi<%= erb :_board %></td>
+			<td id="board57" class="miniboard"><%= erb :_board %></td>
 			<td id="board58" class="miniboard"><%= erb :_board %></td>
 			<td id="board59" class="miniboard"><%= erb :_board %></td>
 			<td id="board60" class="miniboard"><%= erb :_board %></td>

@@ -1,5 +1,35 @@
 * {background-color: #111e1e;}
 
+#splash {
+  display: inline-block;
+  position: absolute;
+  top: 12.1%;
+  left: 25%;
+  width: 50%;
+  height: 375px;
+  /*padding: 50px;*/
+  background-color: #203745;
+  border: 6px solid #265867;
+  border-radius: 3px;
+
+  color: #ff8007;
+}
+
+.splash-button {
+  position: absolute;
+  bottom: 0px;
+  width: 70px;
+  margin: 15px;
+}
+
+#back {
+  right: 85px;
+}
+
+#next {
+  right: 0px;
+}
+
 .board {
   margin: 50px auto;
   width: 600px;
