@@ -36,11 +36,17 @@ GameController.prototype.takeTurn = function(player, cell_index) {
 		this.board.updateBoardView();
 		this.switchPlayer();
 		winner = this.board.checkForWinner();
-		if (winner || this.board.checkForFullBoard()) {
-			this.resetGame();
-		};
+		if (winner) {
+			setTimeout(this.resetGame.bind(this), 20);
+			return this.current_player;
+		} else if (this.board.checkForFullBoard()) {
+			return 'draw'
+		} else {
+			return 'Gameplay continues...'
+		}
+	} else {
+		return 'illegal move'
 	}
-	return isFree;
 }
 
 GameController.prototype.fetchPlayerMove = function(event) {
