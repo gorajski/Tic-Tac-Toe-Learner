@@ -2,14 +2,22 @@ let Generation = function() {
 	this.members = [];
 };
 
-Generation.prototype.build = function(size) {
+Generation.prototype.create = function(size) {
 	for (let i = 0; i < size; i++) {
 		this.members.push(new Player("computer"));
 	};
 }
 
 Generation.prototype.spawn = function(survivalRatio) {
-	let descendants = Object.assign([], this.members);
+	// let descendants = Object.assign([], this.members);
+	// let descendants = JSON.parse(JSON.stringify(this.members));
+
+	let descendants = [];
+
+	for (player in this.members) {
+		descendants.push(player.clone());
+	}
+
 
 	descendants.sort(function(a,b) {
 		if (a.fitness > b.fitness) {

@@ -25,6 +25,8 @@ GameController.prototype.switchPlayer = function() {
 // Jasmine Tested
 GameController.prototype.resetGame = function() {
 	this.board.state = [0,0,0,0,0,0,0,0,0];
+	this.player1.number = null;
+	this.player2.number = null;
 	this.current_player = this.player1;
 	this.board.updateBoardView();
 }
