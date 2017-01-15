@@ -14,8 +14,8 @@ Generation.prototype.spawn = function(survivalRatio) {
 
 	let descendants = [];
 
-	for (player in this.members) {
-		descendants.push(player.clone());
+	for (let member in this.members) {
+		descendants.push(this.members[member].clone());
 	}
 
 
@@ -32,10 +32,11 @@ Generation.prototype.spawn = function(survivalRatio) {
 	nextGeneration = new Generation();
 	let numberToKeepAlive = Math.floor(survivalRatio * descendants.length);
 
-	for(let i = 0; i < numberToKeepAlive; i++) {
-		nextGeneration.members.push(this.members[i]);
-	}
+	// for(let i = 0; i < numberToKeepAlive; i++) {
+	// 	nextGeneration.members.push(this.members[i]);
+	// }
 
-	return nextGeneration;
+	// return nextGeneration;
+	return descendants;
 };
 
