@@ -8,7 +8,7 @@ $(document).ready(function() {
 	const gameCount = playerCount * playerCount;
 
 	currentGeneration = new Generation();
-	currentGeneration.build(playerCount);
+	currentGeneration.create(playerCount);
 
 	let boardCollection = [];
 	for (let i = 0; i < gameCount; i++) {

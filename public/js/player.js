@@ -15,6 +15,12 @@ Player.prototype.newGenome = function() {
 	return fresh_genome;
 };
 
+Player.prototype.clone = function() {
+	let newPlayer = new Player(this.type);
+	newPlayer.genome = Object.assign({}, this.genome);
+	return newPlayer;
+};
+
 Player.prototype.mutate = function() {
 	let mutationFactor = 0.1 * Math.random();
 
