@@ -17,6 +17,7 @@ Player.prototype.newGenome = function() {
 
 Player.prototype.clone = function() {
 	let newPlayer = new Player(this.type);
+	newPlayer.fitness = this.fitness;
 	newPlayer.genome = Object.assign({}, this.genome);
 	return newPlayer;
 };

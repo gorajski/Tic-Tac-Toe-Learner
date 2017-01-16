@@ -8,35 +8,23 @@ Generation.prototype.create = function(size) {
 	};
 }
 
-Generation.prototype.spawn = function(survivalRatio) {
-	// let descendants = Object.assign([], this.members);
-	// let descendants = JSON.parse(JSON.stringify(this.members));
-
+Generation.prototype.spawn = function(survivalRatio, newPopulationSize) {//, doesPromoteElites) {
+	let nextGeneration = new Generation();
+	let numberToKeepAlive = Math.floor(survivalRatio * descendants.length);
+	let descendantsPerAncestor = newPopulationSize / numberToKeepAlive;
 	let descendants = [];
 
-	for (let member in this.members) {
+	for (let member in this.members) {		//deep clone
 		descendants.push(this.members[member].clone());
 	}
 
-
-	descendants.sort(function(a,b) {
-		if (a.fitness > b.fitness) {
-			return 1;
-		}
-		if (a.fitness < b.fitness) {
-			return -1;
-		}
+	descendants.sort(function(a,b) {		//sort by fitness performance
+		if (a.fitness > b.fitness) { return -1; }
+		if (a.fitness < b.fitness) { return 1; }
 		return 0;
-	});
-	
-	nextGeneration = new Generation();
-	let numberToKeepAlive = Math.floor(survivalRatio * descendants.length);
+	});	
 
-	// for(let i = 0; i < numberToKeepAlive; i++) {
-	// 	nextGeneration.members.push(this.members[i]);
-	// }
+	nextGeneration.members = descendants.slice(0, numberToKeepAlive);  //promote high performers
 
-	// return nextGeneration;
-	return descendants;
+	return nextGeneration;
 };
-
