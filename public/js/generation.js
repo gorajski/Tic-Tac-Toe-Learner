@@ -8,23 +8,39 @@ Generation.prototype.create = function(size) {
 	};
 }
 
-Generation.prototype.spawn = function(survivalRatio, newPopulationSize) {//, doesPromoteElites) {
+Generation.prototype.spawn = function(survivalRatio, newPopulationSize, doesPromoteElites) {
 	let nextGeneration = new Generation();
-	let numberToKeepAlive = Math.floor(survivalRatio * descendants.length);
-	let descendantsPerAncestor = newPopulationSize / numberToKeepAlive;
-	let descendants = [];
 
+	let numberToKeepAlive = Math.floor(survivalRatio * this.members.length);
+	let descendantsPerAncestor = Math.floor(newPopulationSize / numberToKeepAlive);
+
+	let ancestors = [];
 	for (let member in this.members) {		//deep clone
-		descendants.push(this.members[member].clone());
+		ancestors.push(this.members[member].clone());
 	}
 
-	descendants.sort(function(a,b) {		//sort by fitness performance
+	ancestors.sort(function(a,b) {		//sort by fitness performance
 		if (a.fitness > b.fitness) { return -1; }
 		if (a.fitness < b.fitness) { return 1; }
 		return 0;
 	});	
 
-	nextGeneration.members = descendants.slice(0, numberToKeepAlive);  //promote high performers
+	ancestors = ancestors.slice(0, numberToKeepAlive);  //promote high performers
+
+	var ancestorIndex = 0;
+	for (let i = 0; i < newPopulationSize; i++) {		//create new population
+		if (doesPromoteElites) {	//add in an unmodified copy of the best performing ancestor
+			nextGeneration.members.push(descendant);
+			doesPromoteElites = false;
+		} 
+		else {	//add in mutated copies of ancestors
+			descendant = ancestors[ancestorIndex].clone();
+			nextGeneration.members.push(descendant.mutate());
+			if ((i+1) % descendantsPerAncestor === 0  && ancestorIndex < numberToKeepAlive ) { 
+				ancestorIndex += 1;
+			}
+		}
+	}
 
 	return nextGeneration;
 };
