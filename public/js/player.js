@@ -4,7 +4,7 @@ let Player = function(type) {
 	this.fitness = 0;
 
 	this.genome = this.newGenome();
-}
+};
 
 Player.prototype.newGenome = function() {
 	let template = genome_template;
