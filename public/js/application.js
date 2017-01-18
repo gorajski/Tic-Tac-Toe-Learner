@@ -33,7 +33,7 @@ $(document).ready(function() {
 	 		game.gameClock();
 	 	});
 
-	}, 130);
+	}, 450);
 
 
 })

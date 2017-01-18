@@ -11,8 +11,8 @@ Generation.prototype.create = function(size) {
 Generation.prototype.spawn = function(survivalRatio, newPopulationSize, doesPromoteElites) {
 	let nextGeneration = new Generation();
 
-	let numberToKeepAlive = Math.floor(survivalRatio * this.members.length);
-	let descendantsPerAncestor = Math.floor(newPopulationSize / numberToKeepAlive);
+	let numberToKeepAlive = Math.floor(survivalRatio * this.members.length); //10
+	let descendantsPerAncestor = Math.floor(newPopulationSize / numberToKeepAlive); //3
 
 	let ancestors = [];
 	for (let member in this.members) {		//deep clone
@@ -30,13 +30,13 @@ Generation.prototype.spawn = function(survivalRatio, newPopulationSize, doesProm
 	var ancestorIndex = 0;
 	for (let i = 0; i < newPopulationSize; i++) {		//create new population
 		if (doesPromoteElites) {	//add in an unmodified copy of the best performing ancestor
-			nextGeneration.members.push(descendant);
+			nextGeneration.members.push(ancestors[0].clone());
 			doesPromoteElites = false;
 		} 
 		else {	//add in mutated copies of ancestors
-			descendant = ancestors[ancestorIndex].clone();
+			let descendant = ancestors[ancestorIndex].clone();
 			nextGeneration.members.push(descendant.mutate());
-			if ((i+1) % descendantsPerAncestor === 0  && ancestorIndex < numberToKeepAlive ) { 
+			if ((i+1) % descendantsPerAncestor === 0  && ancestorIndex < numberToKeepAlive - 1 ) { 
 				ancestorIndex += 1;
 			}
 		}

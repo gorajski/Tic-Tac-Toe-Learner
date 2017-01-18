@@ -1,8 +1,10 @@
 let GameController = function(board, player1, player2) {
  	this.board = board;
-	this.player1 = Object.assign({}, player1);
+	
+	this.player1 = player1.clone();		//Do I need to clone here?
 	this.player1.number = 1;
-	this.player2 = Object.assign({}, player2);
+	
+	this.player2 = player2.clone();
 	this.player2.number = 2;
 
  	this.current_move = null;
@@ -38,7 +40,8 @@ GameController.prototype.takeTurn = function(player, cell_index) {
 		this.switchPlayer();
 		winner = this.board.checkForWinner();
 		if (winner) {
-			setTimeout(this.resetGame.bind(this), 20);
+			setTimeout(this.resetGame.bind(this), 40);
+			// this.resetGame();	//use this if no delay is required between wins
 			return this.current_player;
 		} else if (this.board.checkForFullBoard()) {
 			return 'draw'
@@ -57,7 +60,6 @@ GameController.prototype.fetchPlayerMove = function(event) {
 }
 
 GameController.prototype.gameClock = function() {
-
 	if (this.current_player.type === 'human') {
 		this.board.html_element.on("click", this.fetchPlayerMove.bind(this));
 		if (this.current_move != null) {

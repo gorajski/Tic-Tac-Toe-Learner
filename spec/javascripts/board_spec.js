@@ -1,4 +1,4 @@
-describe("board object", function() {
+describe("Board object", function() {
 	var board, player1, player2;
 
 	beforeEach(function() {
@@ -13,7 +13,7 @@ describe("board object", function() {
 		expect(board.state).toEqual([0,0,0,0,0,0,0,0,0]);
 	});
 
-	describe('cellIsFree', function() {
+	describe('.cellIsFree', function() {
 		it('indicates when cell is unmarked', function() {
 			board.state = [0,0,0,0,0,0,0,0,0];
 			expect(board.cellIsFree(2)).toEqual(true);
@@ -25,7 +25,7 @@ describe("board object", function() {
 		});
 	});
 
-	describe('markAsPlayer', function() {
+	describe('.markAsPlayer', function() {
 		it("marks the selected cell as the current_player's", function() {
 			expect(board.state).toEqual([0,0,0,0,0,0,0,0,0]);
 			board.markAsPlayer(player1, 2);
@@ -34,7 +34,7 @@ describe("board object", function() {
 	});
 
 
-	describe('checkForWinner', function() {
+	describe('.checkForWinner', function() {
 		it("returns null results when no winner", function() {
 			board.state = [2,1,2,
 										1,0,0,
@@ -100,7 +100,7 @@ describe("board object", function() {
 
 	});
 
-	describe('checkForFullBoard', function() {
+	describe('.checkForFullBoard', function() {
 		it("detects board is full and returns true", function() {
 			board.state = [1,1,2,
 										2,1,1,
