@@ -13,26 +13,11 @@ describe("Generation object", function() {
 		it('populates Generation object with randomly generated members', function() {
 			expect(gen.members.length).toEqual(10);
 			expect(gen.members[0] instanceof Player).toEqual(true);
-			expect(gen.members[0].genome['000000000'] >= 0).toEqual(true);
-			expect(gen.members[0].genome['000000000'] <= 8).toEqual(true);
-			expect(gen.members[0].genome['000000001'] >= 0).toEqual(true);
-			expect(gen.members[0].genome['000000001'] <= 8).toEqual(true);
-			expect(gen.members[0].genome['000000012'] >= 0).toEqual(true);
-			expect(gen.members[0].genome['000000012'] <= 8).toEqual(true);
+			expect(gen.members[9] instanceof Player).toEqual(true);
 		});
 	});
 
-	describe('.spawn', function() {
-
-		const countIdenticalGenes = function(genome1, genome2) {
-			let count = 0; 
-			for (let i in genome1) { 
-				if (genome1[i] === genome2[i]) { 
-					count += 1; 
-				}
-			}
-			return count;
-		};
+	describe('.spawn', function() {		//Uses helper method countIdenticalGenes
 
 		beforeEach(function() {
 			gen.members[2].fitness = 999;
@@ -61,7 +46,7 @@ describe("Generation object", function() {
 			expect(newGen2.members[0]).not.toEqual(gen.members[2]);
 		});
 
-		it('it sorts the members by fitness and modifies the genome by the specified amount', function() {
+		it('it sorts the members by fitness and modifies the genome by the specified amount  ***statistically dependent***', function() {
 			//This test works on the basis of statistics.  In the case of direct descendants, the number of identical genes should be roughly 90%.  So of 6046 genes, >5000 will be identical.
 			//Groups 1, 2 and 3 test the similarity of the descendants to the respective ancestor
 
