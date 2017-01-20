@@ -9,7 +9,7 @@ var Board = function(html_element) {
 };
 
 Board.prototype.updateBoardView = function() {
-	const $cells = $(this.html_element.find(".cell"))
+	const $cells = $(this.html_element.find(".cell"));
 
 	for (let i = 0; i < $cells.length; i++) {
 		let mark = "";
@@ -29,8 +29,8 @@ Board.prototype.cellIsFree = function(cell) {
 };
 
 // Jasmine Tested
-Board.prototype.markAsPlayer = function(player, cell) {
-	this.state[cell] = player.number;
+Board.prototype.placePiece = function(piece, cell) {
+	this.state[cell] = piece;
 }
 
 // Jasmine Tested
@@ -48,7 +48,8 @@ Board.prototype.checkForWinner = function() {
 	}
 
 	if (winner != "NO match") {
-		console.log(winner);
+		const $cells = $(this.html_element.find(".cell"))
+		$($cells).css('border-color','blue')
 		return winner;
 	}
 	return null;
@@ -56,8 +57,8 @@ Board.prototype.checkForWinner = function() {
 
 // Jasmine Tested
 Board.prototype.checkForFullBoard = function() {
-	var isFull = true;
-	for (var i = 0; i < this.state.length; i++) {
+	let isFull = true;
+	for (let i = 0; i < this.state.length; i++) {
 		isFull = isFull && (this.state[i] != 0);
 	}
 	if (isFull) {
