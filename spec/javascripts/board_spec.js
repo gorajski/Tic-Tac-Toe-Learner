@@ -3,9 +3,7 @@ describe("Board object", function() {
 
 	beforeEach(function() {
 		player1 = new Player("computer");
-		player1.number = 1;
 		player2 = new Player("computer");
-		player2.number = 2;
 		board = new Board("#dummy_entry");
 	});
 
@@ -25,10 +23,10 @@ describe("Board object", function() {
 		});
 	});
 
-	describe('.markAsPlayer', function() {
+	describe('.placePiece', function() {
 		it("marks the selected cell as the current_player's", function() {
 			expect(board.state).toEqual([0,0,0,0,0,0,0,0,0]);
-			board.markAsPlayer(player1, 2);
+			board.placePiece(player1, 2);
 			expect(board.state).toEqual([0,0,1,0,0,0,0,0,0]);
 		});
 	});
