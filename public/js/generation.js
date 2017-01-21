@@ -14,22 +14,14 @@ Generation.prototype.spawn = function(survivalRatio, newPopulationSize, doesProm
 	let numberToKeepAlive = Math.floor(survivalRatio * this.members.length); //10
 	let descendantsPerAncestor = Math.floor(newPopulationSize / numberToKeepAlive); //3
 
-	// console.log('start')
-	// let ancestors = [];
-	// for (let member in this.members) {		//deep clone
-	// 	ancestors.push(this.members[member].clone());
-	// }
-	// console.log('end')
-
 	let ancestors = this.members;
 
-	ancestors.sort(function(a,b) {
-	// ancestors.sort(function(a,b) {		//sort by fitness performance
+	ancestors.sort(function(a,b) {		//sort by fitness performance
 		if (a.fitness > b.fitness) { return -1; }
 		if (a.fitness < b.fitness) { return 1; }
 		return 0;
 	});	
-	console.log(ancestors)
+	
 	ancestors = ancestors.slice(0, numberToKeepAlive);  //promote high performers
 
 	var ancestorIndex = 0;

@@ -1,25 +1,21 @@
-let runner = function(gameCollection, playerCount) {
+let runner = function(gameCollection) {
 
 	setInterval( function() {
 		areAllGamesComplete = true;
-		// let playerCount = currentGeneration.members.length;
+		let playerCount = currentGeneration.members.length;
 	 	gameCollection.forEach(function(game) {
 	 		areAllGamesComplete = areAllGamesComplete && game.isComplete;
 	 		if (!game.isComplete) { game.gameClock(); }
 	 	});
 
 	 	if (areAllGamesComplete) { 
-
-	 		// console.log("THEY'RE ALL DONE!!!")
- 			currentGeneration = currentGeneration.spawn(0.3, 9, false);
-			let boardCollection = initBoards(81);
-	 		// console.log("Hail King Arthur!!!")
-			gameCollection = initGames(playerCount, 81, boardCollection, currentGeneration);
-	 		// console.log("there are some who call me...Tim?")
-;
+	 		console.log(currentGeneration.members[0].fitness)
+ 			currentGeneration = currentGeneration.spawn(0.13, 25, true);
+			let boardCollection = initBoards(625);
+			gameCollection = initGames(625, boardCollection, currentGeneration);
 		}
 
-	}, 120);
+	}, 30);
 };
 
 let initBoards = function(numberOfGames) {
@@ -30,11 +26,12 @@ let initBoards = function(numberOfGames) {
 	return boardCollection;
 };
 
-let initGames = function(numberOfPlayers,numberOfGames, boardCollection, currentGeneration) {
+let initGames = function(numberOfGames, boardCollection, currentGeneration) {
 	let gameCollection = [];
 	let player1Tick = 0;
 	let player2Tick = 0;
-	// let numberOfPlayers = currentGeneration.members.length
+	let numberOfPlayers = currentGeneration.members.length;
+
 	for (let boardd = 0; boardd < numberOfGames; boardd++) {
 		if (player1Tick >= numberOfPlayers) {
 			player1Tick = 0;
@@ -52,16 +49,16 @@ $(document).ready(function() {
 		$("#splash").remove();
 	// });
 
-	const playerCount = 9;
+	const playerCount = 25;
 	const gameCount = playerCount * playerCount;
 
 	currentGeneration = new Generation();
 	currentGeneration.create(playerCount);
 	let boardCollection = initBoards(gameCount);
-	let gameCollection = initGames(playerCount, gameCount, boardCollection, currentGeneration);
+	let gameCollection = initGames(gameCount, boardCollection, currentGeneration);
 
 
-	runner(gameCollection, playerCount);
+	runner(gameCollection);
 
 
 })

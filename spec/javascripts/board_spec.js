@@ -24,7 +24,7 @@ describe("Board object", function() {
 	});
 
 	describe('.placePiece', function() {
-		it("marks the selected cell as the current_player's", function() {
+		it("places game piece at the selected cell", function() {
 			expect(board.state).toEqual([0,0,0,0,0,0,0,0,0]);
 			board.placePiece(player1, 2);
 			expect(board.state).toEqual([0,0,1,0,0,0,0,0,0]);
