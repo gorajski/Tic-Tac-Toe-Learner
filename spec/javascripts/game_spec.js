@@ -8,53 +8,53 @@ describe("Game object", function() {
 	});
 
 	it('has a current player', function() {
-		expect(game.current_player.number).toEqual(1);
+		expect(game.currentPlayer.number).toEqual(1);
 	});
 
 	it('has a current move', function() {
-		expect(game.current_move).toEqual(null);
+		expect(game.currentMove).toEqual(null);
 	});
 
 	describe('.switchPlayer', function() {
-		it("toggles the current_player from player1 to player2", function() {
-			expect(game.current_player.number).toEqual(1);
+		it("toggles the currentPlayer from player1 to player2", function() {
+			expect(game.currentPlayer.number).toEqual(1);
 			game.switchPlayer();
-			expect(game.current_player.number).toEqual(2);
+			expect(game.currentPlayer.number).toEqual(2);
 		});
 
-		it("toggles the current_player from player2 to player1", function() {
-			game.current_player = 2;
+		it("toggles the currentPlayer from player2 to player1", function() {
+			game.currentPlayer = 2;
 			game.switchPlayer();
-			expect(game.current_player.number).toEqual(1);
+			expect(game.currentPlayer.number).toEqual(1);
 		});
 	});
 
 	describe('.resetGame', function() {
-		it("clears the board and sets current_player as player1", function() {
+		it("clears the board and sets currentPlayer as player1", function() {
 			game.board.state = [1,2,0,1,0,1,0,2,2];
-			game.current_player = game.player2;
+			game.currentPlayer = game.player2;
 			game.resetGame();
 			expect(game.board.state).toEqual([0,0,0,0,0,0,0,0,0]);
-			expect(game.current_player.number).toEqual(1);
+			expect(game.currentPlayer.number).toEqual(1);
 		});
 	});
 
 	describe('.takeTurn', function() {
 		it("returns false and takes no action when chosen cell is not available", function() {
 			game.board.state = [1,2,0,1,0,1,0,2,2];
-			game.current_player = game.player1;
-			result = game.takeTurn(game.current_player, 1);
+			game.currentPlayer = game.player1;
+			result = game.takeTurn(game.currentPlayer, 1);
 			expect(game.board.state).toEqual([1,2,0,1,0,1,0,2,2]);
-			expect(game.current_player.number).toEqual(1);
+			expect(game.currentPlayer.number).toEqual(1);
 			expect(result).toEqual('illegal move');
 		});
 
 		it("returns true when chosen cell is not available", function() {
 			game.board.state = [1,2,0,1,0,1,0,2,2];
-			game.current_player = game.player1;
-			result = game.takeTurn(game.current_player, 2);
+			game.currentPlayer = game.player1;
+			result = game.takeTurn(game.currentPlayer, 2);
 			expect(game.board.state).toEqual([1,2,1,1,0,1,0,2,2]);
-			expect(game.current_player.number).toEqual(2);
+			expect(game.currentPlayer.number).toEqual(2);
 			expect(result).toEqual('Gameplay continues...');		// Currently, this returns whether the cell was available or not.
 		});
 
@@ -70,20 +70,20 @@ describe("Game object", function() {
 
 			it("resets the board 40ms", function() {
 				game.board.state = [1,2,0,1,0,1,0,2,2];
-				game.current_player = game.player2;
-				result = game.takeTurn(game.current_player, 4);
+				game.currentPlayer = game.player2;
+				result = game.takeTurn(game.currentPlayer, 4);
 
 				jasmine.clock().tick(40);
 
 				expect(game.board.state).toEqual([0,0,0,0,0,0,0,0,0]);
-				expect(game.current_player.number).toEqual(1);
+				expect(game.currentPlayer.number).toEqual(1);
 				expect(result).toEqual(game.player1);
 			});
 
 			it("does not reset the board until 40ms", function() {
 				game.board.state = [1,2,0,1,0,1,0,2,2];
-				game.current_player = game.player2;
-				result = game.takeTurn(game.current_player, 4);
+				game.currentPlayer = game.player2;
+				result = game.takeTurn(game.currentPlayer, 4);
 
 				jasmine.clock().tick(39);
 

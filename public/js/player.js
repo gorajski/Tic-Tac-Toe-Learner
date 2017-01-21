@@ -6,14 +6,14 @@ let Player = function(type) {
 };
 
 Player.prototype.newGenome = function() {
-	let template = genome_template;
+	let template = genomeTemplate;
 	const minIndex = 0;
 	const maxIndex = 8;
 	for (let key in template) { 
 		template[key] = Math.floor(Math.random() * (maxIndex - minIndex) + minIndex) 
 	}
-	let fresh_genome = Object.assign({}, template)		
-	return fresh_genome;
+	let freshGenome = Object.assign({}, template)		
+	return freshGenome;
 };
 
 Player.prototype.clone = function() {
@@ -24,12 +24,13 @@ Player.prototype.clone = function() {
 };
 
 Player.prototype.mutate = function() {
-	let mutationFactor = 0.07 * Math.random();		//revisit for a better distribution... maybe http://www.meredithdodge.com/2012/05/30/a-great-little-javascript-function-for-generating-random-gaussiannormalbell-curve-numbers/
+	// let mutationFactor = 0.07 * Math.random();		//revisit for a better distribution... maybe http://www.meredithdodge.com/2012/05/30/a-great-little-javascript-function-for-generating-random-gaussiannormalbell-curve-numbers/
+	let mutationFactor = 0.01;
 	const minIndex = 0;
 	const maxIndex = 8;
 
 	//************************
-	if (Math.random() > 0.75) {
+	if (Math.random() > 0.6) {
 		this.genome['000000000'] = Math.floor(Math.random() * (maxIndex - minIndex) + minIndex);
 	}
 	//************************
@@ -42,11 +43,11 @@ Player.prototype.mutate = function() {
 	return this;
 };
 
-Player.prototype.breedWith = function(other_player) {
+Player.prototype.breedWith = function(otherPlayer) {
 	let newPlayer = this.clone();
 	for (let key in newPlayer.genome) {
 		if (Math.random() < 0.5) {
-			newPlayer.genome[key] = other_player.genome[key];
+			newPlayer.genome[key] = otherPlayer.genome[key];
 		}
 	}
 	return newPlayer;

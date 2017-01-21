@@ -1,5 +1,5 @@
-var Board = function(html_element) {
-	this.html_element = html_element;
+var Board = function(htmlElement) {
+	this.htmlElement = htmlElement;
 	this.state = [
 							  0,0,0,
 								0,0,0,
@@ -9,7 +9,7 @@ var Board = function(html_element) {
 };
 
 Board.prototype.updateBoardView = function() {
-	const $cells = $(this.html_element.find(".cell"));
+	const $cells = $(this.htmlElement.find(".cell"));
 
 	for (let i = 0; i < $cells.length; i++) {
 		let mark = "";
@@ -48,8 +48,8 @@ Board.prototype.checkForWinner = function() {
 	}
 
 	if (winner != "NO match") {
-		const $cells = $(this.html_element.find(".cell"))
-		$($cells).css('border-color','blue')
+		const $cells = $(this.htmlElement.find(".cell"))
+		$($cells).css('border-color','green')
 		return winner;
 	}
 	return null;
@@ -66,4 +66,15 @@ Board.prototype.checkForFullBoard = function() {
 		return true;
 	}
 	return false;
+}
+
+
+
+
+
+// For testing only:
+Board.prototype.prettyPrint = function() {
+	console.log(this.state[0] + this.state[1] + this.state[2])
+	console.log(this.state[3] + this.state[4] + this.state[5])
+	console.log(this.state[6] + this.state[7] + this.state[8])
 }
