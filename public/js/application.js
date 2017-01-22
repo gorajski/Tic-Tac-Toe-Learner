@@ -10,7 +10,7 @@ let runner = function(gameCollection) {
 
 	 	if (areAllGamesComplete) { 
 	 		console.log(currentGeneration.members[0].fitness)
- 			currentGeneration = currentGeneration.spawn(0.13, 25, true);
+ 			currentGeneration = currentGeneration.spawn(0.16, 25, true);
 			let boardCollection = initBoards(625);
 			gameCollection = initGames(625, boardCollection, currentGeneration);
 		}
