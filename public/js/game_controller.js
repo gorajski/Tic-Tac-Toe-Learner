@@ -37,7 +37,7 @@ GameController.prototype.takeTurn = function(player, cellIndex) {
 			// console.log("Player " + winner + " won Game " + this.board.htmlElement.toString());
 			// setTimeout(this.resetGame.bind(this), 40);
 			// this.resetGame();	//use this if no delay is required between wins
-			(this.currentPlayer === this.player1) ? this.currentPlayer.fitness += 1 : this.currentPlayer.fitness += 1.1;
+			(this.currentPlayer === this.player1) ? this.currentPlayer.fitness += 10 : this.currentPlayer.fitness += 11;
 			this.isComplete = true;
 			return this.currentPlayer;
 		} else if (this.board.checkForFullBoard()) {
@@ -52,7 +52,7 @@ GameController.prototype.takeTurn = function(player, cellIndex) {
 			return 'Gameplay continues...'
 		}
 	} else {
-		this.currentPlayer.fitness -= 3;
+		this.currentPlayer.fitness -= 2;
 		this.isComplete = true;
 		return 'illegal move'
 	}

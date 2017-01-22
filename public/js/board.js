@@ -62,6 +62,7 @@ Board.prototype.checkForFullBoard = function() {
 		isFull = isFull && (this.state[i] != 0);
 	}
 	if (isFull) {
+		$($cells).css('border-color','ffff00')
 		console.log("No winner!")
 		return true;
 	}

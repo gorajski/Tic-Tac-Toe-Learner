@@ -27,7 +27,9 @@ Generation.prototype.spawn = function(survivalRatio, newPopulationSize, doesProm
 	var ancestorIndex = 0;
 	for (let i = 0; i < newPopulationSize; i++) {		//create new population
 		if (doesPromoteElites) {	//add in an unmodified copy of the best performing ancestor
-			nextGeneration.members.push(ancestors[0].clone());
+			let elite = ancestors[0].clone();																													//*****************
+			elite.genome['000000000'] = Math.floor(Math.random() * 8);	//*****************
+			nextGeneration.members.push(elite);																												//*****************
 			doesPromoteElites = false;
 		} 
 		else {	//add in mutated copies of ancestors
