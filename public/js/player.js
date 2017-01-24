@@ -7,11 +7,16 @@ let Player = function(type) {
 
 Player.prototype.newGenome = function() {
 	let template = genomeTemplate;
+	let choices = genomeOpenSpaces;
 	const minIndex = 0;
 	const maxIndex = 8;
+		// console.log(template);
+		// debugger
 	for (let key in template) { 
-		template[key] = Math.floor(Math.random() * (maxIndex - minIndex) + minIndex) 
+		let choice = choices[key];
+		template[key] = choice[Math.floor(Math.random() * choice.length)]
 	}
+	// debugger
 	let freshGenome = Object.assign({}, template)		
 	return freshGenome;
 };

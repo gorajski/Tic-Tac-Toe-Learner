@@ -13,12 +13,8 @@ Board.prototype.updateBoardView = function() {
 
 	for (let i = 0; i < $cells.length; i++) {
 		let mark = "";
-		if (this.state[i] === 1) {
-			mark = "X";
-		}
-		if (this.state[i] === 2) {
-			mark = "O";
-		}
+		if (this.state[i] === 1) { mark = "X"; }
+		if (this.state[i] === 2) { mark = "O"; }
 		$($cells[i]).html(mark);
 	}
 }
