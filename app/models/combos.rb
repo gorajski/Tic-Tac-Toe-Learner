@@ -5,12 +5,37 @@ def number_of_moves_by_player(player_num, board)
 end
 
 def player_did_win(num, state)
+  state_str = state.to_s(3)
+  state_str = "0" * (9 - state_str.length) + state_str
+
   search_str = num.to_s * 3
-  if (state[(0..2)] == search_str || state[(3..5)] == search_str || state[(6..8)] == search_str) || (state[0] == num.to_s && state[3] == num.to_s && state[6] == num.to_s) || (state[1] == num.to_s && state[4] == num.to_s && state[7] == num.to_s) || (state[2] == num.to_s && state[5] == num.to_s && state[8] == num.to_s) || (state[0] == num.to_s && state[4] == num.to_s && state[8] == num.to_s) || (state[2] == num.to_s && state[4] == num.to_s && state[6] == num.to_s)
+  if (state_str[(0..2)] == search_str || state_str[(3..5)] == search_str || state_str[(6..8)] == search_str) || 
+    (state_str[0] == num.to_s && state_str[3] == num.to_s && state_str[6] == num.to_s) || 
+    (state_str[1] == num.to_s && state_str[4] == num.to_s && state_str[7] == num.to_s) || 
+    (state_str[2] == num.to_s && state_str[5] == num.to_s && state_str[8] == num.to_s) || 
+    (state_str[0] == num.to_s && state_str[4] == num.to_s && state_str[8] == num.to_s) || 
+    (state_str[2] == num.to_s && state_str[4] == num.to_s && state_str[6] == num.to_s)
     return true
   end
   return false
 end
+
+# p player_did_win(1, 6440) && player_did_win(2, 6440)
+# p player_did_win(1, 1131) && player_did_win(2, 1131)
+# p player_did_win(1, 3400) && player_did_win(2, 3400)
+# p player_did_win(1, 3396) && player_did_win(2, 3396)
+# p player_did_win(2, 10179)
+# p player_did_win(2, 1131)
+# p player_did_win(2, 3400)
+# p player_did_win(2, 3396)
+
+# p state_hash['022211112']
+# p state_hash['001112220']
+# p state_hash['011122221']
+# p state_hash['011122210']
+
+
+
 
 def remove_blatantly_impossible_board_states
   # INPUT: every number from 0 to 19682
@@ -33,16 +58,31 @@ def remove_blatantly_impossible_board_states
 
   # Discard any board where both Player1 and Player2 are winners
   arr = arr.to_a.reject do |board|
-    player_did_win(1, board.to_s(3)) && player_did_win(2, board.to_s(3))
+    player_did_win(1, board) && player_did_win(2, board)
   end
 
   return arr
+
+  #erroneously missing is '022211112', 001112220, 011122221, 011122210
+
 
 end
 
 
 
 REASONABLE_BOARD_STATES = remove_blatantly_impossible_board_states
+
+state_hash = {}
+remove_blatantly_impossible_board_states.each do |state|
+  state_str = state.to_s(3)
+  state_str = "0" * (9 - state_str.length) + state_str
+
+  state_hash[state_str] = 'exists'
+end
+p state_hash['022211112']
+p state_hash['001112220']
+p state_hash['011122221']
+p state_hash['011122210']
 
 
 
