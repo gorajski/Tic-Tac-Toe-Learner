@@ -10,13 +10,11 @@ Player.prototype.newGenome = function() {
 	let choices = genomeOpenSpaces;
 	const minIndex = 0;
 	const maxIndex = 8;
-		// console.log(template);
-		// debugger
+
 	for (let key in template) { 
 		let choice = choices[key];
 		template[key] = choice[Math.floor(Math.random() * choice.length)]
 	}
-	// debugger
 	let freshGenome = Object.assign({}, template)		
 	return freshGenome;
 };
@@ -40,9 +38,13 @@ Player.prototype.mutate = function() {
 	}
 	//************************
 
+
+	// CAN BE REFACTORED FOR BETTER PERFORMANCE
+	let choices = genomeOpenSpaces;
 	for (let key in this.genome) {
+		let choice = choices[key];
 		if (Math.random() < mutationFactor) {
-			this.genome[key] = Math.floor(Math.random() * (maxIndex - minIndex) + minIndex);
+			this.genome[key] = choice[Math.floor(Math.random() * choice.length)];
 		} 
 	};
 	return this;

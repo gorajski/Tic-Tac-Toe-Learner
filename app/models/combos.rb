@@ -20,22 +20,6 @@ def player_did_win(num, state)
   return false
 end
 
-# p player_did_win(1, 6440) && player_did_win(2, 6440)
-# p player_did_win(1, 1131) && player_did_win(2, 1131)
-# p player_did_win(1, 3400) && player_did_win(2, 3400)
-# p player_did_win(1, 3396) && player_did_win(2, 3396)
-# p player_did_win(2, 10179)
-# p player_did_win(2, 1131)
-# p player_did_win(2, 3400)
-# p player_did_win(2, 3396)
-
-# p state_hash['022211112']
-# p state_hash['001112220']
-# p state_hash['011122221']
-# p state_hash['011122210']
-
-
-
 
 def remove_blatantly_impossible_board_states
   # INPUT: every number from 0 to 19682
@@ -63,26 +47,13 @@ def remove_blatantly_impossible_board_states
 
   return arr
 
-  #erroneously missing is '022211112', 001112220, 011122221, 011122210
-
-
 end
+
 
 
 
 REASONABLE_BOARD_STATES = remove_blatantly_impossible_board_states
 
-state_hash = {}
-remove_blatantly_impossible_board_states.each do |state|
-  state_str = state.to_s(3)
-  state_str = "0" * (9 - state_str.length) + state_str
-
-  state_hash[state_str] = 'exists'
-end
-p state_hash['022211112']
-p state_hash['001112220']
-p state_hash['011122221']
-p state_hash['011122210']
 
 
 

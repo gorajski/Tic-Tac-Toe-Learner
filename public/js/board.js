@@ -17,7 +17,7 @@ Board.prototype.updateBoardView = function() {
 		if (this.state[i] === 2) { mark = "O"; }
 		$($cells[i]).html(mark);
 	}
-}
+};
 
 // Jasmine Tested
 Board.prototype.cellIsFree = function(cell) {
@@ -27,7 +27,7 @@ Board.prototype.cellIsFree = function(cell) {
 // Jasmine Tested
 Board.prototype.placePiece = function(piece, cell) {
 	this.state[cell] = piece;
-}
+};
 
 // Jasmine Tested
 Board.prototype.checkForWinner = function() {
@@ -45,11 +45,12 @@ Board.prototype.checkForWinner = function() {
 
 	if (winner != "NO match") {
 		const $cells = $(this.htmlElement.find(".cell"))
-		$($cells).css('border-color','green')
+
+		if (winner === 1) { $($cells).css('border-color','blue') } else { $($cells).css('border-color','red'); }
 		return winner;
 	}
 	return null;
-}
+};
 
 // Jasmine Tested
 Board.prototype.checkForFullBoard = function() {
@@ -58,12 +59,12 @@ Board.prototype.checkForFullBoard = function() {
 		isFull = isFull && (this.state[i] != 0);
 	}
 	if (isFull) {
-		$($cells).css('border-color','ffff00')
-		console.log("No winner!")
+		// $($cells).css('border-color','ffff00')
+		// console.log("No winner!")
 		return true;
 	}
 	return false;
-}
+};
 
 
 
