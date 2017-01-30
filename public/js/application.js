@@ -1,6 +1,6 @@
 let runner = function(gameCollection) {
 
-	setInterval( function() {
+	let clockSignal = setInterval( function() {
 		areAllGamesComplete = true;
 		let playerCount = currentGeneration.members.length;
 	 	gameCollection.forEach(function(game) {
@@ -9,13 +9,15 @@ let runner = function(gameCollection) {
 	 	});
 
 	 	if (areAllGamesComplete) { 
-	 		console.log(currentGeneration.members[0].fitness)	 
+	 		console.log(currentGeneration.members[0].fitness)
  			currentGeneration = currentGeneration.spawn(0.16, 25, true);
 			let boardCollection = initBoards(625);
 			gameCollection = initGames(625, boardCollection, currentGeneration);
 		}
 
 	}, 40);
+
+	return clockSignal;
 };
 
 let initBoards = function(numberOfGames) {
@@ -45,9 +47,6 @@ let initGames = function(numberOfGames, boardCollection, currentGeneration) {
 
 $(document).ready(function() {
 
-	// $("#close").on("click", function() {
-		$("#splash").remove();
-	// });
 
 	const playerCount = 25;
 	const gameCount = playerCount * playerCount;
@@ -58,8 +57,12 @@ $(document).ready(function() {
 	let gameCollection = initGames(gameCount, boardCollection, currentGeneration);
 
 
-	runner(gameCollection);
+	let clockSignal = runner(gameCollection);
+	$("#close").on("click", function() {
+		// $("#splash").remove();
+		console.log(clockSignal)
+		clearInterval(clockSignal);
+		console.log(clockSignal)
+	});
 
-
-})
-
+});

@@ -6,7 +6,7 @@ let Player = function(type) {
 };
 
 Player.prototype.newGenome = function() {
-	let template = genomeTemplate;
+	let template = Object.assign({}, genomeTemplate);
 	let choices = genomeOpenSpaces;
 	const minIndex = 0;
 	const maxIndex = 8;
