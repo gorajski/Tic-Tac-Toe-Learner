@@ -1,19 +1,21 @@
 describe("Player object", function() {
 
 	beforeEach(function() {
-		let player1 = new Player("computer");
-		let player2 = new Player("computer");
+		thisPlayer = new Player("computer");
+		thatPlayer = new Player("computer");
 	});
 
-	it("has number, type and fitness representations", function() {
-		expect(player1.number).toEqual(null);
-		expect(player1.type).toEqual("computer");
-		expect(player1.fitness).toEqual(0);
+	it("has type representations", function() {
+		expect(thisPlayer.type).toEqual("computer");
+	});
+
+	it("has fitness representations", function() {
+		expect(thisPlayer.fitness).toEqual(0);
 	});
 
 	it("has a genome representation", function() {
-		expect(player1.genome instanceof Object).toEqual(true);
-		expect(Object.keys(player1.genome).length).toEqual(6046);
+		expect(thisPlayer.genome instanceof Object).toEqual(true);
+		expect(Object.keys(thisPlayer.genome).length).toEqual(5890);
 		expect(gen.members[0].genome['000000000'] >= 0).toEqual(true);
 		expect(gen.members[0].genome['000000000'] <= 8).toEqual(true);
 		expect(gen.members[0].genome['000000001'] >= 0).toEqual(true);
@@ -24,46 +26,48 @@ describe("Player object", function() {
 
 	describe('.newGenome', function() {
 		it('generates a new genome from scratch', function() {
-			let genome = Object.assign({}, player1.genome);
-			expect(player1.newGenome()).not.toEqual(genome);
-			expect(player1.newGenome() instanceof Object).toEqual(true);
-			expect(Object.keys(player1.genome).length).toEqual(6046);
+			let genome = Object.assign({}, thisPlayer.genome);
+			expect(thisPlayer.newGenome()).not.toEqual(genome);
+			expect(thisPlayer.newGenome() instanceof Object).toEqual(true);
+			expect(Object.keys(thisPlayer.genome).length).toEqual(5890);
 		});
 	});
 
 	describe('.clone', function() {
 		it('generates a deep copy of the Player object', function() {
-			let copy = player1.clone();
-			expect(copy).not.toBe(player1);		//expect these to be independent objects
-			expect(copy).toEqual(player1);		//expect these objects to have identical contents
-			expect(copy.genome).not.toBe(player1.genome);		//expect the genomes to be independent objects
-			expect(copy.genome).toEqual(player1.genome);		//but with identical key/value pairs
+			let copy = thisPlayer.clone();
+			expect(copy).not.toBe(thisPlayer);		//expect these to be independent objects
+			expect(copy).toEqual(thisPlayer);		//expect these objects to have identical contents
+			expect(copy.genome).not.toBe(thisPlayer.genome);		//expect the genomes to be independent objects
+			expect(copy.genome).toEqual(thisPlayer.genome);		//but with identical key/value pairs
 		});
 	});
 
 	describe('.mutate', function() {		//Uses helper method countIdenticalGenes
 		it("modifies the Player object's genome", function() {
-			let copy = player1.clone();
-			let mutant = player1.mutate();
+			let copy = thisPlayer.clone();
+			let mutant = thisPlayer.mutate();
 			expect(mutant).not.toEqual(copy);
 			expect(mutant.genome).not.toEqual(copy.genome);
-			expect(countIdenticalGenes(player1.genome, copy.genome)).toBeGreaterThan(5440);
+			expect(countIdenticalGenes(thisPlayer.genome, copy.genome)).toBeGreaterThan(5440);
 		});
 	});
 
 	describe('.breedWith', function() {		//Uses helper method countIdenticalGenes
 		it("generates a new Player object whose genome is a mix of two ancestors  ***statistically dependent***", function() {
-			let descendant = player1.breedWith(player2);
-			expect(descendant).not.toEqual(player1);
-			expect(descendant).not.toEqual(player2);
+			let descendant = thisPlayer.breedWith(thatPlayer);
+			expect(descendant).not.toEqual(thisPlayer);
+			expect(descendant).not.toEqual(thatPlayer);
 
 			//This following criteria are based on statistics.  A descendant in this model should have roughly, but not strictly, 50% of its genes from each parent.
-			//50% of 6406 is 3203.  However, since some of the genes will inevitably match in both parents, the expected value will be higher than 3203, experimentally determined to be near 3400.
-			//Due to the arbitrary gene assignment in the algorithm, there will be some variability above and below 3400, so a tolerance of +/-500 was added here.
-			expect(countIdenticalGenes(player1.genome, descendant.genome)).toBeGreaterThan(2900);
-			expect(countIdenticalGenes(player1.genome, descendant.genome)).toBeLessThan(3900);
-			expect(countIdenticalGenes(player2.genome, descendant.genome)).toBeGreaterThan(2900);
-			expect(countIdenticalGenes(player2.genome, descendant.genome)).toBeLessThan(3900);
+			//50% of 5890 is 2945.  However, since some of the genes will inevitably match in both parents, the expected value will be higher than 2945, experimentally determined to be near 4100.
+			//Therefore, 2945 serves as a lower bound.
+			//The upper bound set in the tests at 4500, although this is somewhat arbitrary, as nothing prevents the parents genes from matching each other exactly.
+			//However 4500 was chosen based on experiments that showed commonly the result was around 4100, and 400 was added as a tolerance.
+			expect(countIdenticalGenes(thisPlayer.genome, descendant.genome)).toBeGreaterThan(2945);
+			expect(countIdenticalGenes(thisPlayer.genome, descendant.genome)).toBeLessThan(4500);
+			expect(countIdenticalGenes(thatPlayer.genome, descendant.genome)).toBeGreaterThan(2945);
+			expect(countIdenticalGenes(thatPlayer.genome, descendant.genome)).toBeLessThan(4500);
 		});
 	});
 
