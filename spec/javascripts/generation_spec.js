@@ -39,11 +39,12 @@ describe("Generation object", function() {
 		});
 
 		it('copies the best performer when the doesPromoteElites flag is set', function() {
-			expect(newGen1.members[0]).toEqual(gen.members[2]);
+			expect(newGen1.members[0].fitness).toEqual(0);
+			expect(newGen1.members[0].genome).toEqual(gen.members[0].genome);
 		});
 
 		it('does not copy the best performer when the doesPromoteElites flag is not set', function() {
-			expect(newGen2.members[0]).not.toEqual(gen.members[2]);
+			expect(newGen2.members[0]).not.toEqual(gen.members[0]);
 		});
 
 		it('it sorts the members by fitness and modifies the genome by the specified amount  ***statistically dependent***', function() {
@@ -53,65 +54,65 @@ describe("Generation object", function() {
 			//Group 1
 			//This group includes an elite at index 0.  
 			//The member at index 1 is a descendant of the elite so the count is shifted by one.
-			expect(countIdenticalGenes(newGen1.members[0].genome, gen.members[2].genome)).toBeGreaterThan(5440);
-			expect(countIdenticalGenes(newGen1.members[1].genome, gen.members[2].genome)).toBeGreaterThan(5440);
-			expect(countIdenticalGenes(newGen1.members[2].genome, gen.members[4].genome)).toBeGreaterThan(5440);
-			expect(countIdenticalGenes(newGen1.members[3].genome, gen.members[0].genome)).toBeGreaterThan(5440);
-			expect(countIdenticalGenes(newGen1.members[4].genome, gen.members[1].genome)).toBeGreaterThan(5440);
-			expect(countIdenticalGenes(newGen1.members[5].genome, gen.members[5].genome)).toBeGreaterThan(5440);
+			expect(countIdenticalGenes(newGen1.members[0].genome, gen.members[0].genome)).toBeGreaterThan(5300);
+			expect(countIdenticalGenes(newGen1.members[1].genome, gen.members[0].genome)).toBeGreaterThan(5300);
+			expect(countIdenticalGenes(newGen1.members[2].genome, gen.members[1].genome)).toBeGreaterThan(5300);
+			expect(countIdenticalGenes(newGen1.members[3].genome, gen.members[2].genome)).toBeGreaterThan(5300);
+			expect(countIdenticalGenes(newGen1.members[4].genome, gen.members[3].genome)).toBeGreaterThan(5300);
+			expect(countIdenticalGenes(newGen1.members[5].genome, gen.members[4].genome)).toBeGreaterThan(5300);
 			
 			//Group 2
 			//This group has no elite, so the count starts and continues normally.
 			//Since there are 30 descendants (newPopulationSize) and 10 ancestors (gen.members.length * survivalRatio), each ancestor has 3 descendants each.
-			expect(countIdenticalGenes(newGen2.members[0].genome, gen.members[2].genome)).toBeGreaterThan(5440);
-			expect(countIdenticalGenes(newGen2.members[3].genome, gen.members[4].genome)).toBeGreaterThan(5440);
-			expect(countIdenticalGenes(newGen2.members[6].genome, gen.members[0].genome)).toBeGreaterThan(5440);
-			expect(countIdenticalGenes(newGen2.members[9].genome, gen.members[1].genome)).toBeGreaterThan(5440);
-			expect(countIdenticalGenes(newGen2.members[12].genome, gen.members[5].genome)).toBeGreaterThan(5440);
-			expect(countIdenticalGenes(newGen2.members[15].genome, gen.members[6].genome)).toBeGreaterThan(5440);
-			expect(countIdenticalGenes(newGen2.members[18].genome, gen.members[7].genome)).toBeGreaterThan(5440);
-			expect(countIdenticalGenes(newGen2.members[21].genome, gen.members[8].genome)).toBeGreaterThan(5440);
-			expect(countIdenticalGenes(newGen2.members[24].genome, gen.members[9].genome)).toBeGreaterThan(5440);
-			expect(countIdenticalGenes(newGen2.members[27].genome, gen.members[3].genome)).toBeGreaterThan(5440);
+			expect(countIdenticalGenes(newGen2.members[0].genome, gen.members[0].genome)).toBeGreaterThan(5300);
+			expect(countIdenticalGenes(newGen2.members[3].genome, gen.members[1].genome)).toBeGreaterThan(5300);
+			expect(countIdenticalGenes(newGen2.members[6].genome, gen.members[2].genome)).toBeGreaterThan(5300);
+			expect(countIdenticalGenes(newGen2.members[9].genome, gen.members[3].genome)).toBeGreaterThan(5300);
+			expect(countIdenticalGenes(newGen2.members[12].genome, gen.members[4].genome)).toBeGreaterThan(5300);
+			expect(countIdenticalGenes(newGen2.members[15].genome, gen.members[5].genome)).toBeGreaterThan(5300);
+			expect(countIdenticalGenes(newGen2.members[18].genome, gen.members[6].genome)).toBeGreaterThan(5300);
+			expect(countIdenticalGenes(newGen2.members[21].genome, gen.members[7].genome)).toBeGreaterThan(5300);
+			expect(countIdenticalGenes(newGen2.members[24].genome, gen.members[8].genome)).toBeGreaterThan(5300);
+			expect(countIdenticalGenes(newGen2.members[27].genome, gen.members[9].genome)).toBeGreaterThan(5300);
 
 			//Group 3
-			//This group has no elites, so the count starts and continues normally.
+			//This group has no elite, so the count starts and continues normally.
 			//Since there are 39 descendants (newPopulationSize) and 10 ancestors (gen.members.length * survivalRatio), most ancestors have 3 descendants each.
 			//However, the leftovers will be added to the very last group.
-			expect(countIdenticalGenes(newGen3.members[30].genome, gen.members[3].genome)).toBeGreaterThan(5440);
-			expect(countIdenticalGenes(newGen3.members[31].genome, gen.members[3].genome)).toBeGreaterThan(5440);
-			expect(countIdenticalGenes(newGen3.members[32].genome, gen.members[3].genome)).toBeGreaterThan(5440);
-			expect(countIdenticalGenes(newGen3.members[33].genome, gen.members[3].genome)).toBeGreaterThan(5440);
-			expect(countIdenticalGenes(newGen3.members[34].genome, gen.members[3].genome)).toBeGreaterThan(5440);
-			expect(countIdenticalGenes(newGen3.members[35].genome, gen.members[3].genome)).toBeGreaterThan(5440);
-			expect(countIdenticalGenes(newGen3.members[36].genome, gen.members[3].genome)).toBeGreaterThan(5440);
-			expect(countIdenticalGenes(newGen3.members[37].genome, gen.members[3].genome)).toBeGreaterThan(5440);
-			expect(countIdenticalGenes(newGen3.members[38].genome, gen.members[3].genome)).toBeGreaterThan(5440);
+			expect(countIdenticalGenes(newGen3.members[30].genome, gen.members[9].genome)).toBeGreaterThan(5300);
+			expect(countIdenticalGenes(newGen3.members[31].genome, gen.members[9].genome)).toBeGreaterThan(5300);
+			expect(countIdenticalGenes(newGen3.members[32].genome, gen.members[9].genome)).toBeGreaterThan(5300);
+			expect(countIdenticalGenes(newGen3.members[33].genome, gen.members[9].genome)).toBeGreaterThan(5300);
+			expect(countIdenticalGenes(newGen3.members[34].genome, gen.members[9].genome)).toBeGreaterThan(5300);
+			expect(countIdenticalGenes(newGen3.members[35].genome, gen.members[9].genome)).toBeGreaterThan(5300);
+			expect(countIdenticalGenes(newGen3.members[36].genome, gen.members[9].genome)).toBeGreaterThan(5300);
+			expect(countIdenticalGenes(newGen3.members[37].genome, gen.members[9].genome)).toBeGreaterThan(5300);
+			expect(countIdenticalGenes(newGen3.members[38].genome, gen.members[9].genome)).toBeGreaterThan(5300);
 
 
 			//In Groups 4 and 5, each grouping of three is based on a distinct common ancestor.  Statistically, there should be a low correlation between genomes of descendants from different parents.
-			//Experimentation shows that the shared genes between unrelated members is typically about 750 of 6064 genes.  
+			//Of 5890 genes, less than half will typically match in an arbitrary pairing.  
 			//This test could fail statistically.  However, it should not persist in failing if the algorithm is working as intended.  If this fails, several repeats should be attempted to verify. 
 
 			//Group 4
-			expect(countIdenticalGenes(newGen1.members[2].genome, gen.members[2].genome)).toBeLessThan(3000);
-			expect(countIdenticalGenes(newGen1.members[2].genome, gen.members[2].genome)).toBeLessThan(3000);
-			expect(countIdenticalGenes(newGen1.members[3].genome, gen.members[4].genome)).toBeLessThan(3000);
-			expect(countIdenticalGenes(newGen1.members[4].genome, gen.members[0].genome)).toBeLessThan(3000);
-			expect(countIdenticalGenes(newGen1.members[5].genome, gen.members[1].genome)).toBeLessThan(3000);
-			expect(countIdenticalGenes(newGen1.members[0].genome, gen.members[5].genome)).toBeLessThan(3000);
+			expect(countIdenticalGenes(newGen1.members[2].genome, gen.members[0].genome)).toBeLessThan(2900);
+			expect(countIdenticalGenes(newGen1.members[2].genome, gen.members[0].genome)).toBeLessThan(2900);
+			expect(countIdenticalGenes(newGen1.members[3].genome, gen.members[1].genome)).toBeLessThan(2900);
+			expect(countIdenticalGenes(newGen1.members[4].genome, gen.members[2].genome)).toBeLessThan(2900);
+			expect(countIdenticalGenes(newGen1.members[5].genome, gen.members[3].genome)).toBeLessThan(2900);
+			expect(countIdenticalGenes(newGen1.members[0].genome, gen.members[4].genome)).toBeLessThan(2900);
 
 			//Group 5
-			expect(countIdenticalGenes(newGen3.members[3].genome, gen.members[2].genome)).toBeLessThan(3000);
-			expect(countIdenticalGenes(newGen3.members[6].genome, gen.members[4].genome)).toBeLessThan(3000);
-			expect(countIdenticalGenes(newGen3.members[9].genome, gen.members[0].genome)).toBeLessThan(3000);
-			expect(countIdenticalGenes(newGen3.members[12].genome, gen.members[1].genome)).toBeLessThan(3000);
-			expect(countIdenticalGenes(newGen3.members[15].genome, gen.members[5].genome)).toBeLessThan(3000);
-			expect(countIdenticalGenes(newGen3.members[18].genome, gen.members[6].genome)).toBeLessThan(3000);
-			expect(countIdenticalGenes(newGen3.members[21].genome, gen.members[7].genome)).toBeLessThan(3000);
-			expect(countIdenticalGenes(newGen3.members[24].genome, gen.members[8].genome)).toBeLessThan(3000);
-			expect(countIdenticalGenes(newGen3.members[27].genome, gen.members[9].genome)).toBeLessThan(3000);
-			expect(countIdenticalGenes(newGen3.members[0].genome, gen.members[3].genome)).toBeLessThan(3000);
+			expect(countIdenticalGenes(newGen3.members[3].genome, gen.members[0].genome)).toBeLessThan(2900);
+			expect(countIdenticalGenes(newGen3.members[6].genome, gen.members[1].genome)).toBeLessThan(2900);
+			expect(countIdenticalGenes(newGen3.members[9].genome, gen.members[2].genome)).toBeLessThan(2900);
+			expect(countIdenticalGenes(newGen3.members[12].genome, gen.members[3].genome)).toBeLessThan(2900);
+			expect(countIdenticalGenes(newGen3.members[15].genome, gen.members[4].genome)).toBeLessThan(2900);
+			expect(countIdenticalGenes(newGen3.members[18].genome, gen.members[5].genome)).toBeLessThan(2900);
+			expect(countIdenticalGenes(newGen3.members[21].genome, gen.members[6].genome)).toBeLessThan(2900);
+			expect(countIdenticalGenes(newGen3.members[24].genome, gen.members[7].genome)).toBeLessThan(2900);
+			expect(countIdenticalGenes(newGen3.members[27].genome, gen.members[8].genome)).toBeLessThan(2900);
+			expect(countIdenticalGenes(newGen3.members[0].genome, gen.members[9].genome)).toBeLessThan(2900);
 		});
 	});
 

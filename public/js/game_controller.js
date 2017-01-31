@@ -16,7 +16,7 @@ GameController.prototype.switchPlayer = function() {
 	(this.currentPiece === 1) ? this.currentPiece = 2 : this.currentPiece = 1;
 };
 
-// Jasmine Tested *****Needs update
+// Jasmine Tested
 GameController.prototype.resetGame = function() {
 	this.board.state = [0,0,0,0,0,0,0,0,0];
 	this.currentPlayer = this.player1;
@@ -25,38 +25,40 @@ GameController.prototype.resetGame = function() {
 	this.board.updateBoardView();
 };
 
+// Jasmine Tested
 GameController.prototype.takeTurn = function(cellIndex) {
 	let isFree = this.board.cellIsFree(cellIndex);
+	let isBoardFull = this.board.checkForFullBoard();
 
 	if (isFree) {
 		this.board.placePiece(this.currentPiece, cellIndex)
 		this.board.updateBoardView();
-	} else {
+	} else if (!isBoardFull) {
 		console.log('illegal move')
 		return 'illegal move'
 	}
 
-	let result = null;
 	let winner = this.board.checkForWinner();
 	if (winner) {
 		this.winnerLogic();
-		result = this.currentPlayer;
-	} else if (this.board.checkForFullBoard()) {
+		return this.currentPlayer;
+	} else if (isBoardFull) {
 		this.fullBoardLogic();
-		result = 'draw'
+		return 'draw'
 	} else {
-		result = 'Gameplay continues...'
+		this.switchPlayer();
+		return 'Gameplay continues...'
 	}
 
-	this.switchPlayer();
-	return result;
 };
 
+// Not tested yet 
 GameController.prototype.winnerLogic = function() {
 	(this.currentPlayer === this.player1) ? this.currentPlayer.fitness += 10 : this.currentPlayer.fitness += 11;
 	this.isComplete = true;
 };
 
+// Not tested yet 
 GameController.prototype.fullBoardLogic = function() {
 	if (this.player1 === this.player2) {
 		this.player1.fitness += 30;
@@ -86,9 +88,6 @@ GameController.prototype.gameClock = function() {
 
 	if (this.currentPlayer.type === 'computer') {
 		const state = this.board.state.join('');
-		if (this.currentPlayer.genome[state] === undefined) {
-			console.log(state)
-		}
 		let cellIndex = this.currentPlayer.genome[state];
 		return this.takeTurn(cellIndex);
 	}
