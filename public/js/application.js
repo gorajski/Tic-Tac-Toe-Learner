@@ -13,7 +13,7 @@ let runner = function(gameCollection) {
 			let boardCollection = initBoards(625);
 			gameCollection = initGames(625, boardCollection, currentGeneration);
 		}
-	}, 400);
+	}, 70);
 
 	// return clockSignal;
 };
@@ -52,7 +52,7 @@ $(document).ready(function() {
 	currentGeneration.create(playerCount);
 	let boardCollection = initBoards(gameCount);
 	let gameCollection = initGames(gameCount, boardCollection, currentGeneration);
-
+	$("#splash").remove();
 
 	let clockSignal = runner(gameCollection);
 	$("#close").on("click", function() {

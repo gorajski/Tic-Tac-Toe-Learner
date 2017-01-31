@@ -1,4 +1,5 @@
 let GameController = function(board, player1, player2) {
+ 	this.rewardProfile = { "1" : 10, "2" : 11, "draw" : 30 };
  	this.board = board;
  	this.isComplete = false;
 	
@@ -28,21 +29,20 @@ GameController.prototype.resetGame = function() {
 // Jasmine Tested
 GameController.prototype.takeTurn = function(cellIndex) {
 	let isFree = this.board.cellIsFree(cellIndex);
-	let isBoardFull = this.board.checkForFullBoard();
 
 	if (isFree) {
-		this.board.placePiece(this.currentPiece, cellIndex)
+		this.board.placePiece(this.currentPiece, cellIndex);
 		this.board.updateBoardView();
-	} else if (!isBoardFull) {
+	} else if (!this.board.checkForFullBoard()) {
 		console.log('illegal move')
-		return 'illegal move'
+		return 'illegal move';
 	}
 
 	let winner = this.board.checkForWinner();
 	if (winner) {
 		this.winnerLogic();
 		return this.currentPlayer;
-	} else if (isBoardFull) {
+	} else if (this.board.checkForFullBoard()) {
 		this.fullBoardLogic();
 		return 'draw'
 	} else {
@@ -54,17 +54,19 @@ GameController.prototype.takeTurn = function(cellIndex) {
 
 // Not tested yet 
 GameController.prototype.winnerLogic = function() {
-	(this.currentPlayer === this.player1) ? this.currentPlayer.fitness += 10 : this.currentPlayer.fitness += 11;
+	this.currentPlayer.fitness += this.rewardProfile[this.currentPiece];
 	this.isComplete = true;
 };
 
 // Not tested yet 
 GameController.prototype.fullBoardLogic = function() {
 	if (this.player1 === this.player2) {
-		this.player1.fitness += 30;
+		this.player1.fitness += this.rewardProfile["draw"];
+	console.log('hi')
 	} else {
-		this.player1.fitness += 30;
-		this.player2.fitness += 30;
+		this.player1.fitness += this.rewardProfile["draw"];
+		this.player2.fitness += this.rewardProfile["draw"];
+		console.log('bye')
 	}
 	this.isComplete = true;
 };
