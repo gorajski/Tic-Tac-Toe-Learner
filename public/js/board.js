@@ -44,8 +44,8 @@ Board.prototype.checkForWinner = function() {
 	}
 
 	if (winner != "NO match") {
-		// const $cells = $(this.htmlElement.find(".cell"))
-		// if (winner === 1) { $($cells).css('border-color','blue') } else { $($cells).css('border-color','red'); }
+		const $cells = $(this.htmlElement.find(".cell"))
+		if (winner === 1) { $($cells).css('border-color','blue') } else { $($cells).css('border-color','red'); }
 		
 		return winner;
 	}
