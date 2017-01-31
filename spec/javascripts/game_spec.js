@@ -65,9 +65,10 @@ describe("Game object", function() {
 	});
 
 	describe('.takeTurn', function() {
-		it("returns false and takes no action when chosen cell is not available", function() {
+		it("returns 'illegal move' and takes no action when chosen cell is not available", function() {
 			game.board.state = [1,2,0,1,0,1,0,2,2];
 			game.currentPlayer = game.player1;
+			game.currentPiece = 1;
 			result = game.takeTurn(1);
 			expect(game.board.state).toEqual([1,2,0,1,0,1,0,2,2]);
 			expect(game.currentPlayer).toEqual(player1);
@@ -75,14 +76,26 @@ describe("Game object", function() {
 			expect(result).toEqual('illegal move');
 		});
 
-		it("returns true when chosen cell is not available", function() {
+		it("returns 'Gameplay continues...' when chosen cell is available and game is not over", function() {
 			game.board.state = [1,2,0,1,0,1,0,2,2];
 			game.currentPlayer = game.player1;
+			game.currentPiece = 1;
 			result = game.takeTurn(2);
 			expect(game.board.state).toEqual([1,2,1,1,0,1,0,2,2]);
 			expect(game.currentPlayer).toEqual(player2);
 			expect(game.currentPiece).toEqual(2);
 			expect(result).toEqual('Gameplay continues...');		// Currently, this returns whether the cell was available or not.
+		});
+
+		it("returns 'draw' when there is no winner and no more moves can be made", function() {
+			game.board.state = [1,2,1,1,2,1,2,1,2];
+			game.currentPlayer = game.player2;
+			game.currentPiece = 2;
+			result = game.takeTurn(2);
+			expect(game.board.state).toEqual([1,2,1,1,2,1,2,1,2]);
+			expect(game.currentPlayer).toEqual(player2);
+			expect(game.currentPiece).toEqual(2);
+			expect(result).toEqual('draw');		// Currently, this returns whether the cell was available or not.
 		});
 
 		it("acknowledges a win by Player1", function() {
