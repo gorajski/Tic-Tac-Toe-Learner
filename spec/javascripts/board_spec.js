@@ -1,9 +1,7 @@
 describe("Board object", function() {
-	var board, player1, player2;
+	var board;
 
 	beforeEach(function() {
-		player1 = new Player("computer");
-		player2 = new Player("computer");
 		board = new Board("#dummy_entry");
 	});
 
@@ -26,7 +24,7 @@ describe("Board object", function() {
 	describe('.placePiece', function() {
 		it("places game piece at the selected cell", function() {
 			expect(board.state).toEqual([0,0,0,0,0,0,0,0,0]);
-			board.placePiece(player1, 2);
+			board.placePiece(1, 2);
 			expect(board.state).toEqual([0,0,1,0,0,0,0,0,0]);
 		});
 	});

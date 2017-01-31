@@ -1,5 +1,4 @@
 let runner = function(gameCollection) {
-
 	let clockSignal = setInterval( function() {
 		areAllGamesComplete = true;
 		let playerCount = currentGeneration.members.length;
@@ -14,10 +13,9 @@ let runner = function(gameCollection) {
 			let boardCollection = initBoards(625);
 			gameCollection = initGames(625, boardCollection, currentGeneration);
 		}
+	}, 400);
 
-	}, 40);
-
-	return clockSignal;
+	// return clockSignal;
 };
 
 let initBoards = function(numberOfGames) {
@@ -46,7 +44,6 @@ let initGames = function(numberOfGames, boardCollection, currentGeneration) {
 }
 
 $(document).ready(function() {
-
 
 	const playerCount = 25;
 	const gameCount = playerCount * playerCount;
