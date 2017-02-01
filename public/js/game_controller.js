@@ -77,6 +77,7 @@ GameController.prototype.fetchPlayerMove = function(event) {
 	this.currentMove = cellIndex;
 };
 
+//Jasmine Tested for 'computer' only
 GameController.prototype.gameClock = function() {
 	if (this.currentPlayer.type === 'human') {
 		this.board.htmlElement.on("click", this.fetchPlayerMove.bind(this));
