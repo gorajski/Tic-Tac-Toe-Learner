@@ -1,19 +1,23 @@
 $(document).ready(function() {
 
-	// $("#splash").remove();
+	$("#splash").remove();
 
-	const playerCount = 25;
+	const playerCount = 12;
 	const gameCount = playerCount * playerCount;
 	
 	let ai = new GeneticAlgorithmAI(playerCount, gameCount);
 	ai.startTraining();
 
-	$("#close").on("click", function() {
+	$("#pause").on("click", function() {
 		ai.stopTraining();
 	});
 
-	$("#back").on("click", function() {
+	$("#stop").on("click", function() {
+		ai.stopTraining();
+	});
+
+	$("#start").on("click", function() {
 		ai.startTraining();
-	})
+	});
 
 });
