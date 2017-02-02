@@ -84,7 +84,7 @@ describe("Game object", function() {
 			expect(game.board.state).toEqual([1,2,1,1,0,1,0,2,2]);
 			expect(game.currentPlayer).toEqual(player2);
 			expect(game.currentPiece).toEqual(2);
-			expect(result).toEqual('Gameplay continues...');		// Currently, this returns whether the cell was available or not.
+			expect(result).toEqual('Gameplay continues...');
 		});
 
 		it("returns 'draw' when there is no winner and no more moves can be made", function() {
@@ -95,7 +95,7 @@ describe("Game object", function() {
 			expect(game.board.state).toEqual([1,2,1,1,2,1,2,1,2]);
 			expect(game.currentPlayer).toEqual(player2);
 			expect(game.currentPiece).toEqual(2);
-			expect(result).toEqual('draw');		// Currently, this returns whether the cell was available or not.
+			expect(result).toEqual('draw');
 		});
 
 		it("acknowledges a win by Player1", function() {

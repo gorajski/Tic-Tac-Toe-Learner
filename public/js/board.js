@@ -1,4 +1,4 @@
-var Board = function(htmlElement) {
+let Board = function(htmlElement) {
 	this.htmlElement = htmlElement;
 	this.state = [
 							  0,0,0,

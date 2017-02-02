@@ -62,11 +62,9 @@ GameController.prototype.winnerLogic = function() {
 GameController.prototype.fullBoardLogic = function() {
 	if (this.player1 === this.player2) {
 		this.player1.fitness += this.rewardProfile["draw"];
-	console.log('hi')
 	} else {
 		this.player1.fitness += this.rewardProfile["draw"];
 		this.player2.fitness += this.rewardProfile["draw"];
-		console.log('bye')
 	}
 	this.isComplete = true;
 };
