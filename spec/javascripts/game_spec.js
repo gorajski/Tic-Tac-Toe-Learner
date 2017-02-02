@@ -84,7 +84,7 @@ describe("Game object", function() {
 			expect(game.board.state).toEqual([1,2,1,1,0,1,0,2,2]);
 			expect(game.currentPlayer).toEqual(player2);
 			expect(game.currentPiece).toEqual(2);
-			expect(result).toEqual('Gameplay continues...');		// Currently, this returns whether the cell was available or not.
+			expect(result).toEqual('Gameplay continues...');
 		});
 
 		it("returns 'draw' when there is no winner and no more moves can be made", function() {
@@ -95,7 +95,7 @@ describe("Game object", function() {
 			expect(game.board.state).toEqual([1,2,1,1,2,1,2,1,2]);
 			expect(game.currentPlayer).toEqual(player2);
 			expect(game.currentPiece).toEqual(2);
-			expect(result).toEqual('draw');		// Currently, this returns whether the cell was available or not.
+			expect(result).toEqual('draw');
 		});
 
 		it("acknowledges a win by Player1", function() {
@@ -122,14 +122,14 @@ describe("Game object", function() {
 
 	});
 
-	describe('.gameClock', function() {
+	describe('.gameClock .winnerLogic .fullBoardLogic', function() {
 		beforeEach(function() {		
 			playerA = new Player("computer");
 			playerA.genome = { "120120000" : 5, "120121212" : 2 };
 			playerB = new Player("computer");
 			playerB.genome = { "121120002" : 6, "120121000" : 7 };
 			playerC = new Player("computer");
-			playerC.genome = { "120120000" : 6, "221221102" : 7 };
+			playerC.genome = { "120120000" : 6, "122211102" : 7 };
 			board1 = new Board($("#dummy"));
 			board1.state = [1, 2, 0, 1, 2, 1, 2, 1, 2];
 			game1 = new GameController(board1, playerA, playerA);
@@ -146,7 +146,7 @@ describe("Game object", function() {
 			board5.state = [1, 2, 0, 1, 2, 0, 0, 0, 0];
 			game5 = new GameController(board5, playerC, playerA);
 			board6 = new Board($("#dummy"));
-			board6.state = [2, 2, 1, 2, 2, 1, 1, 0, 2];
+			board6.state = [1, 2, 2, 2, 1, 1, 1, 0, 2];
 			game6 = new GameController(board6, playerC, playerB);
 		});
 

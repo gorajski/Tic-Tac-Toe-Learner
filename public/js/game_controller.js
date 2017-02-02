@@ -62,11 +62,9 @@ GameController.prototype.winnerLogic = function() {
 GameController.prototype.fullBoardLogic = function() {
 	if (this.player1 === this.player2) {
 		this.player1.fitness += this.rewardProfile["draw"];
-	console.log('hi')
 	} else {
 		this.player1.fitness += this.rewardProfile["draw"];
 		this.player2.fitness += this.rewardProfile["draw"];
-		console.log('bye')
 	}
 	this.isComplete = true;
 };
@@ -77,6 +75,7 @@ GameController.prototype.fetchPlayerMove = function(event) {
 	this.currentMove = cellIndex;
 };
 
+//Jasmine Tested for 'computer' only
 GameController.prototype.gameClock = function() {
 	if (this.currentPlayer.type === 'human') {
 		this.board.htmlElement.on("click", this.fetchPlayerMove.bind(this));
