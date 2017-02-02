@@ -24,12 +24,13 @@
 #generation {
   margin: 0px;
   padding: 0px;
-  text-align: center;
   border: 1px solid #265867;
+  text-align: center;
+  font-size: 32px;
   color: #265867;
 }
 
-#content {
+#training-view {
   display: inline-block;
   vertical-align: top;
   width: 67%;
@@ -49,7 +50,8 @@
 
 .control-button {
   display: block;
-  width: 10em;
+  width: 25em;
+  height: 17em;
   color: #265867;
 }
 
