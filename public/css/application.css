@@ -30,6 +30,10 @@
   color: #265867;
 }
 
+#container {
+  min-width: 1200px;
+}
+
 #training-view {
   display: inline-block;
   vertical-align: top;
@@ -132,3 +136,5 @@ body {
   overflow: auto;
   width: 100%;
  }
+
+

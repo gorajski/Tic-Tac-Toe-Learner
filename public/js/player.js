@@ -28,12 +28,12 @@ Player.prototype.clone = function() {
 
 Player.prototype.mutate = function() {
 	// let mutationFactor = 0.07 * Math.random();		//revisit for a better distribution... maybe http://www.meredithdodge.com/2012/05/30/a-great-little-javascript-function-for-generating-random-gaussiannormalbell-curve-numbers/
-	let mutationFactor = 0.05;
+	let mutationFactor = 0.005;
 	const minIndex = 0;
 	const maxIndex = 8;
 
 	//************************
-	if (Math.random() < 0.4) {
+	if (Math.random() < 4) {
 		this.genome['000000000'] = Math.floor(Math.random() * (maxIndex - minIndex) + minIndex);
 	}
 	//************************
