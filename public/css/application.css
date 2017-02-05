@@ -1,17 +1,26 @@
 * {background-color: #111e1e;}
 
-#splash {
+.modal {
   display: inline-block;
   position: absolute;
   top: 12.1%;
   left: 25%;
-  width: 50%;
-  height: 375px;
+/*  width: 50%;
+  height: 375px;*/
   background-color: #203745;
   border: 6px solid #265867;
   border-radius: 3px;
 
   color: #ff8007;
+  
+}
+
+#splash {
+
+}
+
+#challenge {
+
 }
 
 .splash-button {
@@ -20,6 +29,10 @@
   width: 70px;
   margin: 15px;
 }
+
+/*#challenge-view {
+  margin: 0px;
+}*/
 
 #generation {
   margin: 0px;
@@ -63,10 +76,13 @@ tbody {
   padding: 2px 0px 2px 0px;
 }
 
-/*.board {
-  margin: 50px auto;
-  width: 600px;
-  height: 600px;
+.board {
+  margin: 0px;
+  /*min-width: ???;*/
+  width: 598px;
+  height: 598px;
+
+  font-size: 128px;
 }
 
 .board .c0, .board .c1, .board .c3, .board .c4 {
@@ -82,7 +98,7 @@ tbody {
 .board .c7 {
   border-right: 5px solid #ff8007;
   border-left: 5px solid #ff8007;
-}*/
+}
 
 .miniboard {
   width: 90px;
@@ -107,23 +123,34 @@ tbody {
   border-left: 2px solid #ff8007;
 }
 
-.center-text {
+/*.center-text {
   text-align: center;
+}*/
+
+.miniboard .cells {
+  display: flex;
+  overflow: auto;
+  width: 100%;
 }
 
-.cell{
-  width: 18px;
-  min-width: 18px;
-  height: 18px;
-
+.cell {
   text-align: center;
   color: #ff8007;
 }
 
-.cells {
-  display: flex;
-  overflow: auto;
-  width: 100%;
+.board .cell {
+  width: 196px;
+  min-width: 196px;
+  height: 196px;
+}
+
+.miniboard .cell {
+  width: 18px;
+  min-width: 18px;
+  height: 18px;
+
+/*  text-align: center;
+  color: #ff8007;*/
 }
 
 #controls {

@@ -14,6 +14,11 @@ $(document).ready(function() {
 
 	$("#stop").on("click", function() {
 		ai.stopTraining();
+		let userPlayer = new Player('human');
+		let bestPlayer = ai.currentGeneration.members[0];
+		let board = new Board($('#challenge-board'));
+		let game = new GameController(board, userPlayer, bestPlayer)
+		setInterval(game.gameClock.bind(game), 40)
 	});
 
 	$("#start").on("click", function() {
