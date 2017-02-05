@@ -1,8 +1,17 @@
-<div id="splash">
+<div id="splash" class="modal">
 	<div id="button-container">
 		<button id="close" class="splash-button">x</button>
 	  <button id="back" class="splash-button">   < back   </button>
 	  <button id="next" class="splash-button">   next >   </button>
+  </div>
+</div>
+
+<div id="challenge" class="modal">
+	<div id="challenge-view">
+		<span>You are playing as 'X'</span><span>You WIN!</span>
+		<div id="challenge-board" class="board">
+			<%= erb :_board %>
+		</div>
   </div>
 </div>
 
