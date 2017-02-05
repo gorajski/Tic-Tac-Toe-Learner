@@ -38,25 +38,13 @@
   display: inline-block;
   vertical-align: top;
   width: 67%;
+  /*min-width: 1200px;*/
   margin: 0px auto 0px 20px;
   border: 1px solid #265867;
 }
 
 #training {
   padding: 15px;
-
-}
-
-#controls {
-  display: inline-block;
-  vertical-align: top;
-}
-
-.control-button {
-  display: block;
-  width: 25em;
-  height: 17em;
-  color: #265867;
 }
 
 #back {
@@ -67,21 +55,18 @@
   right: 0px;
 }
 
-.board {
-  margin: 50px auto;
-  width: 600px;
-  height: 600px;
-}
-
-.miniboard {
-  width: 60px;
-  height: 60px;
-
-  font-size: 14px;
+tbody {
+  margin: auto;
 }
 
 .board_element > td {
-  padding: 0px 15px 5px 15px;
+  padding: 2px 0px 2px 0px;
+}
+
+/*.board {
+  margin: 50px auto;
+  width: 600px;
+  height: 600px;
 }
 
 .board .c0, .board .c1, .board .c3, .board .c4 {
@@ -97,8 +82,15 @@
 .board .c7 {
   border-right: 5px solid #ff8007;
   border-left: 5px solid #ff8007;
-}
+}*/
 
+.miniboard {
+  width: 90px;
+  min-width: 60px;
+  height: 60px;
+
+  font-size: 14px;
+}
 
 .miniboard .c0, .miniboard .c1, .miniboard .c3, .miniboard .c4 {
   border-right: 2px solid #ff8007;
@@ -115,16 +107,13 @@
   border-left: 2px solid #ff8007;
 }
 
-body {
-  padding-bottom: 4em;
-}
-
 .center-text {
   text-align: center;
 }
 
 .cell{
   width: 18px;
+  min-width: 18px;
   height: 18px;
 
   text-align: center;
@@ -135,6 +124,20 @@ body {
   display: flex;
   overflow: auto;
   width: 100%;
- }
+}
 
+#controls {
+  display: inline-block;
+  vertical-align: top;
+  margin: 0px auto;
+}
 
+.control-button {
+  display: block;
+  min-width: 200px;
+  width: 100%;
+  margin: 0px auto;
+  padding: 0px;
+  height: 275px;
+  color: #265867;
+}

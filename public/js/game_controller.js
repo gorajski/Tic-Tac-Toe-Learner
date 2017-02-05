@@ -1,5 +1,5 @@
 let GameController = function(board, player1, player2) {
- 	this.rewardProfile = { "1" : 1.18, "2" : 6.64, "draw" : 1531441 };
+ 	this.rewardProfile = { "1" : 1.18, "2" : 6.64, "draw" : 531441 }; //531441
  	this.board = board;
  	this.isComplete = false;
 	
