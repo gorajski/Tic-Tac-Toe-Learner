@@ -1,12 +1,15 @@
 let Generation = function() {
 	this.members = [];
+	Generation.id += 1; 
 };
+
+Generation.id = 0;
 
 Generation.prototype.create = function(size) {
 	for (let i = 0; i < size; i++) {
 		this.members.push(new Player("computer"));
-	};
-}
+	}
+};
 
 Generation.prototype.spawn = function(survivalRatio, newPopulationSize, doesPromoteElites) {
 	let nextGeneration = new Generation();
@@ -28,7 +31,7 @@ Generation.prototype.spawn = function(survivalRatio, newPopulationSize, doesProm
 	for (let i = 0; i < newPopulationSize; i++) {		//create new population
 		if (doesPromoteElites) {	//add in an unmodified copy of the best performing ancestor
 			let elite = ancestors[0].clone();																												//*****************
-			// elite.genome['000000000'] = Math.floor(Math.random() * 8);	//*****************
+			elite.genome['000000000'] = Math.floor(Math.random() * 8);	//*****************
 			nextGeneration.members.push(elite);																												//*****************
 			doesPromoteElites = false;
 		} 

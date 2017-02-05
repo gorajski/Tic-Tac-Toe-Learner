@@ -5,7 +5,7 @@ $(document).ready(function() {
 	const playerCount = 12;
 	const gameCount = playerCount * playerCount;
 	
-	let ai = new GeneticAlgorithmAI(playerCount, gameCount);
+	let ai = new GeneticAlgorithmAI(playerCount, gameCount, "#generation");
 	ai.startTraining();
 
 	$("#pause").on("click", function() {

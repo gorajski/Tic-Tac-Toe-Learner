@@ -1,6 +1,8 @@
-let GeneticAlgorithmAI = function(playerCount, gameCount) {
+let GeneticAlgorithmAI = function(playerCount, gameCount, htmlElement) {
+	this.htmlElement = htmlElement;
 	this.currentGeneration = new Generation();
 	this.currentGeneration.create(playerCount);
+	$(this.htmlElement).html("Generation " + Generation.id)
 	this.boardCollection = this.initBoards(gameCount);
 	this.gameCollection = this.initGames(gameCount, this.boardCollection, this.currentGeneration);
 
@@ -26,7 +28,9 @@ GeneticAlgorithmAI.prototype.trainer = function() {
  	});
 
  	if (areAllGamesComplete) { 
+ 		console.log(this.currentGeneration.members[0].fitness)
 		this.currentGeneration = this.currentGeneration.spawn(0.24, 12, true);
+		$(this.htmlElement).html("Generation " + Generation.id)
 		this.boardCollection = this.initBoards(144);
 		this.gameCollection = this.initGames(144, this.boardCollection, this.currentGeneration);
 	}
