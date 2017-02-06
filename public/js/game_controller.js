@@ -1,10 +1,10 @@
 let GameController = function(board, player1, player2) {
- 	this.rewardProfile = { "1" : 1.18, "2" : 6.64, "draw" : 531441 }; //531441
+ 	this.rewardProfile = { "1" : 1.18, "2" : 531441, "draw" : 6.64 }; //531441
  	this.board = board;
  	this.isComplete = false;
 	
 	this.player1 = player1;
-	this.player2 = player2;
+	this.player2 = player2;	
 
  	this.currentMove = null;
  	this.currentPlayer = this.player1;
@@ -53,12 +53,14 @@ GameController.prototype.takeTurn = function(cellIndex) {
 };
 
 // Not tested yet 
+// This needs refactoring to separate concerns.  Should know zero about AI.
 GameController.prototype.winnerLogic = function() {
 	this.currentPlayer.fitness += this.rewardProfile[this.currentPiece];
 	this.isComplete = true;
 };
 
 // Not tested yet 
+// This needs refactoring to separate concerns.  Should know zero about AI.
 GameController.prototype.fullBoardLogic = function() {
 	if (this.player1 === this.player2) {
 		this.player1.fitness += this.rewardProfile["draw"];
