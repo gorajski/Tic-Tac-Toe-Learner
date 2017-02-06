@@ -7,7 +7,7 @@ let GeneticAlgorithmAI = function(playerCount, gameCount, htmlElement) {
 	this.gameCollection = this.initGames(gameCount, this.boardCollection, this.currentGeneration);
 
 	this.timer = null;
-	this.timerInterval = 50;
+	this.timerInterval = 80;
 };
 
 GeneticAlgorithmAI.prototype.startTraining = function() {

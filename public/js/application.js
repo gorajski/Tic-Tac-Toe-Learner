@@ -18,7 +18,12 @@ $(document).ready(function() {
 		let bestPlayer = ai.currentGeneration.members[0];
 		let board = new Board($('#challenge-board'));
 		let game = new GameController(board, userPlayer, bestPlayer)
-		setInterval(game.gameClock.bind(game), 40)
+		setInterval(function() {
+			game.gameClock()
+			if (game.isComplete) {
+				game.resetGame()
+			}
+		}, 40)
 	});
 
 	$("#start").on("click", function() {
