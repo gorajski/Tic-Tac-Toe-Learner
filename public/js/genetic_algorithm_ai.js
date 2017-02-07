@@ -2,11 +2,12 @@ let GeneticAlgorithmAI = function(playerCount, gameCount, htmlElement) {
 	this.htmlElement = htmlElement;
 	this.currentGeneration = new Generation();
 	this.currentGeneration.create(playerCount);
-	$(this.htmlElement).html("Generation " + Generation.id)
+	$(this.htmlElement).html("Generation " + Generation.id) //relocate this
 	this.boardCollection = this.initBoards(gameCount);
 	this.gameCollection = this.initGames(gameCount, this.boardCollection, this.currentGeneration);
 
-	this.timer = null;
+	this.rewardProfile = { "1" : 1.18, "2" : 531441, "draw" : 6.64 }; //531441
+ 	this.timer = null;
 	this.timerInterval = 80;
 };
 
@@ -22,9 +23,16 @@ GeneticAlgorithmAI.prototype.stopTraining = function() {
 
 GeneticAlgorithmAI.prototype.trainer = function() {
 	let areAllGamesComplete = true;
- 	this.gameCollection.forEach(function(game) {
+ 	this.gameCollection.forEach( (game) => {
  		areAllGamesComplete = areAllGamesComplete && game.isComplete;
- 		if (!game.isComplete) { game.gameClock(); }
+ 		if (!game.isComplete) {
+ 			let result = game.gameClock();
+ 			if (result instanceof Player) {
+ 				this.winnerLogic(game);
+ 			} else if (result === 'draw') {
+ 				this.fullBoardLogic(game);
+ 			}
+ 		}
  	});
 
  	if (areAllGamesComplete) { 
@@ -60,3 +68,18 @@ GeneticAlgorithmAI.prototype.initGames = function(numberOfGames, boardCollection
 	}
 	return gameCollection;
 }
+
+GeneticAlgorithmAI.prototype.winnerLogic = function(game) {
+	game.currentPlayer.fitness += this.rewardProfile[game.currentPiece];
+	game.isComplete = true;
+};
+
+GeneticAlgorithmAI.prototype.fullBoardLogic = function(game) {
+	if (game.player1 === game.player2) {
+		game.player1.fitness += this.rewardProfile["draw"];
+	} else {
+		game.player1.fitness += this.rewardProfile["draw"];
+		game.player2.fitness += this.rewardProfile["draw"];
+	}
+	game.isComplete = true;
+};
