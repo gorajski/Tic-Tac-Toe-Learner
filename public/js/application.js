@@ -18,10 +18,14 @@ $(document).ready(function() {
 		let bestPlayer = ai.currentGeneration.members[0];
 		let board = new Board($('#challenge-board'));
 		let game = new GameController(board, userPlayer, bestPlayer)
-		setInterval(function() {
+		setInterval(function() {		//This scheme is problematic; it needs a pause. 
 			game.gameClock()
 			if (game.isComplete) {
-				game.resetGame()
+
+				setTimeout(function() { 
+					game.resetGame();
+					$(board.htmlElement).find(".cell").css('border-color','#ff8007');
+				}, 900);
 			}
 		}, 40)
 	});

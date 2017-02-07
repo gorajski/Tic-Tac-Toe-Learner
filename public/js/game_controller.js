@@ -40,10 +40,10 @@ GameController.prototype.takeTurn = function(cellIndex) {
 
 	let winner = this.board.checkForWinner();
 	if (winner) {
-		this.winnerLogic();
+		// this.winnerLogic();
 		return this.currentPlayer;
 	} else if (this.board.checkForFullBoard()) {
-		this.fullBoardLogic();
+		// this.fullBoardLogic();
 		return 'draw'
 	} else {
 		this.switchPlayer();

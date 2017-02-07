@@ -44,8 +44,8 @@ Board.prototype.checkForWinner = function() {
 	}
 
 	if (winner != "NO match") {
-		// const $cells = $(this.htmlElement.find(".cell"));
-		// if (winner === 1) { $($cells).css('border-color','blue') } else { $($cells).css('border-color','red'); }
+		const $cells = $(this.htmlElement.find(".cell"));
+		if (winner === 1) { $($cells).css('border-color','blue') } else { $($cells).css('border-color','red'); }
 		
 		return winner;
 	}
@@ -59,8 +59,8 @@ Board.prototype.checkForFullBoard = function() {
 		isFull = isFull && (this.state[i] != 0);
 	}
 	if (isFull) {
-		// const $cells = $(this.htmlElement.find(".cell"));
-		// $($cells).css('border-color','#bbbb00');
+		const $cells = $(this.htmlElement.find(".cell"));
+		$($cells).css('border-color','#bbbb00');
 		// console.log("No winner!")
 		return true;
 	}
