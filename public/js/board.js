@@ -5,7 +5,6 @@ let Board = function(htmlElement) {
 								0,0,0,
 								0,0,0 
 											];
-
 };
 
 Board.prototype.updateBoardView = function() {
