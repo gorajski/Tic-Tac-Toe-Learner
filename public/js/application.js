@@ -15,23 +15,27 @@ $(document).ready(function() {
 	$("#stop").on("click", function() {
 		ai.stopTraining();
 		let userPlayer = new Player('human');
-		let bestPlayer = ai.currentGeneration.members[0];
+		let bestPlayer = ai.bestPerformer();
 		let board = new Board($('#challenge-board'));
 		let game = new GameController(board, userPlayer, bestPlayer)
-		setInterval(function() {		//This scheme is problematic; it needs a pause. 
-			game.gameClock()
-			if (game.isComplete) {
 
-				setTimeout(function() { 
-					game.resetGame();
-					$(board.htmlElement).find(".cell").css('border-color','#ff8007');
-				}, 900);
-			}
-		}, 40)
+		runGame(game);
 	});
 
 	$("#start").on("click", function() {
 		ai.startTraining();
 	});
+
+	let runGame = function(game) {
+		let result = game.gameClock();
+		let timer = null;
+		if (game.isComplete) {
+			setTimeout(function() { 
+				game.resetGame();
+				$(game.board.htmlElement).find(".cell").css('border-color','#ff8007');
+			}, 700);
+		} 
+		timer = setTimeout(function() { runGame(game); }, 70);	
+	};
 
 });

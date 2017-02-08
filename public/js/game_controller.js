@@ -1,5 +1,4 @@
 let GameController = function(board, player1, player2) {
- 	this.rewardProfile = { "1" : 1.18, "2" : 531441, "draw" : 6.64 }; //531441
  	this.board = board;
  	this.isComplete = false;
 	
@@ -19,6 +18,7 @@ GameController.prototype.switchPlayer = function() {
 
 // Jasmine Tested
 GameController.prototype.resetGame = function() {
+	console.log('reset')
 	this.board.state = [0,0,0,0,0,0,0,0,0];
 	this.currentPlayer = this.player1;
 	this.currentPiece = 1;
@@ -40,35 +40,16 @@ GameController.prototype.takeTurn = function(cellIndex) {
 
 	let winner = this.board.checkForWinner();
 	if (winner) {
-		// this.winnerLogic();
+		this.isComplete = true;
 		return this.currentPlayer;
 	} else if (this.board.checkForFullBoard()) {
-		// this.fullBoardLogic();
-		return 'draw'
+		this.isComplete = true;
+		return 'draw';
 	} else {
 		this.switchPlayer();
-		return 'Gameplay continues...'
+		return 'Gameplay continues...';
 	}
 
-};
-
-// Not tested yet 
-// This needs refactoring to separate concerns.  Should know zero about AI.
-GameController.prototype.winnerLogic = function() {
-	this.currentPlayer.fitness += this.rewardProfile[this.currentPiece];
-	this.isComplete = true;
-};
-
-// Not tested yet 
-// This needs refactoring to separate concerns.  Should know zero about AI.
-GameController.prototype.fullBoardLogic = function() {
-	if (this.player1 === this.player2) {
-		this.player1.fitness += this.rewardProfile["draw"];
-	} else {
-		this.player1.fitness += this.rewardProfile["draw"];
-		this.player2.fitness += this.rewardProfile["draw"];
-	}
-	this.isComplete = true;
 };
 
 GameController.prototype.fetchPlayerMove = function(event) {
@@ -79,20 +60,21 @@ GameController.prototype.fetchPlayerMove = function(event) {
 
 //Jasmine Tested for 'computer' only
 GameController.prototype.gameClock = function() {
-	if (this.currentPlayer.type === 'human') {
-		this.board.htmlElement.on("click", this.fetchPlayerMove.bind(this));
-		if (this.currentMove != null) {
-			let cellIndex = this.currentMove;
-			this.currentMove = null;
-			this.board.htmlElement.off("click");
+	if (!this.isComplete) {
+		if (this.currentPlayer.type === 'human') {
+			this.board.htmlElement.on("click", this.fetchPlayerMove.bind(this));
+			if (this.currentMove != null) {
+				let cellIndex = this.currentMove;
+				this.currentMove = null;
+				this.board.htmlElement.off("click");
+				return this.takeTurn(cellIndex);
+			}
+		}
+
+		if (this.currentPlayer.type === 'computer') {
+			const state = this.board.state.join('');
+			let cellIndex = this.currentPlayer.genome[state];
 			return this.takeTurn(cellIndex);
 		}
 	}
-
-	if (this.currentPlayer.type === 'computer') {
-		const state = this.board.state.join('');
-		let cellIndex = this.currentPlayer.genome[state];
-		return this.takeTurn(cellIndex);
-	}
-
 };
