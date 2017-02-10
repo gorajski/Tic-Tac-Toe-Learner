@@ -76,5 +76,5 @@ GameController.prototype.gameClock = function() {
 			let cellIndex = this.currentPlayer.genome[state];
 			return this.takeTurn(cellIndex);
 		}
-	}
+	} 
 };

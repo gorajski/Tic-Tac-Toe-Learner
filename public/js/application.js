@@ -2,11 +2,18 @@ $(document).ready(function() {
 
 	$("#splash").remove();
 
-	const playerCount = 12;
+	const playerCount = 24;
 	const gameCount = playerCount * playerCount;
 	
+	let timer = null;
 	let ai = new GeneticAlgorithmAI(playerCount, gameCount, "#generation");
 	ai.startTraining();
+
+	$("#start").on("click", function() {
+		ai.startTraining();
+		clearTimeout(timer);
+		timer = null;
+	});
 
 	$("#pause").on("click", function() {
 		ai.stopTraining();
@@ -14,28 +21,28 @@ $(document).ready(function() {
 
 	$("#stop").on("click", function() {
 		ai.stopTraining();
+		let board = new Board($('#challenge-board'));
 		let userPlayer = new Player('human');
 		let bestPlayer = ai.bestPerformer();
-		let board = new Board($('#challenge-board'));
-		let game = new GameController(board, userPlayer, bestPlayer)
+		let game = new GameController(board, userPlayer, bestPlayer);
+
+		console.log(bestPlayer.genome['000000000']);
 
 		runGame(game);
 	});
 
-	$("#start").on("click", function() {
-		ai.startTraining();
-	});
-
 	let runGame = function(game) {
+
 		let result = game.gameClock();
-		let timer = null;
 		if (game.isComplete) {
 			setTimeout(function() { 
 				game.resetGame();
+				timer = setTimeout(function() { runGame(game); }, 70);
 				$(game.board.htmlElement).find(".cell").css('border-color','#ff8007');
 			}, 700);
-		} 
-		timer = setTimeout(function() { runGame(game); }, 70);	
+		} else {
+			timer = setTimeout(function() { runGame(game); }, 70);
+		}
 	};
 
 });
