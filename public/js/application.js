@@ -1,6 +1,7 @@
 $(document).ready(function() {
 
-	$("#splash").remove();
+	$("#splash").hide();
+	$("#challenge").hide();
 
 	const playerCount = 24;
 	const gameCount = playerCount * playerCount;
@@ -10,6 +11,7 @@ $(document).ready(function() {
 	ai.startTraining();
 
 	$("#start").on("click", function() {
+		$("#challenge").hide();
 		ai.startTraining();
 		clearTimeout(timer);
 		timer = null;
@@ -21,6 +23,7 @@ $(document).ready(function() {
 
 	$("#stop").on("click", function() {
 		if (ai.timer === null) { return };
+		$("#challenge").show();
 		ai.stopTraining();
 		let board = new Board($('#challenge-board'));
 		let userPlayer = new Player('human');
