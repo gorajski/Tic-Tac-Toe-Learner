@@ -20,6 +20,7 @@ $(document).ready(function() {
 	});
 
 	$("#stop").on("click", function() {
+		if (ai.timer === null) { return };
 		ai.stopTraining();
 		let board = new Board($('#challenge-board'));
 		let userPlayer = new Player('human');
