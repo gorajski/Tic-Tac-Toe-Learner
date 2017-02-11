@@ -14,6 +14,7 @@ let GeneticAlgorithmAI = function(playerCount, gameCount, htmlElement) {
 
 GeneticAlgorithmAI.prototype.startTraining = function() {
 	if (this.timer !== null) { return };
+	console.log('hi')
 	this.timer = this.trainer();
 };
 
@@ -44,27 +45,6 @@ GeneticAlgorithmAI.prototype.trainer = function() {
 	};
 	this.timer = setTimeout(this.trainer.bind(this), this.timerInterval)
 };
-
-// GeneticAlgorithmAI.prototype.trainer = function() {
-// 	let areAllGamesComplete = true;
-//  	this.gameCollection.forEach( (game) => {
-//  		areAllGamesComplete = areAllGamesComplete && game.isComplete;
-//  			let result = game.gameClock();
-//  			if (result instanceof Player) {
-//  				this.winnerLogic(game);
-//  			} else if (result === 'draw') {
-//  				this.fullBoardLogic(game);
-//  			}
-//  	});
-
-//  	if (areAllGamesComplete) { 
-//  		// console.log(this.currentGeneration.members[0].fitness)
-// 		this.currentGeneration = this.currentGeneration.spawn(0.24, 12, true);
-// 		$(this.htmlElement).html("Generation " + Generation.id)
-// 		this.boardCollection = this.initBoards(144);
-// 		this.gameCollection = this.initGames(144, this.boardCollection, this.currentGeneration);
-// 	}
-// };
 
 GeneticAlgorithmAI.prototype.initBoards = function(numberOfGames) {
 	let boardCollection = [];

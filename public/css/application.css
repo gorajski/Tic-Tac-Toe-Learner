@@ -1,26 +1,7 @@
 * {background-color: #111e1e;}
 
-.modal {
-  display: inline-block;
-  position: absolute;
-  top: 12.1%;
-  left: 25%;
-/*  width: 50%;
-  height: 375px;*/
-  background-color: #203745;
-  border: 6px solid #265867;
-  border-radius: 3px;
-
-  color: #ff8007;
-  
-}
-
 #splash {
-
-}
-
-#challenge {
-
+  display: none;
 }
 
 .splash-button {
@@ -30,9 +11,48 @@
   margin: 15px;
 }
 
+#back {
+  right: 85px;
+}
+
+#next {
+  right: 0px;
+}
+
+.modal {
+  display: inline-block;
+  position: absolute;
+  top: 12.1%;
+  left: 25%;
+  background-color: #203745;
+  border: 6px solid #265867;
+  border-radius: 3px;
+
+  color: #ff8007;
+  
+}
+
+#challenge {
+  display: none;
+}
+
 /*#challenge-view {
   margin: 0px;
 }*/
+
+#container {
+  min-width: 1200px;
+}
+
+#training-view {
+  display: inline-block;
+  vertical-align: top;
+  width: 67%;
+  height: 850px;
+  /*min-width: 1200px;*/
+  margin: 0px auto 0px 20px;
+  border: 1px solid #265867;
+}
 
 #generation {
   margin: 0px;
@@ -43,29 +63,8 @@
   color: #265867;
 }
 
-#container {
-  min-width: 1200px;
-}
-
-#training-view {
-  display: inline-block;
-  vertical-align: top;
-  width: 67%;
-  /*min-width: 1200px;*/
-  margin: 0px auto 0px 20px;
-  border: 1px solid #265867;
-}
-
 #training {
   padding: 15px;
-}
-
-#back {
-  right: 85px;
-}
-
-#next {
-  right: 0px;
 }
 
 tbody {
@@ -165,6 +164,6 @@ tbody {
   width: 100%;
   margin: 0px auto;
   padding: 0px;
-  height: 275px;
+  height: 284px;
   color: #265867;
 }
