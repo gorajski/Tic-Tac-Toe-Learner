@@ -9,7 +9,7 @@ let GeneticAlgorithmAI = function(playerCount, gameCount, htmlElement) {
 
 	this.rewardProfile = { "1" : 1.18, "2" : 5.64, "draw" : 3.91 }; // Calculated weights { "1" : 1.18, "2" : 6.64, "draw" : 531441 }
  	this.timer = null;
-	this.timerInterval = 5;
+	this.timerInterval = 150;
 };
 
 GeneticAlgorithmAI.prototype.startTraining = function() {
