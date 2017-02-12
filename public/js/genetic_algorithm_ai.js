@@ -7,9 +7,9 @@ let GeneticAlgorithmAI = function(playerCount, gameCount, htmlElement) {
 	this.boardCollection = this.initBoards(gameCount);
 	this.gameCollection = this.initGames(gameCount, this.boardCollection, this.currentGeneration);
 
-	this.rewardProfile = { "1" : 1.18, "2" : 5.64, "draw" : 3.91 }; // Calculated weights { "1" : 1.18, "2" : 6.64, "draw" : 531441 }
+	this.rewardProfile = { "1" : 1.18, "2" : 4.64, "draw" : 3.91 }; // Calculated weights { "1" : 1.18, "2" : 6.64, "draw" : 531441 }
  	this.timer = null;
-	this.timerInterval = 150;
+	this.timerInterval = 10;
 };
 
 GeneticAlgorithmAI.prototype.startTraining = function() {

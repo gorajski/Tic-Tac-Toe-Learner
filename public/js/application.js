@@ -2,6 +2,7 @@ $(document).ready(function() {
 
 	$("#splash").hide();
 	$("#challenge").hide();
+	$("#ai-controls").css("opacity", 0.4);
 
 	const playerCount = 24;
 	const gameCount = playerCount * playerCount;
@@ -12,18 +13,21 @@ $(document).ready(function() {
 
 	$("#start").on("click", function() {
 		$("#challenge").hide();
+		$("#ai-controls").css("opacity", 0.4);
 		ai.startTraining();
 		clearTimeout(timer);
 		timer = null;
 	});
 
 	$("#pause").on("click", function() {
+		$("#ai-controls").css("opacity", 1);
 		ai.stopTraining();
 	});
 
 	$("#stop").on("click", function() {
 		if (ai.timer === null) { return };
 		$("#challenge").show();
+		$("#ai-controls").css("opacity", 0.4);
 		ai.stopTraining();
 		let board = new Board($('#challenge-board'));
 		let userPlayer = new Player('human');
