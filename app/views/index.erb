@@ -38,11 +38,12 @@
 		<button id="start" class="control-button">Start</button>
 		<button id="pause" class="control-button">Pause</button>
 		<button id="stop" class="control-button">Stop & Play Against Best Player</button>
-		<form>
-			<div class="control-container">
-				<input type="radio" name="speed" value="" checked> Fast<br>
-				<input type="radio" name="speed" value=""> Medium<br>
-				<input type="radio" name="speed" value=""> Slow<br>
+		
+		<form id="ai-controls">
+			<div class="ai-control-container">
+				<input type="radio" id="fast" name="speed" value="" checked><label for="fast"> Fast</label><br>
+				<input type="radio" id="medium" name="speed" value=""><label for="medium"> Medium</label><br>
+				<input type="radio" id="slow" name="speed" value=""><label for="slow"> Slow</label><br>
 			</div>
 			<div class="control-container"><input type="checkbox"> Elites</div>
 			<div>
