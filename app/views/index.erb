@@ -15,7 +15,7 @@
   </div>
 </div>
 
-<div id="container">	
+<div id="container">
 
 	<div id="training-view">
 
@@ -37,25 +37,29 @@
 	<div id="controls">
 		<button id="start" class="control-button">Start</button>
 		<button id="pause" class="control-button">Pause</button>
-		<button id="stop" class="control-button">Stop & Play Against Best Player</button>
+		<button id="stop" class="control-button">Stop and Play<br>Against Best Player</button>
 		
-		<form id="ai-controls">
+		<form id="ai-control-form">
 			<div class="ai-control-container">
-				<input type="radio" id="fast" name="speed" value="" checked><label for="fast"> Fast</label><br>
-				<input type="radio" id="medium" name="speed" value=""><label for="medium"> Medium</label><br>
-				<input type="radio" id="slow" name="speed" value=""><label for="slow"> Slow</label><br>
+				<input type="radio" id="fast" class="ai-control" name="speed" value="" checked><label for="fast"> Fast</label><br>
+				<input type="radio" id="medium" class="ai-control" name="speed" value=""><label for="medium"> Medium</label><br>
+				<input type="radio" id="slow" class="ai-control" name="speed" value=""><label for="slow"> Slow</label><br>
 			</div>
-			<div class="control-container"><input type="checkbox"> Elites</div>
+			<div class="ai-control-container"><input type="checkbox" class="ai-control"> Elites</div>
 			<div>
+<!-- 				<label>Population Size</label><br>
+				<input class="text-input" type="text"> -->
+				<label>Survival Rate</label><br>
+				<input class="text-input ai-control" type="text">
 				<label>Mutation Rate</label><br>
-				<input class="text-input" type="text">
+				<input class="text-input ai-control" type="text">
 			</div>
 
 			<div>
-			<div id="weights">Points Assigned for Game Result:</div>
-				<div><label>Player 1 Wins</label><br><input class="text-input" type="text"></div>
-				<div><label>Player 2 Wins</label><br><input class="text-input" type="text"></div>
-				<div><label>Game is Tied</label><br><input class="text-input" type="text"></div>
+				<div id="weights">Points Assigned for Game Result:</div>
+				<div><label>Player 1 Wins</label><br><input class="text-input ai-control" type="text"></div>
+				<div><label>Player 2 Wins</label><br><input class="text-input ai-control" type="text"></div>
+				<div><label>Game is Tied</label><br><input class="text-input ai-control" type="text"></div>
 			</div>
 		</form>
 

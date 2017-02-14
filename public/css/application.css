@@ -70,7 +70,7 @@ body {background-color: #163545;}  /*111e1e*/
 
 #training {
   margin: 0px;
-  padding: 15px;
+  padding: 15px 0px;
   border: 1px solid #467887;
 }
 
@@ -169,12 +169,14 @@ tbody {
   display: block;
   min-width: 200px;
   width: 100%;
-  margin: 15px auto;
+  margin: 12px auto;
   padding: 0px;
-  height: 80px;
+  height: 70px;
   background-color: #111e1e;
-  color: #4A7C8B;
   border-width: 3px;
+  
+  color: #4A7C8B;
+  word-wrap: break-word;
 }
 
 #start {
@@ -186,7 +188,7 @@ tbody {
 }
 
 .ai-control-container {
-  margin: 25px 0px;
+  margin: 15px 0px;
   padding: 10px;
   border: 3px solid #111e1e;
   color: #ff8007;
@@ -208,7 +210,7 @@ label {
 }
 
 #weights {
-  margin: 30px 0px 10px 0px;
+  margin: 15px 0px 10px 0px;
   color: #ff8007;
 }
 
