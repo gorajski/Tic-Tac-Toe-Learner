@@ -27,7 +27,7 @@ Player.prototype.clone = function() {
 };
 
 Player.prototype.mutate = function() {
-	let mutationFactor = 0.002;
+	let mutationFactor = 0.0007;
 	const minIndex = 0;
 	const maxIndex = 8;
 

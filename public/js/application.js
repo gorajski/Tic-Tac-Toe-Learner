@@ -2,9 +2,10 @@ $(document).ready(function() {
 
 	$("#splash").hide();
 	$("#challenge").hide();
-	$("#ai-controls").css("opacity", 0.4);
+	$("#ai-control-form").css("opacity", 0.4);
+	$(".ai-control").attr("disabled", "true");
 
-	const playerCount = 24;
+	const playerCount = 40;
 	const gameCount = playerCount * playerCount;
 	
 	let timer = null;
@@ -13,26 +14,30 @@ $(document).ready(function() {
 
 	$("#start").on("click", function() {
 		$("#challenge").hide();
-		$("#ai-controls").css("opacity", 0.4);
+		$("#ai-control-form").css("opacity", 0.4);
+		$(".ai-control").attr("disabled", "true");
 		ai.startTraining();
 		clearTimeout(timer);
 		timer = null;
 	});
 
 	$("#pause").on("click", function() {
-		$("#ai-controls").css("opacity", 1);
+		if (ai.timer === null) { return };
+		$("#ai-control-form").css("opacity", 1);
+		$(".ai-control").removeAttr("disabled");
 		ai.stopTraining();
 	});
 
 	$("#stop").on("click", function() {
 		if (ai.timer === null) { return };
 		$("#challenge").show();
-		$("#ai-controls").css("opacity", 0.4);
+		$("#ai-control-form").css("opacity", 0.4);
+		$(".ai-control").attr("disabled", "true");
 		ai.stopTraining();
 		let board = new Board($('#challenge-board'));
 		let userPlayer = new Player('human');
 		let bestPlayer = ai.bestPerformer();
-		let game = new GameController(board, userPlayer, bestPlayer);
+		let game = new GameController(board, bestPlayer, userPlayer);
 
 		console.log(bestPlayer.genome['000000000']);
 
