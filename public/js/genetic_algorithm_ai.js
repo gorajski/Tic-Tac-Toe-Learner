@@ -14,7 +14,6 @@ let GeneticAlgorithmAI = function(populationSize, gameCount, htmlElement) {
 
 GeneticAlgorithmAI.prototype.startTraining = function() {
 	if (this.timer !== null) { return };
-	console.log('hi')
 	this.timer = this.trainer();
 };
 

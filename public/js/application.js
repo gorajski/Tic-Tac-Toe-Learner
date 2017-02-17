@@ -1,16 +1,24 @@
 $(document).ready(function() {
 
-	$("#splash").hide();
+	$("#splash").show();
 	$("#challenge").hide();
-	$("#ai-control-form").css("opacity", 0.4);
-	$(".ai-control").attr("disabled", "true");
 
-	const playerCount = 40;
+	const playerCount = 80;
 	const gameCount = playerCount * playerCount;
 	
 	let timer = null;
 	let ai = new GeneticAlgorithmAI(playerCount, gameCount, "#generation");
-	ai.startTraining();
+	
+	$("#close").on("click", function() {
+		$("#splash").hide();
+		$("#ai-control-form").css("opacity", 1);
+		$(".ai-control").removeAttr("disabled");
+		$(".control-button").css("opacity", 1);
+		$(".control-button").removeAttr("disabled");
+
+		console.log('hi')
+	});
+
 
 	$("#start").on("click", function() {
 		$("#challenge").hide();

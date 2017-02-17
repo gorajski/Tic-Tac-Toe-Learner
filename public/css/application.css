@@ -1,22 +1,42 @@
 body {background-color: #163545;}  /*111e1e*/
 
 #splash {
-  display: none;
+  height: 400px;
+  width: 500px;
+  padding: 0px 20px 0px 20px;
+}
+
+h1 {
+  text-align: center;
+}
+
+h3 {
+  margin: 5px;
+  text-align: center;
 }
 
 .splash-button {
   position: absolute;
-  bottom: 0px;
   width: 70px;
   margin: 15px;
 }
 
 #back {
+  bottom: 0px;
   right: 85px;
 }
 
 #next {
+  bottom: 0px;
   right: 0px;
+}
+
+#close {
+  position: absolute;
+  top: 3px;
+  right: 3px;
+  border: none;
+  background-color: transparent;
 }
 
 .modal {
@@ -174,7 +194,8 @@ tbody {
   height: 70px;
   background-color: #111e1e;
   border-width: 3px;
-  
+  opacity: 0.4;
+
   color: #4A7C8B;
   word-wrap: break-word;
 }
@@ -183,20 +204,52 @@ tbody {
   margin-top: 0px;
 }
 
-#ai-controls {
+#ai-control-form {
   opacity: 0.4;
 }
 
 .ai-control-container {
-  margin: 15px 0px;
-  padding: 10px;
+  display: inline-block;
+  margin: 8px 0px;
+  padding: 5px 10px;
+  width: 125px;
   border: 3px solid #111e1e;
   color: #ff8007;
+  vertical-align: top;
+}
+
+#legend-container {
+  height: 131px;
 }
 
 input {
   margin: 10px 0px;
   background-color: #256857;
+}
+
+#xwon {
+  background-color: blue;
+}
+
+#owon {
+  background-color: red;
+}
+
+#draw {
+  background-color: yellow;
+}
+
+.legend-color {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  margin: 3px;
+  border: 1px solid black;  /*change to better color*/
+}
+
+.legend-label {
+  /*display: inline-block;*/
+  width: 40px;
 }
 
 .text-input {
