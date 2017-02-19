@@ -5,9 +5,12 @@ $(document).ready(function() {
 
 	const playerCount = 80;
 	const gameCount = playerCount * playerCount;
+
+	//speed, elites, survival rate, mutation rate, reward profile
 	
 	let timer = null;
-	let ai = new GeneticAlgorithmAI(playerCount, gameCount, "#generation");
+	//														 (populationSize, gameCount, htmlElement, timerInterval, hasElites, survivalRatio, mutationRate, player1Reward, player2Reward, tieGameReward)
+	let ai = new GeneticAlgorithmAI(playerCount, gameCount, "#generation", 40, true, 0.24, 0.0007, 2, 2, 6);
 	
 	$("#close").on("click", function() {
 		$("#splash").hide();

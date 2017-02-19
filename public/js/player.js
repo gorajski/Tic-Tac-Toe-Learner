@@ -26,8 +26,7 @@ Player.prototype.clone = function() {
 	return newPlayer;
 };
 
-Player.prototype.mutate = function() {
-	let mutationFactor = 0.0007;
+Player.prototype.mutate = function(mutationRate) {
 	const minIndex = 0;
 	const maxIndex = 8;
 
@@ -42,7 +41,7 @@ Player.prototype.mutate = function() {
 	let choices = genomeOpenSpaces;
 	for (let key in this.genome) {
 		let choice = choices[key];
-		if (Math.random() < mutationFactor) {
+		if (Math.random() < mutationRate) {
 			this.genome[key] = choice[Math.floor(Math.random() * choice.length)];
 		} 
 	};

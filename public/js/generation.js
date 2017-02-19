@@ -1,5 +1,6 @@
-let Generation = function() {
+let Generation = function(mutationRate) {
 	this.members = [];
+	this.mutationRate = mutationRate;
 	Generation.id += 1; 
 };
 
@@ -12,7 +13,7 @@ Generation.prototype.create = function(size) {
 };
 
 Generation.prototype.spawn = function(survivalRatio, newPopulationSize, doesPromoteElites) {
-	let nextGeneration = new Generation();
+	let nextGeneration = new Generation(this.mutationRate);
 
 	let numberToKeepAlive = Math.floor(survivalRatio * this.members.length); //10
 	let descendantsPerAncestor = Math.floor(newPopulationSize / numberToKeepAlive); //3
@@ -37,7 +38,7 @@ Generation.prototype.spawn = function(survivalRatio, newPopulationSize, doesProm
 		} 
 		else {	//add in mutated copies of ancestors
 			let descendant = ancestors[ancestorIndex].clone();
-			nextGeneration.members.push(descendant.mutate());
+			nextGeneration.members.push(descendant.mutate(this.mutationRate));
 			if ((i+1) % descendantsPerAncestor === 0  && ancestorIndex < numberToKeepAlive - 1 ) { 
 				ancestorIndex += 1;
 			}
