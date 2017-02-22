@@ -5,12 +5,9 @@ $(document).ready(function() {
 
 	const playerCount = 80;
 	const gameCount = playerCount * playerCount;
-
-	//speed, elites, survival rate, mutation rate, reward profile
 	
 	let timer = null;
-	//														 (populationSize, gameCount, htmlElement, timerInterval, hasElites, survivalRatio, mutationRate, player1Reward, player2Reward, tieGameReward)
-	let ai = new GeneticAlgorithmAI(playerCount, gameCount, "#generation", 40, true, 0.24, 0.0007, 2, 2, 6);
+	let ai = new GeneticAlgorithmAI(playerCount, gameCount, "#generation");
 	
 	$("#close").on("click", function() {
 		$("#splash").hide();
@@ -18,15 +15,25 @@ $(document).ready(function() {
 		$(".ai-control").removeAttr("disabled");
 		$(".control-button").css("opacity", 1);
 		$(".control-button").removeAttr("disabled");
-
-		console.log('hi')
 	});
-
 
 	$("#start").on("click", function() {
 		$("#challenge").hide();
 		$("#ai-control-form").css("opacity", 0.4);
 		$(".ai-control").attr("disabled", "true");
+
+		ai.hasElites = $("#elites").is(":checked");
+		ai.survivalRatio = $("#survival-ratio").val();
+		ai.mutationRate = $("#mutation-rate").val();
+		if ($("#fast").prop("checked")) {
+			ai.timerInterval = 40;
+		} else if ($("#medium").prop("checked")) {
+			console.log('hi')
+			ai.timerInterval = 160;
+		} else if ($("#slow").prop("checked")) {
+			ai.timerInterval = 640;
+		}
+
 		ai.startTraining();
 		clearTimeout(timer);
 		timer = null;
@@ -36,6 +43,7 @@ $(document).ready(function() {
 		if (ai.timer === null) { return };
 		$("#ai-control-form").css("opacity", 1);
 		$(".ai-control").removeAttr("disabled");
+
 		ai.stopTraining();
 	});
 
@@ -44,6 +52,7 @@ $(document).ready(function() {
 		$("#challenge").show();
 		$("#ai-control-form").css("opacity", 0.4);
 		$(".ai-control").attr("disabled", "true");
+
 		ai.stopTraining();
 		let board = new Board($('#challenge-board'));
 		let userPlayer = new Player('human');
