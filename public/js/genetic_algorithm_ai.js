@@ -79,6 +79,7 @@ GeneticAlgorithmAI.prototype.winnerLogic = function(game) {
 };
 
 GeneticAlgorithmAI.prototype.fullBoardLogic = function(game) {
+	console.log(this.rewardProfile)
 	if (game.player1 === game.player2) {
 		game.player1.fitness += this.rewardProfile["draw"];
 	} else {
