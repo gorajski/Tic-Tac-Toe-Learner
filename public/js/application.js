@@ -33,6 +33,10 @@ $(document).ready(function() {
 		} else if ($("#slow").prop("checked")) {
 			ai.timerInterval = 640;
 		}
+		const playerXPoints = $("#x-won-points").val()
+		const playerOPoints = $("#o-won-points").val()
+		const drawGamePoints = $("#draw-points").val()
+		ai.rewardProfile = { "1" : playerXPoints, "2" : playerOPoints, "draw" : drawGamePoints };
 
 		ai.startTraining();
 		clearTimeout(timer);
