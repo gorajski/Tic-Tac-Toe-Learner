@@ -46,8 +46,8 @@
 			<div>
 				<div class="ai-control-container" id="legend-container">
 					<h3>Legend</h3>
-					<div><div id="xwon" class="legend-color"></div> 'X' won</div>
-					<div><div id="owon" class="legend-color"></div> 'O' won</div>
+					<div><div id="x-won" class="legend-color"></div> 'X' won</div>
+					<div><div id="o-won" class="legend-color"></div> 'O' won</div>
 					<div><div id="draw" class="legend-color"></div> draw</div>
 				</div>
 				<div class="ai-control-container">
@@ -58,22 +58,22 @@
 				</div>
 			</div>	
 			<div class="ai-control-container">
-				<input type="checkbox" id="elites" class="ai-control" disabled><label for="elites"> Elites</label>
+				<input type="checkbox" id="elites" class="ai-control" disabled checked><label for="elites"> Elites</label>
 			</div>
 			<div>
 <!-- 				<label>Population Size</label><br>
 				<input class="text-input" type="text"> -->
-				<label>Survival Rate</label><br>
-				<input class="text-input ai-control" type="text">
+				<label>Survival Ratio</label><br>
+				<input id="survival-ratio" class="text-input ai-control" type="text" value="0.24">
 				<label>Mutation Rate</label><br>
-				<input class="text-input ai-control" type="text">
+				<input id="mutation-rate" class="text-input ai-control" type="text" value="0.0007">
 			</div>
 
 			<div>
 				<div id="weights">Points Assigned for Game Result:</div>
-				<div><label>Player 1 Wins</label><br><input class="text-input ai-control" type="text" value="2"></div>
-				<div><label>Player 2 Wins</label><br><input class="text-input ai-control" type="text" value="2"></div>
-				<div><label>Game is Tied</label><br><input class="text-input ai-control" type="text" value="1"></div>
+				<div><label>Player X Wins</label><br><input id="x-won-points" class="text-input ai-control" type="text" value="2"></div>
+				<div><label>Player O Wins</label><br><input id="o-won-points" class="text-input ai-control" type="text" value="2"></div>
+				<div><label>Game is Tied</label><br><input id="draw-points" class="text-input ai-control" type="text" value="1"></div>
 			</div>
 		</form>
 
