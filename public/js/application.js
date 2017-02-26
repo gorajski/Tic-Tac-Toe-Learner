@@ -1,14 +1,19 @@
 $(document).ready(function() {
 
+// In this file you have a lot of stuff just dumped in document.ready
+// I would think it would be better to refactor this into a top level
+// app controller that sets all this stuff up. Binds all of your events
+// to an overall app view.
+
 	$("#splash").show();
 	$("#challenge").hide();
 
 	const playerCount = 80;
 	const gameCount = playerCount * playerCount;
-	
+
 	let timer = null;
 	let ai = new GeneticAlgorithmAI(playerCount, gameCount, "#generation");
-	
+
 	$("#close").on("click", function() {
 		$("#splash").hide();
 		$("#ai-control-form").css("opacity", 1);
@@ -68,11 +73,12 @@ $(document).ready(function() {
 		runGame(game);
 	});
 
+// Feels like runGame should actually be a method inside your Game controller object
 	let runGame = function(game) {
 
 		let result = game.gameClock();
 		if (game.isComplete) {
-			setTimeout(function() { 
+			setTimeout(function() {
 				game.resetGame();
 				timer = setTimeout(function() { runGame(game); }, 70);
 				$(game.board.htmlElement).find(".cell").css('border-color','#ff8007');

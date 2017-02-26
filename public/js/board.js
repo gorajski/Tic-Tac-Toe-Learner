@@ -1,9 +1,15 @@
+// This Board object feels like a Model.  I wouldn't tie this so tightly to knowing aobut
+// html element or the 'cells'. Update Board View feels like it should be in a
+// View for a board specifically maybe in a render method?
+// this is the same feedback I have for all of the files where you are using jquery selectors
+// in what I percieve to be more model/logic/controllers
+
 let Board = function(htmlElement) {
 	this.htmlElement = htmlElement;
 	this.state = [
 							  0,0,0,
 								0,0,0,
-								0,0,0 
+								0,0,0
 											];
 };
 
@@ -45,7 +51,7 @@ Board.prototype.checkForWinner = function() {
 	if (winner != "NO match") {
 		const $cells = $(this.htmlElement.find(".cell"));
 		if (winner === 1) { $($cells).css('border-color','blue') } else { $($cells).css('border-color','red'); }
-		
+
 		return winner;
 	}
 	return null;
