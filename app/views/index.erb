@@ -1,5 +1,5 @@
 <div id="splash" class="modal">
-		<button id="close" class="">x</button>
+	<button id="close" class="">x</button>
 	<div>
 		<h1>Tic-Tac-Toe Genetic Algorithm</h1>
 	</div>
@@ -21,7 +21,6 @@
 <div id="container">
 
 	<div id="training-view">
-
 		<div id="generation">Generation 1</div>
 		<div id="training">
 			<table>
@@ -34,7 +33,6 @@
 				<% end %>
 			</table>
 		</div>
-
 	</div>
 
 	<div id="controls">
@@ -50,6 +48,7 @@
 					<div><div id="o-won" class="legend-color"></div> 'O' won</div>
 					<div><div id="draw" class="legend-color"></div> draw</div>
 				</div>
+
 				<div class="ai-control-container">
 					<h3>Speed</h3>
 					<input type="radio" id="fast" class="ai-control" name="speed" value="" disabled checked><label for="fast"> Fast</label><br>
@@ -57,12 +56,14 @@
 					<input type="radio" id="slow" class="ai-control" name="speed" value="" disabled><label for="slow"> Slow</label><br>
 				</div>
 			</div>
+
 			<div class="ai-control-container">
 				<input type="checkbox" id="elites" class="ai-control" disabled checked><label for="elites"> Elites</label>
 			</div>
+
 			<div>
-<!-- 				<label>Population Size</label><br>
-				<input class="text-input" type="text"> -->
+				<!--<label>Population Size</label><br>
+				<input class="text-input" type="text">-->
 				<label>Survival Ratio</label><br>
 				<input id="survival-ratio" class="text-input ai-control" type="text" value="0.24">
 				<label>Mutation Rate</label><br>
@@ -76,10 +77,7 @@
 				<div><label>Game is Tied</label><br><input id="draw-points" class="text-input ai-control" type="text" value="1"></div>
 			</div>
 		</form>
-
-
 	</div>
-
 </div>
 
 
