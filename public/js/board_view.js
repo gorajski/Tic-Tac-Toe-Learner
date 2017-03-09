@@ -1,0 +1,1 @@
+const $cells = $(this.htmlElement.find(".cell"));

@@ -1,5 +1,5 @@
 let GameController = function(board, player1, player2) {
- 	this.board = board;
+ 	this.board = board;	
  	this.isComplete = false;
 	
 	this.player1 = player1;
