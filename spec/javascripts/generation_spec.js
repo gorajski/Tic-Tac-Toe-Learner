@@ -23,9 +23,9 @@ describe("Generation object", function() {
 			gen.members[2].fitness = 999;
 			gen.members[3].fitness = -1;
 			gen.members[4].fitness = 888;
-			newGen1 = gen.spawn(0.5, 6, true);
-			newGen2 = gen.spawn(1, 30, false);
-			newGen3 = gen.spawn(1, 39, false);
+			newGen1 = gen.spawn(0.5, 0.9, 6, true);
+			newGen2 = gen.spawn(1, 0.9, 30, false);
+			newGen3 = gen.spawn(1, 0.9, 39, false);
 		});
 
 		it('returns a Generation object', function() {
