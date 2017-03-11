@@ -175,3 +175,6 @@ open_spaces_str += " }"
 CSV.open('open_spaces.csv', 'wb') do |csv|
   csv << [open_spaces_str]
 end
+
+
+# p REASONABLE_BOARD_STATES.count     #->   5890
