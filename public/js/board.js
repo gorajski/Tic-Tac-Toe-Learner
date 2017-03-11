@@ -1,20 +1,10 @@
 let Board = function(view) {
-	// this.cells = $(htmlElement.find(".cell"));
 	this.view = view;
 	this.state = [
 							  0,0,0,
 								0,0,0,
 								0,0,0 
 											];
-};
-
-Board.prototype.updateBoardView = function() {
-	for (let i = 0; i < this.cells.length; i++) {
-		let mark = "";
-		if (this.state[i] === 1) { mark = "X"; }
-		if (this.state[i] === 2) { mark = "O"; }
-		$(this.cells[i]).html(mark);
-	}
 };
 
 // Jasmine Tested
