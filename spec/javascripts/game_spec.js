@@ -104,7 +104,7 @@ describe("Game object", function() {
 			game.currentPiece = 1;
 			result = game.takeTurn(6);
 
-			expect(game.player1.fitness).toEqual(10);
+			// expect(game.player1.fitness).toEqual(10);   // Now handled by the AI object
 			expect(game.isComplete).toEqual(true);
 			expect(result).toEqual(game.player1);
 		});
@@ -115,7 +115,7 @@ describe("Game object", function() {
 			game.currentPiece = 2;
 			result = game.takeTurn(4);
 
-			expect(game.player2.fitness).toEqual(11);
+			// expect(game.player2.fitness).toEqual(11);   // Now handled by the AI object
 			expect(game.isComplete).toEqual(true);
 			expect(result).toEqual(game.player2);
 		});
@@ -150,27 +150,27 @@ describe("Game object", function() {
 			game6 = new GameController(board6, playerC, playerB);
 		});
 
-		it('adds fitness points', function() {
-			expect(playerA.fitness).toEqual(0);
-			expect(playerB.fitness).toEqual(0);
-			expect(playerC.fitness).toEqual(0);
+		// it('adds fitness points', function() {		// now handled by the AI object
+		// 	expect(playerA.fitness).toEqual(0);
+		// 	expect(playerB.fitness).toEqual(0);
+		// 	expect(playerC.fitness).toEqual(0);
 
-			game1.gameClock();
-			expect(playerA.fitness).toEqual(game1.rewardProfile["draw"]);
-			game2.gameClock(); game2.gameClock();
-			expect(playerA.fitness).toEqual(game2.rewardProfile["draw"]);
-			expect(playerB.fitness).toEqual(game2.rewardProfile[2]);
-			game3.gameClock();
-			expect(playerA.fitness).toEqual(game3.rewardProfile["draw"]);
-			expect(playerB.fitness).toEqual(game3.rewardProfile[1] + game3.rewardProfile[2]);
-			game4.gameClock();
-			expect(playerA.fitness).toEqual(game4.rewardProfile["draw"]);
-			expect(playerB.fitness).toEqual(2 * game4.rewardProfile[1] + game4.rewardProfile[2]);
-			game5.gameClock();
-			expect(playerC.fitness).toEqual(game5.rewardProfile[1]);
-			game6.gameClock();
-			expect(playerB.fitness).toEqual(2 * game6.rewardProfile[1] + game6.rewardProfile[2] + game6.rewardProfile["draw"]);
-			expect(playerC.fitness).toEqual(game6.rewardProfile[1] + game6.rewardProfile["draw"]);
-		});
+		// 	game1.gameClock();
+		// 	expect(playerA.fitness).toEqual(game1.rewardProfile["draw"]);
+		// 	game2.gameClock(); game2.gameClock();
+		// 	expect(playerA.fitness).toEqual(game2.rewardProfile["draw"]);
+		// 	expect(playerB.fitness).toEqual(game2.rewardProfile[2]);
+		// 	game3.gameClock();
+		// 	expect(playerA.fitness).toEqual(game3.rewardProfile["draw"]);
+		// 	expect(playerB.fitness).toEqual(game3.rewardProfile[1] + game3.rewardProfile[2]);
+		// 	game4.gameClock();
+		// 	expect(playerA.fitness).toEqual(game4.rewardProfile["draw"]);
+		// 	expect(playerB.fitness).toEqual(2 * game4.rewardProfile[1] + game4.rewardProfile[2]);
+		// 	game5.gameClock();
+		// 	expect(playerC.fitness).toEqual(game5.rewardProfile[1]);
+		// 	game6.gameClock();
+		// 	expect(playerB.fitness).toEqual(2 * game6.rewardProfile[1] + game6.rewardProfile[2] + game6.rewardProfile["draw"]);
+		// 	expect(playerC.fitness).toEqual(game6.rewardProfile[1] + game6.rewardProfile["draw"]);
+		// });
 	});
 });
