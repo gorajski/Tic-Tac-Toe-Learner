@@ -23,9 +23,9 @@ describe("Generation object", function() {
 			gen.members[2].fitness = 999;
 			gen.members[3].fitness = -1;
 			gen.members[4].fitness = 888;
-			newGen1 = gen.spawn(0.5, 0.9, 6, true);
-			newGen2 = gen.spawn(1, 0.9, 30, false);
-			newGen3 = gen.spawn(1, 0.9, 39, false);
+			newGen1 = gen.spawn(0.5, 0.005, 6, true);
+			newGen2 = gen.spawn(1, 0.005, 30, false);
+			newGen3 = gen.spawn(1, 0.005, 39, false);
 		});
 
 		it('returns a Generation object', function() {
@@ -39,8 +39,10 @@ describe("Generation object", function() {
 		});
 
 		it('copies the best performer when the doesPromoteElites flag is set', function() {
-			expect(newGen1.members[0].fitness).toEqual(0);
-			expect(newGen1.members[0].genome).toEqual(gen.members[0].genome);
+			expect(newGen1.members[0].fitness).toEqual(0);	//The copy should have a clean slate for fitness
+
+			// expect(newGen1.members[0].genome).toEqual(gen.members[0].genome);		// This test is better than the one below when the Player.prototype.mutate method does NOT randomly modify the Player's first move.
+			expect(countIdenticalGenes(newGen1.members[0].genome, gen.members[0].genome)).toBeGreaterThan(5888);		//When the first move is modified, use this test instead of the one above. 
 		});
 
 		it('does not copy the best performer when the doesPromoteElites flag is not set', function() {

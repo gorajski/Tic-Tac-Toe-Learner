@@ -16,12 +16,12 @@ describe("Player object", function() {
 	it("has a genome representation", function() {
 		expect(thisPlayer.genome instanceof Object).toEqual(true);
 		expect(Object.keys(thisPlayer.genome).length).toEqual(5890);
-		expect(gen.members[0].genome['000000000'] >= 0).toEqual(true);
-		expect(gen.members[0].genome['000000000'] <= 8).toEqual(true);
-		expect(gen.members[0].genome['000000001'] >= 0).toEqual(true);
-		expect(gen.members[0].genome['000000001'] <= 8).toEqual(true);
-		expect(gen.members[0].genome['000000012'] >= 0).toEqual(true);
-		expect(gen.members[0].genome['000000012'] <= 8).toEqual(true);
+		expect(thisPlayer.genome['000000000'] >= 0).toEqual(true);
+		expect(thisPlayer.genome['000000000'] <= 8).toEqual(true);
+		expect(thisPlayer.genome['000000001'] >= 0).toEqual(true);
+		expect(thisPlayer.genome['000000001'] <= 8).toEqual(true);
+		expect(thisPlayer.genome['000000012'] >= 0).toEqual(true);
+		expect(thisPlayer.genome['000000012'] <= 8).toEqual(true);
 	});
 
 	describe('.newGenome', function() {
@@ -46,10 +46,9 @@ describe("Player object", function() {
 	describe('.mutate', function() {		//Uses helper method countIdenticalGenes
 		it("modifies the Player object's genome", function() {
 			let copy = thisPlayer.clone();
-			let mutant = thisPlayer.mutate();
+			let mutant = thisPlayer.mutate(0.99);
 			expect(mutant).not.toEqual(copy);
 			expect(mutant.genome).not.toEqual(copy.genome);
-			expect(countIdenticalGenes(thisPlayer.genome, copy.genome)).toBeGreaterThan(5440);
 		});
 	});
 

@@ -52,7 +52,8 @@ GeneticAlgorithmAI.prototype.trainer = function() {
 GeneticAlgorithmAI.prototype.initBoards = function(numberOfGames) {
 	let boardCollection = [];
 	for (let i = 0; i < numberOfGames; i++) {
-		boardCollection.push(new Board($("#board" + (i + 1).toString())));
+		let boardView = new BoardView($("#board" + (i + 1).toString()));
+		boardCollection.push(new Board(boardView));
 	}
 	return boardCollection;
 };

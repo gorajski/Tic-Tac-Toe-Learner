@@ -1,5 +1,6 @@
-let Board = function(htmlElement) {
-	this.htmlElement = htmlElement;
+let Board = function(view) {
+	// this.cells = $(htmlElement.find(".cell"));
+	this.view = view;
 	this.state = [
 							  0,0,0,
 								0,0,0,
@@ -8,13 +9,11 @@ let Board = function(htmlElement) {
 };
 
 Board.prototype.updateBoardView = function() {
-	const $cells = $(this.htmlElement.find(".cell"));
-
-	for (let i = 0; i < $cells.length; i++) {
+	for (let i = 0; i < this.cells.length; i++) {
 		let mark = "";
 		if (this.state[i] === 1) { mark = "X"; }
 		if (this.state[i] === 2) { mark = "O"; }
-		$($cells[i]).html(mark);
+		$(this.cells[i]).html(mark);
 	}
 };
 
@@ -43,9 +42,7 @@ Board.prototype.checkForWinner = function() {
 	}
 
 	if (winner != "NO match") {
-		// const $cells = $(this.htmlElement.find(".cell"));
-		// if (winner === 1) { $($cells).css('border-color','blue') } else { $($cells).css('border-color','red'); }
-		
+		this.view.updateBoardWin(winner);
 		return winner;
 	}
 	return null;
@@ -58,9 +55,8 @@ Board.prototype.checkForFullBoard = function() {
 		isFull = isFull && (this.state[i] != 0);
 	}
 	if (isFull) {
-		// const $cells = $(this.htmlElement.find(".cell"));
-		// $($cells).css('border-color','#bbbb00');
-		// console.log("No winner!")
+		this.view.updateBoardDraw();
+		console.log("No winner!")
 		return true;
 	}
 	return false;
@@ -70,7 +66,7 @@ Board.prototype.checkForFullBoard = function() {
 
 
 
-// For testing only:
+// For debugging only:
 Board.prototype.prettyPrint = function() {
 	console.log(this.state[0] + this.state[1] + this.state[2])
 	console.log(this.state[3] + this.state[4] + this.state[5])
