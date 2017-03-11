@@ -23,7 +23,7 @@ GameController.prototype.resetGame = function() {
 	this.currentPlayer = this.player1;
 	this.currentPiece = 1;
 	this.isComplete = false;
-	this.board.updateBoardView();
+	this.board.view.updateBoardView(this.board.state);
 };
 
 // Jasmine Tested
@@ -32,7 +32,7 @@ GameController.prototype.takeTurn = function(cellIndex) {
 
 	if (isFree) {
 		this.board.placePiece(this.currentPiece, cellIndex);
-		this.board.updateBoardView();
+		this.board.view.updateBoardView(this.board.state);
 	} else if (!this.board.checkForFullBoard()) {
 		console.log('illegal move')
 		return 'illegal move';

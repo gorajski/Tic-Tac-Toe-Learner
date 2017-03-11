@@ -62,7 +62,8 @@ $(document).ready(function() {
 		$(".ai-control").attr("disabled", "true");
 
 		ai.stopTraining();
-		let board = new Board($('#challenge-board'));
+		let boardView = new BoardView($('#challenge-board'));
+		let board = new Board(boardView);
 		let userPlayer = new Player('human');
 		let bestPlayer = ai.bestPerformer();
 		let game = new GameController(board, bestPlayer, userPlayer);

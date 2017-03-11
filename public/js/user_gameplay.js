@@ -2,7 +2,8 @@ let UserGameplay = function(player) {
 	this.htmlElement = htmlElement;
 	this.computerPlayer = player;
 	this.humanPlayer = new Player('human');
-	this.board = new Board($('#challenge-board'));
+	let boardView = new BoardView($('#challenge-board'));
+	let board = new Board(boardView);
 	this.game = new GameController(this.board, this.humanPlayer, this.computerPlayer);
 };
 
