@@ -139,25 +139,25 @@ puts '*' * 8
 
 # For Javascript to construct an object that can be used as a genome template.
 template_str = "{ "
-remove_blatantly_impossible_board_states.each do |state|
+remove_blatantly_impossible_board_states.each_with_index do |state, index|
   state_str = state.to_s(3)
   state_str = "0" * (9 - state_str.length) + state_str   # add frontend zeroes back on
 
-  template_str << "'#{state_str}' : null, "
+  template_str << "'#{state_str}' : #{index}, "
 end
 template_str = template_str.chop.chop
 template_str += " }"
 p template_str
 
-CSV.open('template.csv', 'wb') do |csv|
+CSV.open('template.csv', 'wb') do |csv| 
   csv << [template_str]
 end
 
 
 # For Javascript to construct an object that can be used as a list of all open spaces available in a board state.
 # This object to be used as a look up during gene assignment and mutation to ensure any move selected is a legal move.
-open_spaces_str = "{ "
-remove_blatantly_impossible_board_states.each do |state|  
+open_spaces_str = "[ "
+remove_blatantly_impossible_board_states.each_with_index do |state, index|  
   state_str = state.to_s(3)
   state_str = "0" * (9 - state_str.length) + state_str   # add frontend zeroes back on
 
@@ -165,16 +165,19 @@ remove_blatantly_impossible_board_states.each do |state|
   for i in 0..state_str.length
     spaces += "#{i}, " if state_str[i] == '0'
   end
+  p spaces
   spaces = spaces.chop.chop if spaces != "["
   spaces += "]"
-  open_spaces_str += "'#{state_str}' : #{spaces}, "
+  open_spaces_str += "#{spaces}, "
 end
 open_spaces_str = open_spaces_str.chop.chop
-open_spaces_str += " }"
+open_spaces_str += " ]"
 
 CSV.open('open_spaces.csv', 'wb') do |csv|
   csv << [open_spaces_str]
 end
+
+
 
 
 # p REASONABLE_BOARD_STATES.count     #->   5890
