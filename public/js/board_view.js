@@ -1,4 +1,5 @@
 let BoardView = function(htmlElement) {
+	this.htmlElement = htmlElement
 	this.cells = $(htmlElement.find(".cell"));
 };
 
@@ -21,4 +22,14 @@ BoardView.prototype.updateBoardWin = function(winner) {
 
 BoardView.prototype.updateBoardDraw = function() {
 	$(this.cells).css('border-color','#bbbb00');
+}
+
+BoardView.prototype.listenForPlayerMove = function(callback) {
+	this.htmlElement.on("click", 
+		function() {
+			const cell = event.target;
+			const cellIndex = parseInt($(cell).attr("class")[1]);
+			callback(cellIndex);
+		}
+	)
 }

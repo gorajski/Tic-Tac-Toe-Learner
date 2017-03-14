@@ -1,10 +1,16 @@
 describe("Game object", function() {
 	var player1, player2, board, game;
 	
-	beforeEach(function() {		
+	beforeEach(function() {
 		player1 = new Player("computer");
 		player2 = new Player("computer");
-		board = new Board($("#dummy_entry"));
+
+		stubbedView = new Object();
+		stubbedView.updateBoardWin = function() { return null };	
+		stubbedView.updateBoardDraw = function() { return null };	
+		stubbedView.updateBoardView = function() { return null };
+		board = new Board(stubbedView);
+
 		game = new GameController(board, player1, player2);
 	});
 

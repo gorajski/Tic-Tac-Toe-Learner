@@ -2,7 +2,11 @@ describe("Board object", function() {
 	var board;
 
 	beforeEach(function() {
-		board = new Board("#dummy_entry");
+		stubbedView = new Object();
+		stubbedView.updateBoardWin = function() { return null };	
+		stubbedView.updateBoardDraw = function() { return null };	
+		stubbedView.updateBoardView = function() { return null };
+		board = new Board(stubbedView);
 	});
 
 	it("has board representation", function() {
@@ -44,6 +48,7 @@ describe("Board object", function() {
 
 		it('detects player1 win on row 1', function() {
 			board.state = [1,1,1,2,2,0,0,0,0];
+
 			expect(board.checkForWinner()).toEqual(1);
 		});
 

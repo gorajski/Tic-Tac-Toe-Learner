@@ -20,10 +20,10 @@ GameController.prototype.switchPlayer = function() {
 GameController.prototype.resetGame = function() {
 	console.log('reset')
 	this.board.state = [0,0,0,0,0,0,0,0,0];
+	this.board.view.updateBoardView(this.board.state);
 	this.currentPlayer = this.player1;
 	this.currentPiece = 1;
 	this.isComplete = false;
-	this.board.view.updateBoardView(this.board.state);
 };
 
 // Jasmine Tested
@@ -52,21 +52,25 @@ GameController.prototype.takeTurn = function(cellIndex) {
 
 };
 
-GameController.prototype.fetchPlayerMove = function(event) {
-	const cell = event.target;
-	const cellIndex = parseInt($(cell).attr("class")[1]);
-	this.currentMove = cellIndex;
-};
+// GameController.prototype.fetchPlayerMove = function(event) {
+// 	// console.log("in fetchPlayerMove: ")
+// 	// console.log(this)
+// 	this.currentMove = this.board.view.watchForPlayerMove();
+// 	return 'hi';
+// };
 
 //Jasmine Tested for 'computer' only
 GameController.prototype.gameClock = function() {
 	if (!this.isComplete) {
 		if (this.currentPlayer.type === 'human') {
-			this.board.htmlElement.on("click", this.fetchPlayerMove.bind(this));
+
+			this.board.view.listenForPlayerMove(this.setCurrentMove.bind(this));
+
 			if (this.currentMove != null) {
 				let cellIndex = this.currentMove;
+				console.log(this.currentMove)
 				this.currentMove = null;
-				this.board.htmlElement.off("click");
+				this.board.view.htmlElement.off("click");
 				return this.takeTurn(cellIndex);
 			}
 		}
@@ -78,3 +82,7 @@ GameController.prototype.gameClock = function() {
 		}
 	} 
 };
+
+GameController.prototype.setCurrentMove = function(returnValue) {
+	this.currentMove = returnValue;
+}
