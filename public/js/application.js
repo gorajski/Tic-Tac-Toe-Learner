@@ -3,7 +3,7 @@ $(document).ready(function() {
 	$("#splash").show();
 	$("#challenge").hide();
 
-	const playerCount = 150;
+	const playerCount = 120;
 	const gameCount = playerCount * playerCount;
 	
 	let timer = null;
