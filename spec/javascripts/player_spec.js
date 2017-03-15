@@ -14,30 +14,33 @@ describe("Player object", function() {
 	});
 
 	it("has a genome representation", function() {
-		expect(thisPlayer.genome instanceof Object).toEqual(true);
-		expect(Object.keys(thisPlayer.genome).length).toEqual(5890);
-		expect(thisPlayer.genome['000000000'] >= 0).toEqual(true);
-		expect(thisPlayer.genome['000000000'] <= 8).toEqual(true);
-		expect(thisPlayer.genome['000000001'] >= 0).toEqual(true);
-		expect(thisPlayer.genome['000000001'] <= 8).toEqual(true);
-		expect(thisPlayer.genome['000000012'] >= 0).toEqual(true);
-		expect(thisPlayer.genome['000000012'] <= 8).toEqual(true);
+		expect(thisPlayer.genome instanceof Array).toEqual(true);
+		expect(thisPlayer.genome.length).toEqual(5890);
+		expect(thisPlayer.nextMove('000000000') >= 0).toEqual(true);
+		expect(thisPlayer.nextMove('000000000') <= 8).toEqual(true);
+		expect(thisPlayer.nextMove('000000001') >= 0).toEqual(true);
+		expect(thisPlayer.nextMove('000000001') <= 8).toEqual(true);
+		expect(thisPlayer.nextMove('000000012') >= 0).toEqual(true);
+		expect(thisPlayer.nextMove('000000012') <= 8).toEqual(true);
 	});
 
 	describe('.newGenome', function() {
 		it('generates a new genome from scratch', function() {
-			let genome = Object.assign({}, thisPlayer.genome);
-			expect(thisPlayer.newGenome()).not.toEqual(genome);
-			expect(thisPlayer.newGenome() instanceof Object).toEqual(true);
-			expect(Object.keys(thisPlayer.genome).length).toEqual(5890);
+			let genome = thisPlayer.genome;
+			let newGenome = thisPlayer.newGenome();
+			expect(newGenome).not.toEqual(genome);
+			expect(newGenome instanceof Array).toEqual(true);
+			expect(newGenome.length).toEqual(5890);
 		});
 	});
 
 	describe('.clone', function() {
 		it('generates a deep copy of the Player object', function() {
+			thisPlayer.fitness = 44;
 			let copy = thisPlayer.clone();
 			expect(copy).not.toBe(thisPlayer);		//expect these to be independent objects
-			expect(copy).toEqual(thisPlayer);		//expect these objects to have identical contents
+			expect(copy.type).toEqual('computer');
+			expect(copy.fitness).toEqual(0);
 			expect(copy.genome).not.toBe(thisPlayer.genome);		//expect the genomes to be independent objects
 			expect(copy.genome).toEqual(thisPlayer.genome);		//but with identical key/value pairs
 		});

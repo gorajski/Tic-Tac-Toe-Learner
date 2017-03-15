@@ -61,23 +61,23 @@ GameController.prototype.takeTurn = function(cellIndex) {
 
 //Jasmine Tested for 'computer' only
 GameController.prototype.gameClock = function() {
+	var fido = "";
 	if (!this.isComplete) {
 		if (this.currentPlayer.type === 'human') {
 
-			this.board.view.listenForPlayerMove(this.setCurrentMove.bind(this));
+			this.board.view.enablePlayerMoveListener(this.setCurrentMove.bind(this));
 
 			if (this.currentMove != null) {
 				let cellIndex = this.currentMove;
-				console.log(this.currentMove)
 				this.currentMove = null;
-				this.board.view.htmlElement.off("click");
+				this.board.view.disablePlayerMoveListener();
 				return this.takeTurn(cellIndex);
 			}
 		}
 
 		if (this.currentPlayer.type === 'computer') {
 			const state = this.board.state.join('');
-			let cellIndex = this.currentPlayer.genome[state];
+			let cellIndex = this.currentPlayer.nextMove(state);
 			return this.takeTurn(cellIndex);
 		}
 	} 
