@@ -101,8 +101,11 @@ DEPENDENCIES
   rspec (~> 3.0)
   shotgun
   shoulda-matchers
-  sinatra
+  sinatra (= 1.4.5)
   sinatra-contrib
+
+RUBY VERSION
+   ruby 2.3.1p112
 
 BUNDLED WITH
    1.12.5

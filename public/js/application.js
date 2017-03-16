@@ -3,7 +3,7 @@ $(document).ready(function() {
 	$("#splash").show();
 	$("#challenge").hide();
 
-	const playerCount = 12;
+	const playerCount = 120;
 	const gameCount = playerCount * playerCount;
 	
 	let timer = null;
@@ -68,7 +68,7 @@ $(document).ready(function() {
 		let bestPlayer = ai.bestPerformer();
 		let game = new GameController(board, bestPlayer, userPlayer);
 
-		console.log(bestPlayer.genome['000000000']);
+		console.log(bestPlayer.nextMove('000000000'));
 
 		runGame(game);
 	});

@@ -24,12 +24,20 @@ BoardView.prototype.updateBoardDraw = function() {
 	$(this.cells).css('border-color','#bbbb00');
 }
 
-BoardView.prototype.listenForPlayerMove = function(callback) {
+BoardView.prototype.enablePlayerMoveListener = function(callback) {
 	this.htmlElement.on("click", 
 		function() {
 			const cell = event.target;
+			// There is a minor bug here, when highlighting the board 
+			// throws an error because the event.target is actually a 
+			// <tbody> instead of a <tr class="cell">.  Still functions
+			// otherwise.  Bug only noticed when console is open.
 			const cellIndex = parseInt($(cell).attr("class")[1]);
 			callback(cellIndex);
 		}
 	)
+}
+
+BoardView.prototype.disablePlayerMoveListener = function(callback) {
+	this.htmlElement.off("click")
 }

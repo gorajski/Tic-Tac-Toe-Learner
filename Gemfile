@@ -1,17 +1,18 @@
 source 'https://rubygems.org'
+ruby "2.3.1"
 
 # PostgreSQL driver
 gem 'pg'
 
 # Sinatra driver
-gem 'sinatra'
+gem 'sinatra', '1.4.5'
 gem 'sinatra-contrib'
 
 gem 'activesupport', '~>4.2.0'
 gem 'activerecord', '~>4.2.0'
 
 gem 'rake'
-
+gem 'jasmine'
 gem 'shotgun'
 
 group :test do
