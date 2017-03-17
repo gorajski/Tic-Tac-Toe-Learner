@@ -22,11 +22,13 @@ h3 {
 }
 
 #back {
+  display: none;
   bottom: 0px;
   right: 85px;
 }
 
 #next {
+  display: none;
   bottom: 0px;
   right: 0px;
 }
@@ -58,9 +60,9 @@ h3 {
   background-color: #111e1e;
 }
 
-/*#challenge-view {
-  margin: 0px;
-}*/
+#result {
+  display: none;
+}
 
 #container {
   min-width: 1200px;
