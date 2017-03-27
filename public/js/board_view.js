@@ -1,5 +1,5 @@
 let BoardView = function(htmlElement) {
-	this.htmlElement = htmlElement
+	this.htmlElement = htmlElement;
 	this.cells = $(htmlElement.find(".cell"));
 };
 

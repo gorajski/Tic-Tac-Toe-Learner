@@ -1,18 +1,18 @@
-let GeneticAlgorithmAI = function(populationSize, gameCount, htmlElement) {
+let GeneticAlgorithmAI = function(populationSize, gameCount, view) {
 	this.timerInterval = 40;
 	this.hasElites = true;
 	this.survivalRatio = 0.24;
 	this.mutationRate = 0.0007;
+	this.rewardProfile = { "1" : 2, "2" : 2, "draw" : 6 }; // Calculated weights { "1" : 1.18, "2" : 6.64, "draw" : 531441 }
 
-	this.htmlElement = htmlElement;
 	this.currentGeneration = new Generation();
 	this.currentGeneration.create(populationSize);
 	this.populationSize = populationSize;
-	$(this.htmlElement).html("Generation " + Generation.id) //relocate this
+	
 	this.boardCollection = this.initBoards(gameCount);
 	this.gameCollection = this.initGames(gameCount, this.boardCollection, this.currentGeneration);
 
-	this.rewardProfile = { "1" : 2, "2" : 2, "draw" : 6 }; // Calculated weights { "1" : 1.18, "2" : 6.64, "draw" : 531441 }
+	this.view = view;
  	this.timer = null;
 };
 
@@ -39,9 +39,8 @@ GeneticAlgorithmAI.prototype.trainer = function() {
  	});
 
  	if (areAllGamesComplete) { 
- 		// console.log(this.currentGeneration.members[0].fitness)
 		this.currentGeneration = this.currentGeneration.spawn(this.survivalRatio, this.mutationRate, this.populationSize, this.hasElites);
-		$(this.htmlElement).html("Generation " + Generation.id)
+		this.view.updateGenerationCount();
 		this.boardCollection = this.initBoards(this.populationSize * this.populationSize);
 		this.gameCollection = this.initGames(this.populationSize * this.populationSize, this.boardCollection, this.currentGeneration);
 	};

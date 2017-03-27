@@ -3,12 +3,12 @@ $(document).ready(function() {
 	$("#splash").show();
 	$("#challenge").hide();
 
-	const playerCount = 120;
+	const playerCount = 48;
 	const gameCount = playerCount * playerCount;
 	
 	let timer = null;
-	let ai = new GeneticAlgorithmAI(playerCount, gameCount, "#generation");
-	
+	let view = new GeneticAlgorithmView("#generation");
+	let ai = new GeneticAlgorithmAI(playerCount, gameCount, view);
 
 	$("#close").on("click", function() {
 		$("#splash").hide();
