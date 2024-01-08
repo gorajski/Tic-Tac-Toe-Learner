@@ -1,4 +1,50 @@
+const ROW_COUNT = 12
+const COLUMN_COUNT = 12
+
+const boardComponent = `
+	<table class="cells">
+		<tr>
+			<td class="c0 cell"></td>
+			<td class="c1 cell"></td>
+			<td class="c2 cell"></td>
+		</tr>
+		<tr>
+			<td class="c3 cell"></td>
+			<td class="c4 cell"></td>
+			<td class="c5 cell"></td>
+		</tr>
+		<tr>
+			<td class="c6 cell"></td>
+			<td class="c7 cell"></td>
+			<td class="c8 cell"></td>
+		</tr>
+	</table>
+`
+
 $(document).ready(function() {
+
+	let tableContents = ``
+	for(let row=0; row < ROW_COUNT; row++) {
+		let rowContents = `<tr class="board_element">`
+		for (let column = 0; column < COLUMN_COUNT; column++) {
+			rowContents += `<td id="board${row * COLUMN_COUNT + column + 1}" class="miniboard">${boardComponent}</td>`
+		}
+		tableContents += rowContents + `</tr>`
+	}
+
+	if (document.querySelector('#training')) {
+		document.querySelector('#training').innerHTML = `
+			<table>
+				${tableContents}
+			</table>
+		`
+	}
+
+	if (document.querySelector('#challenge-board')) {
+		document.querySelector('#challenge-board').innerHTML = boardComponent
+	}
+
+
 
 	$("#splash").show();
 	$("#challenge").hide();

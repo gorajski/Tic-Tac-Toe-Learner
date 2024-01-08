@@ -1,5 +1,8 @@
 describe("Player object", function() {
 
+	let thisPlayer
+	let thatPlayer
+
 	beforeEach(function() {
 		thisPlayer = new Player("computer");
 		thatPlayer = new Player("computer");

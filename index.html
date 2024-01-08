@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" href="/css/normalize.css">
+  <link rel="stylesheet" href="/css/application.css">
+
+  <script src="/js/jquery-3.1.0.min.js"></script>
+
+  <script src="/js/genome_template.js"></script>
+  <script src="/js/genome_open_spaces.js"></script>
+  <script src="/js/player.js"></script>
+  <script src="/js/board_view.js"></script>
+  <script src="/js/board.js"></script>
+  <script src="/js/generation.js"></script>
+  <script src="/js/game_controller.js"></script>
+  <script src="/js/genetic_algorithm_view.js"></script>
+  <script src="/js/genetic_algorithm_ai.js"></script>
+  <script src="/js/splash.js"></script>
+  <script src="/js/application.js"></script>
+
+  <title>Tic-Tac-Toe Genetic Algorithm</title>
+
+  <link rel="icon" href="/tac.png">
+</head>
+
+<body>
+  <div id="splash" class="modal">
+    <button id="close" class="">x</button>
+    <div>
+      <h1>Tic-Tac-Toe Genetic Algorithm</h1>
+    </div>
+    <div id="button-container">
+      <div>[[[ Placeholder for introduction, explanation of genetic algorithms and how site controls work ]]]</div>
+      <button id="back" class="splash-button">   back   </button>
+      <button id="next" class="splash-button">   next   </button>
+    </div>
+  </div>
+
+  <div id="challenge" class="modal">
+    <div id="challenge-view">
+      <span>You are playing as 'O'</span><span id="result">You WIN!</span>
+      <div id="challenge-board" class="board"></div>
+    </div>
+  </div>
+
+  <div id="container">
+
+    <div id="training-view">
+
+      <div id="generation">Generation 1</div>
+      <div id="training">
+        <!--  TRAINING TABLES GET INJECTED HERE  -->
+      </div>
+
+    </div>
+
+    <div id="controls">
+      <button id="start" class="control-button" disabled="true">Start</button>
+      <button id="pause" class="control-button" disabled="true">Pause</button>
+      <button id="stop" class="control-button" disabled="true">Stop and Play<br>Against Best Player</button>
+
+      <form id="ai-control-form">
+        <div>
+          <div class="ai-control-container" id="legend-container">
+            <h3>Legend</h3>
+            <div><div id="x-won" class="legend-color"></div> 'X' won</div>
+            <div><div id="o-won" class="legend-color"></div> 'O' won</div>
+            <div><div id="draw" class="legend-color"></div> draw</div>
+          </div>
+          <div class="ai-control-container">
+            <h3>Speed</h3>
+            <input type="radio" id="fast" class="ai-control" name="speed" value="" disabled checked><label for="fast"> Fast</label><br>
+            <input type="radio" id="medium" class="ai-control" name="speed" value="" disabled><label for="medium" disabled> Medium</label><br>
+            <input type="radio" id="slow" class="ai-control" name="speed" value="" disabled><label for="slow"> Slow</label><br>
+          </div>
+        </div>
+        <div class="ai-control-container">
+          <input type="checkbox" id="elites" class="ai-control" disabled checked><label for="elites"> Elites</label>
+        </div>
+        <div>
+          <!-- 				<label>Population Size</label><br>
+                  <input class="text-input" type="text"> -->
+          <label>Survival Ratio</label><br>
+          <input id="survival-ratio" class="text-input ai-control" type="text" value="0.24">
+          <label>Mutation Rate</label><br>
+          <input id="mutation-rate" class="text-input ai-control" type="text" value="0.0007">
+        </div>
+
+        <div>
+          <div id="weights">Points Assigned for Game Result:</div>
+          <div><label>Player X Wins</label><br><input id="x-won-points" class="text-input ai-control" type="text" value="2"></div>
+          <div><label>Player O Wins</label><br><input id="o-won-points" class="text-input ai-control" type="text" value="2"></div>
+          <div><label>Game is Tied</label><br><input id="draw-points" class="text-input ai-control" type="text" value="1"></div>
+        </div>
+      </form>
+
+    </div>
+  </div>
+
+</body>
+
+
+</html>

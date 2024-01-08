@@ -1,4 +1,5 @@
 describe("Generation object", function() {
+	let gen
 
 	beforeEach(function() {
 		gen = new Generation();
